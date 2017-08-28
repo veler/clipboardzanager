@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+apply plugin: 'pmd'
+
+def configDir = "${project.rootDir}/config"
+def reportsDir = "${project.buildDir}/reports"
+
+task pmd(type: Pmd) {
+    group = 'Verification'
+
+    pmd.consoleOutput = true
+
+    ignoreFailures = false
+    ruleSetFiles = files("$configDir/pmd/pmd-ruleset.xml")
+    ruleSets = []
+
+    source 'src/'
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude '**/test/**'
+    exclude '**/R.java'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+    classpath = files()
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.etiennebaudoux.clipboardzanager"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "2017.8.22.1" // Do NOT change this line manually. It is changed automatically everytime the Windows app is built.
+        // Do NOT change this line manually. It is changed automatically everytime the Windows app is built.
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        jackOptions {
+            enabled true
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    afterEvaluate {
+        assembleDebug.dependsOn("pmd")
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile('com.onedrive.sdk:onedrive-sdk-android:1.2+') {
+        transitive = false
+    }
+    compile 'com.android.support:appcompat-v7:25.0.2'
+    compile 'com.android.support:design:25.1.1'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.dropbox.core:dropbox-core-sdk:2.1.2'
+    compile 'com.microsoft.services.msa:msa-auth:0.8.+'
+    compile 'com.microsoft.aad:adal:1.1.+'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.android.support.constraint:constraint-layout:+'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:3.3'
+}

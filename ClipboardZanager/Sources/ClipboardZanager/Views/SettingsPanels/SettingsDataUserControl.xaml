@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="ClipboardZanager.Views.SettingsPanels.SettingsDataUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:settingsPanels="clr-namespace:ClipboardZanager.ViewModels.SettingsPanels"
+             xmlns:controls="clr-namespace:ClipboardZanager.ComponentModel.UI.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <settingsPanels:SettingsDataUserControlViewModel/>
+    </UserControl.DataContext>
+    <StackPanel>
+        <CheckBox Content="{Binding Language.SettingsDataUserControl.Reboot}" IsChecked="{Binding KeepDataAfterReboot, Mode=TwoWay}"/>
+
+        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+            <TextBlock x:Name="textBlock" Text="{Binding Language.SettingsDataUserControl.DataToKeep}" VerticalAlignment="Center"/>
+            <TextBlock Text=" : " VerticalAlignment="Center"/>
+            <controls:TouchTextBox PlaceHolder="1-100" Width="100" CanClear="False" Text="{Binding MaxDataToKeep, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.LabeledBy="{Binding ElementName=textBlock, Mode=OneWay}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+            <TextBlock x:Name="textBlock1" Text="{Binding Language.SettingsDataUserControl.ExpireLimit}" VerticalAlignment="Center"/>
+            <TextBlock Text=" : " VerticalAlignment="Center"/>
+            <controls:TouchTextBox PlaceHolder="1-90" Width="100" CanClear="False" Text="{Binding DateExpireLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.LabeledBy="{Binding ElementName=textBlock1, Mode=OneWay}"/>
+            <TextBlock Text=" " VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Language.SettingsDataUserControl.Days}" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <TextBlock Text="{Binding Language.SettingsDataUserControl.WhatToKeep}" Focusable="{Binding IsScreenReaderRunning}" KeyboardNavigation.TabIndex="0" VerticalAlignment="Center" Margin="0,20,0,0"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Vertical">
+                <CheckBox Content="{Binding Language.SettingsDataUserControl.Text}" IsChecked="{Binding KeepTextData, Mode=TwoWay}" Margin="0,5,0,0"/>
+                <CheckBox Content="{Binding Language.SettingsDataUserControl.File}" IsChecked="{Binding KeepFilesData, Mode=TwoWay}" Margin="0,5,0,0"/>
+                <CheckBox Content="{Binding Language.SettingsDataUserControl.Image}" IsChecked="{Binding KeepImagesData, Mode=TwoWay}" Margin="0,5,0,0"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Vertical">
+                <CheckBox Content="{Binding Language.SettingsDataUserControl.Word}" IsChecked="{Binding KeepMicrosoftWordData, Mode=TwoWay}" Margin="0,5,0,0"/>
+                <CheckBox Content="{Binding Language.SettingsDataUserControl.Excel}" IsChecked="{Binding KeepMicrosoftExcelData, Mode=TwoWay}" Margin="0,5,0,0"/>
+                <CheckBox Content="{Binding Language.SettingsDataUserControl.PowerPoint}" IsChecked="{Binding KeepMicrosoftPowerPointData, Mode=TwoWay}" Margin="0,5,0,0"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Orientation="Vertical">
+                <CheckBox Content="{Binding Language.SettingsDataUserControl.Outlook}" IsChecked="{Binding KeepMicrosoftOutlookData, Mode=TwoWay}" Margin="0,5,0,0"/>
+                <CheckBox Content="{Binding Language.SettingsDataUserControl.Photoshop}" IsChecked="{Binding KeepAdobePhotoshopData, Mode=TwoWay}" Margin="0,5,0,0"/>
+            </StackPanel>
+        </Grid>
+
+        <Border Margin="0,50,0,0"/>
+    </StackPanel>
+</UserControl>

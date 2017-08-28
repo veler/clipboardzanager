@@ -1,0 +1,99 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="BackgroundBrush" Color="#232323"/>
+    <SolidColorBrush x:Key="OverBackgroundBrush" Color="#19FFFFFF"/>
+    <SolidColorBrush x:Key="ForegroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="DarkerForegroundBrush" Color="#c6c6c6"/>
+    <SolidColorBrush x:Key="IsHighlightedForegroundBrush" Color="#FFFFFF"/>
+
+    <SolidColorBrush x:Key="VisualFocusBrush" Color="#FFFFFF"/>
+
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#353535"/>
+    <SolidColorBrush x:Key="ButtonBorderBrush" Color="#00858585"/>
+    <SolidColorBrush x:Key="ButtonIsHighlightedBackgroundBrush" Color="#353535"/>
+    <SolidColorBrush x:Key="ButtonIsHighlightedBorderBrush" Color="#666666"/>
+    <SolidColorBrush x:Key="ButtonIsHighlightedForeground" Color="{Binding Color, Source={StaticResource IsHighlightedForegroundBrush}}"/>
+    <SolidColorBrush x:Key="ButtonIsPressedBackgroundBrush" Color="#666666"/>
+    <SolidColorBrush x:Key="ButtonIsPressedForeground" Color="{Binding Color, Source={StaticResource IsHighlightedForegroundBrush}}"/>
+    <SolidColorBrush x:Key="ButtonIsPressedBorderBrush" Color="#00858585"/>
+    <SolidColorBrush x:Key="ButtonIsDisabledForeground" Color="#858585"/>
+    <SolidColorBrush x:Key="ButtonIsDisabledBorderBrush" Color="#00858585"/>
+
+    <SolidColorBrush x:Key="CheckBoxEnabledBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="CheckBoxEnabledBorder" Color="#808080"/>
+    <SolidColorBrush x:Key="CheckBoxEnabledGlyph" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="CheckBoxMouseOverBackground" Color="{Binding Color, Source={StaticResource OverBackgroundBrush}}"/>
+    <SolidColorBrush x:Key="CheckBoxMouseOverBorder" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="CheckBoxMouseOverGlyph" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="CheckBoxDisabledBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="CheckBoxDisabledBorder" Color="{Binding Color, Source={StaticResource DarkerForegroundBrush}}"/>
+    <SolidColorBrush x:Key="CheckBoxDisabledGlyph" Color="{Binding Color, Source={StaticResource DarkerForegroundBrush}}"/>
+    <SolidColorBrush x:Key="CheckBoxDisabledTextBrush" Color="{Binding Color, Source={StaticResource DarkerForegroundBrush}}"/>
+    <SolidColorBrush x:Key="CheckBoxPressedBackground" Color="#33FFFFFF"/>
+    <SolidColorBrush x:Key="CheckBoxPressedBorder" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="CheckBoxPressedGlyph" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+
+    <SolidColorBrush x:Key="ComboBoxEnabledBackgroundBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="ComboBoxEnabledBorderBrush" Color="#808080"/>
+    <SolidColorBrush x:Key="ComboBoxOverBorderBrush" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="ComboBoxOverBackground" Color="{Binding Color, Source={StaticResource OverBackgroundBrush}}"/>
+    <SolidColorBrush x:Key="ComboBoxFocusedBorderBrush" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="ComboBoxDisabledBorderBrush" Color="{Binding Color, Source={StaticResource DarkerForegroundBrush}}"/>
+    <SolidColorBrush x:Key="ComboBoxDisabledTextBrush" Color="{Binding Color, Source={StaticResource DarkerForegroundBrush}}"/>
+
+    <SolidColorBrush x:Key="TouchTextBoxEnabledBackgroundBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="TouchTextBoxEnabledBorderBrush" Color="#808080"/>
+    <SolidColorBrush x:Key="TouchTextBoxOverBorderBrush" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="TouchTextBoxOverBackground" Color="{Binding Color, Source={StaticResource OverBackgroundBrush}}"/>
+    <SolidColorBrush x:Key="TouchTextBoxFocusedBorderBrush" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="TouchTextBoxDisabledBorderBrush" Color="{Binding Color, Source={StaticResource DarkerForegroundBrush}}"/>
+    <SolidColorBrush x:Key="TouchTextBoxDisabledTextBrush" Color="{Binding Color, Source={StaticResource DarkerForegroundBrush}}"/>
+    <SolidColorBrush x:Key="TouchTextBoxCrossBrush" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+
+    <SolidColorBrush x:Key="PasteBarItemBorder" Color="{Binding Color, Source={StaticResource DarkerForegroundBrush}}"/>
+    <SolidColorBrush x:Key="PasteBarItemIsHighContrastIsHighlightedBorder" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="PasteBarItemTopBarBackground" Color="{Binding Color, Source={StaticResource OverBackgroundBrush}}"/>
+    <SolidColorBrush x:Key="PasteBarItemBackground" Color="#66000000"/>
+    <SolidColorBrush x:Key="PasteBarItemCheckerboard" Color="{Binding Color, Source={StaticResource OverBackgroundBrush}}"/>
+    <SolidColorBrush x:Key="PasteBarItemMouseOverBackground" Color="{Binding Color, Source={StaticResource OverBackgroundBrush}}"/>
+    <SolidColorBrush x:Key="PasteBarItemMouseOverForeground" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="PasteBarItemMoreInfoBackground" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="PasteBarItemMoreInfoForeground" Color="#000000"/>
+    <SolidColorBrush x:Key="PasteBarItemMoreInfoButtonMouseOverBackground" Color="#66000000"/>
+    <SolidColorBrush x:Key="PasteBarItemMoreInfoButtonMouseOverForeground" Color="#000000"/>
+
+    <SolidColorBrush x:Key="ListBoxEnabledBackgroundBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="ListBoxEnabledBorderBrush" Color="#808080"/>
+    <SolidColorBrush x:Key="ListBoxOverBorderBrush" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="ListBoxOverBackground" Color="{Binding Color, Source={StaticResource OverBackgroundBrush}}"/>
+    <SolidColorBrush x:Key="ListBoxFocusedBorderBrush" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="ListBoxItemMouseOverBackground" Color="{Binding Color, Source={StaticResource OverBackgroundBrush}}"/>
+    
+    <SolidColorBrush x:Key="ToolTipBackgroundBrush" Color="#2B2B2B"/>
+    <SolidColorBrush x:Key="ToolTipBorderBrush" Color="#767676"/>
+
+    <SolidColorBrush x:Key="PopupBackground" Color="#2B2B2B"/>
+    <SolidColorBrush x:Key="PopupBorder" Color="#A0A0A0"/>
+
+    <SolidColorBrush x:Key="SeparatorBrush" Color="#808080"/>
+
+    <SolidColorBrush x:Key="MenuItemIsHighlightedBackgroundBrush" Color="#414141"/>
+    <SolidColorBrush x:Key="MenuItemDisabledForeground" Color="#656565"/>
+
+    <SolidColorBrush x:Key="SplitViewPaneBorder" Color="#00000000"/>
+    
+    <SolidColorBrush x:Key="HamburgerMenuItemMouseOverBackground" Color="{Binding Color, Source={StaticResource OverBackgroundBrush}}"/>
+    <SolidColorBrush x:Key="HamburgerMenuItemMouseOverForeground" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+
+    <SolidColorBrush x:Key="ScrollBarBrush" Color="#99FFFFFF"/>
+    <SolidColorBrush x:Key="ScrollBarOverBrush" Color="#CCFFFFFF"/>
+    <SolidColorBrush x:Key="ScrollBarDraggingBrush" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+
+    <SolidColorBrush x:Key="FlipViewIndicatorStroke" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    <SolidColorBrush x:Key="FlipViewIndicatorSelectedBackground" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    
+    <SolidColorBrush x:Key="PasteBarListBoxItemMouseOverBackground" Color="{Binding Color, Source={StaticResource OverBackgroundBrush}}"/>
+    <SolidColorBrush x:Key="PasteBarListBoxItemMouseOverForeground" Color="{Binding Color, Source={StaticResource ForegroundBrush}}"/>
+    
+</ResourceDictionary>

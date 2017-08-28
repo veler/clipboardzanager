@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{41E2E6CE-1229-456F-9FF5-40CF211D1FB9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0AABB5DE-488F-4BB3-BD34-3F29087D4AAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClipboardZanager.Shared", "Sources\ClipboardZanager.Shared\ClipboardZanager.Shared.csproj", "{62617A24-2636-4644-B301-C6907AA29531}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClipboardZanager.Core.Desktop", "Sources\ClipboardZanager.Core.Desktop\ClipboardZanager.Core.Desktop.csproj", "{A09CC9C5-9FB6-40B5-8168-1AFBC09E7207}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClipboardZanager", "Sources\ClipboardZanager\ClipboardZanager.csproj", "{619D814C-C85A-493A-8EAB-8EEE4175FB6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClipboardZanager.Shared.Tests", "Tests\ClipboardZanager.Shared.Tests\ClipboardZanager.Shared.Tests.csproj", "{67A874E2-EB23-42F1-8152-34B8AF3CF778}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClipboardZanager.Core.Desktop.Tests", "Tests\ClipboardZanager.Core.Desktop.Tests\ClipboardZanager.Core.Desktop.Tests.csproj", "{1644A256-66C1-4046-A125-038F78B7A21A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClipboardZanager.Tests", "Tests\ClipboardZanager.Tests\ClipboardZanager.Tests.csproj", "{996BEBDC-32A9-4465-8E6A-DE661EB536DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D3B87D8C-85FA-4D0A-A034-00B9006F207B}"
+	ProjectSection(SolutionItems) = preProject
+		..\passwords.txt = ..\passwords.txt
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android", "Android", "{60723C47-7CBB-4CCD-B39B-46DA4FB9052B}"
+	ProjectSection(SolutionItems) = preProject
+		..\Android\app\src\main\res\values\passwords.xml = ..\Android\app\src\main\res\values\passwords.xml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62617A24-2636-4644-B301-C6907AA29531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62617A24-2636-4644-B301-C6907AA29531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62617A24-2636-4644-B301-C6907AA29531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62617A24-2636-4644-B301-C6907AA29531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A09CC9C5-9FB6-40B5-8168-1AFBC09E7207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A09CC9C5-9FB6-40B5-8168-1AFBC09E7207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A09CC9C5-9FB6-40B5-8168-1AFBC09E7207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A09CC9C5-9FB6-40B5-8168-1AFBC09E7207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{619D814C-C85A-493A-8EAB-8EEE4175FB6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{619D814C-C85A-493A-8EAB-8EEE4175FB6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{619D814C-C85A-493A-8EAB-8EEE4175FB6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{619D814C-C85A-493A-8EAB-8EEE4175FB6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67A874E2-EB23-42F1-8152-34B8AF3CF778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67A874E2-EB23-42F1-8152-34B8AF3CF778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67A874E2-EB23-42F1-8152-34B8AF3CF778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67A874E2-EB23-42F1-8152-34B8AF3CF778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1644A256-66C1-4046-A125-038F78B7A21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1644A256-66C1-4046-A125-038F78B7A21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1644A256-66C1-4046-A125-038F78B7A21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1644A256-66C1-4046-A125-038F78B7A21A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{996BEBDC-32A9-4465-8E6A-DE661EB536DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{996BEBDC-32A9-4465-8E6A-DE661EB536DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{996BEBDC-32A9-4465-8E6A-DE661EB536DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{996BEBDC-32A9-4465-8E6A-DE661EB536DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{62617A24-2636-4644-B301-C6907AA29531} = {41E2E6CE-1229-456F-9FF5-40CF211D1FB9}
+		{A09CC9C5-9FB6-40B5-8168-1AFBC09E7207} = {41E2E6CE-1229-456F-9FF5-40CF211D1FB9}
+		{619D814C-C85A-493A-8EAB-8EEE4175FB6C} = {41E2E6CE-1229-456F-9FF5-40CF211D1FB9}
+		{67A874E2-EB23-42F1-8152-34B8AF3CF778} = {0AABB5DE-488F-4BB3-BD34-3F29087D4AAA}
+		{1644A256-66C1-4046-A125-038F78B7A21A} = {0AABB5DE-488F-4BB3-BD34-3F29087D4AAA}
+		{996BEBDC-32A9-4465-8E6A-DE661EB536DA} = {0AABB5DE-488F-4BB3-BD34-3F29087D4AAA}
+		{60723C47-7CBB-4CCD-B39B-46DA4FB9052B} = {D3B87D8C-85FA-4D0A-A034-00B9006F207B}
+	EndGlobalSection
+EndGlobal

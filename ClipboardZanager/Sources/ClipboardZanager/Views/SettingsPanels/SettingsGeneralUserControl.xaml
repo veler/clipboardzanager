@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="ClipboardZanager.Views.SettingsPanels.SettingsGeneralUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:settingsPanels="clr-namespace:ClipboardZanager.ViewModels.SettingsPanels"
+             xmlns:converters="clr-namespace:ClipboardZanager.ComponentModel.UI.Converters"
+             xmlns:controls="clr-namespace:ClipboardZanager.ComponentModel.UI.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:IntegerManipulationConverter x:Key="IntegerManipulationConverter" Value="40" Manipulation="Addition"/>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <settingsPanels:SettingsGeneralUserControlViewModel/>
+    </UserControl.DataContext>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Language.SettingsGeneralUserControl.Language}" VerticalAlignment="Center"/>
+            <TextBlock Text=" : " VerticalAlignment="Center"/>
+            <ComboBox Width="200" ItemsSource="{Binding AvailableLanguages, Mode=OneTime}" SelectedValue="{Binding CurrentLanguage, Mode=TwoWay}" DisplayMemberPath="NativeName" SelectedValuePath="Name" AutomationProperties.Name="{Binding Language.SettingsGeneralUserControl.Language}" AutomationProperties.HelpText="{Binding Language.FirstStartWindow.SelectLanguage}">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
+                        <Setter Property="AutomationProperties.Name" Value="{Binding NativeName}"/>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
+        </StackPanel>
+
+        <CheckBox Content="{Binding Language.SettingsGeneralUserControl.StartWithWindows}" IsChecked="{Binding StartWithWindows, Mode=TwoWay}" Margin="0,20,0,0"/>
+
+        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+            <TextBlock Text="{Binding Language.SettingsGeneralUserControl.PasteBarPosition}" VerticalAlignment="Center"/>
+            <TextBlock Text=" : " VerticalAlignment="Center"/>
+            <ComboBox Width="200" SelectedValue="{Binding PasteBarPosition, Mode=TwoWay}" SelectedValuePath="Position" AutomationProperties.Name="{Binding Language.SettingsGeneralUserControl.PasteBarPosition}">
+                <controls:PasteBarPositionSettingItem Position="Top" Content="{Binding Language.SettingsGeneralUserControl.PasteBarPosition_Top}" AutomationProperties.Name="{Binding Language.SettingsGeneralUserControl.PasteBarPosition_Top}"/>
+                <controls:PasteBarPositionSettingItem Position="Bottom" Content="{Binding Language.SettingsGeneralUserControl.PasteBarPosition_Bottom}" AutomationProperties.Name="{Binding Language.SettingsGeneralUserControl.PasteBarPosition_Bottom}"/>
+            </ComboBox>
+        </StackPanel>
+
+        <CheckBox Content="{Binding Language.SettingsGeneralUserControl.MouseGesture}" AutomationProperties.HelpText="{Binding Language.SettingsGeneralUserControl.MouseGesture_Description}" IsChecked="{Binding MouseGesture, Mode=TwoWay}" Margin="0,20,0,0"/>
+        <TextBlock Text="{Binding Language.SettingsGeneralUserControl.MouseGesture_Description}" TextWrapping="Wrap" Margin="30,0,0,0"/>
+
+        <CheckBox Content="{Binding Language.SettingsGeneralUserControl.HotKey}" IsChecked="{Binding KeyboardGesture, Mode=TwoWay}" Margin="0,20,0,0"/>
+        <StackPanel Margin="30,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Language.SettingsGeneralUserControl.CurrentHotKey}" AutomationProperties.HelpText="{Binding DisplayedCurrentKeyboardShortcut}" VerticalAlignment="Center" Focusable="{Binding IsScreenReaderRunning}" KeyboardNavigation.TabIndex="0"/>
+                <TextBlock Text=" : " VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding DisplayedCurrentKeyboardShortcut}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Button x:Name="ToggleChangeHotKeysButton" Content="{Binding Language.SettingsGeneralUserControl.ChangeHotKey}" IsEnabled="{Binding KeyboardGesture}" Margin="0,10,0,0" HorizontalAlignment="Left" Command="{Binding ToggleChangeHotKeysCommand}" AutomationProperties.HelpText="{Binding Language.SettingsGeneralUserControl.HotKeyPopupHelpText}"/>
+            <Popup PlacementTarget="{Binding ElementName=ToggleChangeHotKeysButton}" Placement="Top" HorizontalOffset="-30" VerticalOffset="-5" PopupAnimation="Fade" StaysOpen="False" IsOpen="{Binding IsChangeHotKeyPopupOpened, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <Popup.InputBindings>
+                    <KeyBinding Key="Esc" Command="{Binding ChangeHotKeyPopupClosedCommand}" />
+                </Popup.InputBindings>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Closed">
+                        <command:EventToCommand Command="{Binding ChangeHotKeyPopupClosedCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Border Style="{StaticResource PopupBackgroundBorderStyle}">
+                    <StackPanel Width="{Binding ActualWidth, ElementName=ToggleChangeHotKeysButton, Converter={StaticResource IntegerManipulationConverter}}">
+                        <TextBlock Text="{Binding Language.SettingsGeneralUserControl.HotKeyPopup_Description1}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding Language.SettingsGeneralUserControl.HotKeyPopup_Description2}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding DisplayedTemporaryKeyboardShortcut}" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,10,0,10"/>
+                        <TextBlock Text="{Binding Language.SettingsGeneralUserControl.HotKeyPopup_Description3}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        <Button x:Name="AcceptHotKeysButton" Content="{Binding Language.SettingsGeneralUserControl.HotKeyPopup_Accept}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,10,0,0" Command="{Binding AcceptHotKeysCommand}"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </StackPanel>
+
+        <CheckBox Content="{Binding Language.SettingsGeneralUserControl.ClosePasteBarWhenMouseIsAway}" IsChecked="{Binding ClosePasteBarWhenMouseIsAway, Mode=TwoWay}" Margin="0,20,0,0"/>
+
+        <CheckBox Content="{Binding Language.SettingsGeneralUserControl.ClosePasteBarWithHotKey}" IsChecked="{Binding ClosePasteBarWithHotKey, Mode=TwoWay}" Margin="0,20,0,0"/>
+        <StackPanel Margin="30,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Language.SettingsGeneralUserControl.CurrentHotKey}" VerticalAlignment="Center"/>
+                <TextBlock Text=" : " VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding DisplayedCurrentKeyboardShortcut}" VerticalAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+        
+        <StackPanel Margin="0,30,0,0">
+            <Button x:Name="RestoreDefaultSettingsButton" Content="{Binding Language.SettingsGeneralUserControl.RestoreDefault}" Command="{Binding RestoreDefaultCommand}" HorizontalAlignment="Left"/>
+            <Popup PlacementTarget="{Binding ElementName=RestoreDefaultSettingsButton}" MaxWidth="300" StaysOpen="False" IsOpen="{Binding IsRestoreDefaultPopupOpened, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <Popup.InputBindings>
+                    <KeyBinding Key="Esc" Command="{Binding RestoreDefaultCommand}" />
+                </Popup.InputBindings>
+                <Border Style="{StaticResource PopupBackgroundBorderStyle}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Language.SettingsGeneralUserControl.RestoreDefault_Confirmation}" TextWrapping="Wrap"/>
+                        <Button x:Name="RestoreDefaultConfirmButton" Content="{Binding Language.SettingsGeneralUserControl.RestoreDefault_Confirm}" AutomationProperties.HelpText="{Binding Language.SettingsGeneralUserControl.RestoreDefault_Confirmation}" HorizontalAlignment="Left" Margin="0,10,0,0" Command="{Binding ConfirmRestoreDefaultCommand}"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </StackPanel>
+
+        <Border Margin="0,50,0,0"/>
+    </StackPanel>
+</UserControl>

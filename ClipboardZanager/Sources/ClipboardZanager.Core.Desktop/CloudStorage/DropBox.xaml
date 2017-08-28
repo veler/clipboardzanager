@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="IconDropBox">
+        <Viewbox Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+            <Canvas Width="243" Height="236">
+                <Path Data="M128.1,50.6c-1.7-1-1.8-2.9-0.3-4.2l40.6-33.9c1.5-1.3,4.1-1.5,5.8-0.4L241.3,56c1.7,1.1,1.8,2.9,0.3,4.2l-40.6,33
+	c-1.5,1.3-4.2,1.4-5.9,0.4L128.1,50.6z"  Fill="White"/>
+                <Path Data="M118.3,49"  Fill="White"/>
+                <Path Data="M202.2,101.7c-1.5-1.3-4.1-1.5-5.8-0.5l-63.5,38.3c-1.7,1-1.9,2.9-0.4,4.2l35.3,30.3c1.5,1.3,4.1,1.5,5.9,0.5l64.4-37.4
+	c1.7-1,1.9-2.9,0.4-4.2L202.2,101.7z"  Fill="White"/>
+                <Path Data="M127.8,147.1c-1.5-1.3-2.8-0.7-2.8,1.3v73.9c0,2,1.4,2.8,3.1,1.7l64.8-39.8c1.7-1,3.1-3.5,3.1-5.5v-7.1c0-2-1.4-2.8-3.1-1.8
+	l-19.1,11.2c-1.7,1-4.4,0.8-5.9-0.5L127.8,147.1z"  Fill="White"/>
+                <Path Data="M116.8,50.6c1.7-1,1.8-2.9,0.3-4.2L76.5,12.5c-1.5-1.3-4.1-1.5-5.8-0.4L3.6,56c-1.7,1.1-1.8,2.9-0.3,4.2l40.6,33
+	c1.5,1.3,4.2,1.4,5.9,0.4L116.8,50.6z"  Fill="White"/>
+                <Path Data="M131.7,49"  Fill="White"/>
+                <Path Data="M42.7,101.7c1.5-1.3,4.1-1.5,5.8-0.5l63.5,38.3c1.7,1,1.9,2.9,0.4,4.2L77.1,174c-1.5,1.3-4.1,1.5-5.9,0.5L6.8,137.1
+	c-1.7-1-1.9-2.9-0.4-4.2L42.7,101.7z"  Fill="White"/>
+                <Path Data="M117.1,147.1c1.5-1.3,2.8-0.7,2.8,1.3v73.9c0,2-1.4,2.8-3.1,1.7L52,184.3c-1.7-1-3.1-3.5-3.1-5.5v-7.1c0-2,1.4-2.8,3.1-1.8
+	l19.1,11.2c1.7,1,4.4,0.8,5.9-0.5L117.1,147.1z"  Fill="White"/>
+            </Canvas>
+        </Viewbox>
+    </ControlTemplate>
+</ResourceDictionary>

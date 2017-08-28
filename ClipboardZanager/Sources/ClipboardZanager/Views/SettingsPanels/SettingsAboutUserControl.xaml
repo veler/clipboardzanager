@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="ClipboardZanager.Views.SettingsPanels.SettingsAboutUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClipboardZanager.Views.SettingsPanels"
+             xmlns:settingsPanels="clr-namespace:ClipboardZanager.ViewModels.SettingsPanels"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="650">
+    <UserControl.DataContext>
+        <settingsPanels:SettingsAboutUserControlViewModel/>
+    </UserControl.DataContext>
+    <StackPanel>
+        <TextBlock Text="{Binding Name}" Margin="0,20,0,0"/>
+
+
+        <TextBlock Text="{Binding Version}" Margin="0,20,0,0"/>
+
+        <TextBlock Text="{Binding Copyright}" Margin="0,20,0,0"/>
+
+        <TextBlock Margin="0,20,0,0">
+            <Hyperlink x:Name="hyperlink" NavigateUri="http://www.velersoftware.com" Command="{Binding OpenWebsite}" CommandParameter="{Binding NavigateUri.OriginalString, ElementName=hyperlink, Mode=OneWay}">
+                <TextBlock Text="http://www.velersoftware.com"/>
+             </Hyperlink>
+        </TextBlock>
+
+        <TextBlock Text="Made with ♥ from France and Washington State." Margin="0,20,0,0"/>
+
+        <Button Content="{Binding Language.SettingsAboutUserControl.SendLog}" HorizontalAlignment="Left" Command="{Binding SendLogs}" Margin="0,20,0,0"/>
+
+        <StackPanel Margin="0,30,0,0">
+            <Button x:Name="CreditButton" Content="{Binding Language.SettingsAboutUserControl.CreditButton}" Command="{Binding CreditButtonCommand}" HorizontalAlignment="Left"/>
+            <Popup PlacementTarget="{Binding ElementName=CreditButton}" MaxWidth="500" StaysOpen="False" IsOpen="{Binding IsCreditPopupOpened, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <Popup.InputBindings>
+                    <KeyBinding Key="Esc" Command="{Binding CreditButtonCommand}" />
+                </Popup.InputBindings>
+                <Border Style="{StaticResource PopupBackgroundBorderStyle}">
+                    <StackPanel>
+                        <ScrollViewer MaxHeight="300">
+                            <TextBlock Text="{Binding Language.SettingsAboutUserControl.Credit}" TextWrapping="Wrap"/>
+                        </ScrollViewer>
+                        <Button x:Name="CreditConfirmButton" Content="{Binding Language.SettingsAboutUserControl.CreditButton_Confirm}" AutomationProperties.HelpText="{Binding Language.SettingsAboutUserControl.Credit}" HorizontalAlignment="Left" Margin="0,10,0,0" Command="{Binding CreditButtonCommand}"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </StackPanel>
+
+        <TextBlock Margin="0,20,0,0">
+            <Hyperlink x:Name="hyperlink2" NavigateUri="http://www.velersoftware.com/privacy-policy.php" Command="{Binding OpenWebsite}" CommandParameter="{Binding NavigateUri.OriginalString, ElementName=hyperlink2, Mode=OneWay}">
+                <TextBlock Text="{Binding Language.SettingsAboutUserControl.Privacy}"/>
+             </Hyperlink>
+        </TextBlock>
+
+        <TextBlock Margin="0,20,0,0">
+            <Hyperlink x:Name="hyperlink3" NavigateUri="https://github.com/veler/clipboardzanager" Command="{Binding OpenWebsite}" CommandParameter="{Binding NavigateUri.OriginalString, ElementName=hyperlink3, Mode=OneWay}">
+                <TextBlock Text="{Binding Language.SettingsAboutUserControl.Contribute}"/>
+             </Hyperlink>
+        </TextBlock>
+
+        <Border Margin="0,50,0,0"/>
+    </StackPanel>
+</UserControl>

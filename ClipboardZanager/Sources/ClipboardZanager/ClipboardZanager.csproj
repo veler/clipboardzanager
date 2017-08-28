@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{619D814C-C85A-493A-8EAB-8EEE4175FB6C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ClipboardZanager</RootNamespace>
+    <AssemblyName>ClipboardZanager</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Assets\clipboardzanager.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <TransformOnBuild>True</TransformOnBuild>
+    <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationClientsideProviders" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ComponentModel\Enums\AccentColorUse.cs" />
+    <Compile Include="ComponentModel\Enums\IntegerManipulation.cs" />
+    <Compile Include="ComponentModel\Enums\PasteBarPosition.cs" />
+    <Compile Include="ComponentModel\Enums\SettingsViewMode.cs" />
+    <Compile Include="ComponentModel\UI\Controls\CloudStorageAuthenticationUserControl.xaml.cs">
+      <DependentUpon>CloudStorageAuthenticationUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ComponentModel\UI\Controls\FlipView.cs" />
+    <Compile Include="ComponentModel\UI\Controls\FlipViewIndicator.cs" />
+    <Compile Include="ComponentModel\UI\Controls\HamburgerMenuItem.cs" />
+    <Compile Include="ComponentModel\UI\Controls\PasteBarToggleButton.cs" />
+    <Compile Include="ComponentModel\UI\Controls\ProgressRing.cs" />
+    <Compile Include="ComponentModel\UI\Controls\SearchTextBox.cs" />
+    <Compile Include="ComponentModel\UI\Controls\TouchTextBox.cs" />
+    <Compile Include="ComponentModel\UI\Converters\ActiveColorSetToSolidColorBrushConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\BooleanToBrushConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\BooleanToIntegerConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\BooleanToInvertedBooleanConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\BooleanToThicknessConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\BooleanToVerticalAlignmentConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\DataEntryToDescriptiveTextConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\DateTimeToTimeSpanStringConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\EnumToVisibilityConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\FilePathToIconConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\FlowDirectionToStringConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\IntegerManipulationConverter.cs" />
+    <Compile Include="ComponentModel\UI\Controls\PasteBarPositionSettingItem.cs" />
+    <Compile Include="ComponentModel\UI\Converters\MultiBindingConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\ThumbnailToValueConverter.cs" />
+    <Compile Include="ComponentModel\UI\Converters\WidthToPaneMarginConverter.cs" />
+    <Compile Include="ComponentModel\UI\ForceTouchCaptureBehavior.cs" />
+    <Compile Include="ComponentModel\UI\SetPropertyAction.cs" />
+    <Compile Include="ComponentModel\UI\VisualHelper.cs" />
+    <Compile Include="Strings\FirstStartWindow\FirstStartWindow.Designer.cs">
+      <DependentUpon>FirstStartWindow.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings\PasteBarWindow\PasteBarWindow.Designer.cs">
+      <DependentUpon>PasteBarWindow.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings\SettingsNotificationsUserControl\SettingsNotificationsUserControl.Designer.cs">
+      <DependentUpon>SettingsNotificationsUserControl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings\SettingsAboutUserControl\SettingsAboutUserControl.Designer.cs">
+      <DependentUpon>SettingsAboutUserControl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings\SettingsSynchronizationUserControl\SettingsSynchronizationUserControl.Designer.cs">
+      <DependentUpon>SettingsSynchronizationUserControl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings\SettingsSecurityUserControl\SettingsSecurityUserControl.Designer.cs">
+      <DependentUpon>SettingsSecurityUserControl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings\SettingsDataUserControl\SettingsDataUserControl.Designer.cs">
+      <DependentUpon>SettingsDataUserControl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings\SettingsGeneralUserControl\SettingsGeneralUserControl.Designer.cs">
+      <DependentUpon>SettingsGeneralUserControl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Strings\SettingsWindow\SettingsWindow.Designer.cs">
+      <DependentUpon>SettingsWindow.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels\PasteBarWindowViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPanels\SettingsAboutUserControlViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPanels\SettingsDataUserControlViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPanels\SettingsGeneralUserControlViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPanels\SettingsNotificationsUserControlViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPanels\SettingsSecurityUserControlViewModel.cs" />
+    <Compile Include="ViewModels\SettingsPanels\SettingsSynchronizationUserControlViewModel.cs" />
+    <Compile Include="ViewModels\FirstStartWindowViewModel.cs" />
+    <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
+    <Compile Include="Views\FirstStartWindow.xaml.cs">
+      <DependentUpon>FirstStartWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PasteBarWindow.xaml.cs">
+      <DependentUpon>PasteBarWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsPanels\SettingsAboutUserControl.xaml.cs">
+      <DependentUpon>SettingsAboutUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsPanels\SettingsDataUserControl.xaml.cs">
+      <DependentUpon>SettingsDataUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsPanels\SettingsGeneralUserControl.xaml.cs">
+      <DependentUpon>SettingsGeneralUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsPanels\SettingsNotificationsUserControl.xaml.cs">
+      <DependentUpon>SettingsNotificationsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsPanels\SettingsSecurityUserControl.xaml.cs">
+      <DependentUpon>SettingsSecurityUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsPanels\SettingsSynchronizationUserControl.xaml.cs">
+      <DependentUpon>SettingsSynchronizationUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ComponentModel\UI\Controls\CloudStorageAuthenticationUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Custom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\DefaultColorSchema.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\HighContrastColorSchema.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Icons\Paste.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Icons\Synchronize.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Icons\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FirstStartWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ComponentModel\CloudStorage\DropBoxTokenProvider.cs" />
+    <Compile Include="ComponentModel\CloudStorage\OneDriveTokenProvider.cs" />
+    <Compile Include="ComponentModel\Enums\BalloonTipIcon.cs" />
+    <Compile Include="ComponentModel\Messages\Message.cs" />
+    <Compile Include="ComponentModel\Messages\MessageIdentifier.cs" />
+    <Compile Include="ComponentModel\Messages\MessageIdentifiers.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageIdentifiers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ComponentModel\Services\ServiceSettingProvider.cs" />
+    <Compile Include="ComponentModel\UI\Controls\BlurredWindow.cs" />
+    <Compile Include="ComponentModel\UI\Controls\NotifyIcon.cs" />
+    <Compile Include="Strings\LanguageManager.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LanguageManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Strings\MainWindow\MainWindow.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainWindow.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\PasteBarWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsPanels\SettingsAboutUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsPanels\SettingsDataUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsPanels\SettingsGeneralUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsPanels\SettingsNotificationsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsPanels\SettingsSecurityUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsPanels\SettingsSynchronizationUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\Passwords.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Passwords.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssemblyInfo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\FirstStartWindow\FirstStartWindow.fr.resx" />
+    <EmbeddedResource Include="Strings\FirstStartWindow\FirstStartWindow.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FirstStartWindow.Designer.cs</LastGenOutput>
+      <RunCustomToolOn>..\LanguageManager.tt</RunCustomToolOn>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\PasteBarWindow\PasteBarWindow.fr.resx" />
+    <EmbeddedResource Include="Strings\PasteBarWindow\PasteBarWindow.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PasteBarWindow.Designer.cs</LastGenOutput>
+      <RunCustomToolOn>..\LanguageManager.tt</RunCustomToolOn>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\SettingsNotificationsUserControl\SettingsNotificationsUserControl.fr.resx" />
+    <EmbeddedResource Include="Strings\SettingsNotificationsUserControl\SettingsNotificationsUserControl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsNotificationsUserControl.Designer.cs</LastGenOutput>
+      <RunCustomToolOn>..\LanguageManager.tt</RunCustomToolOn>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\SettingsAboutUserControl\SettingsAboutUserControl.fr.resx" />
+    <EmbeddedResource Include="Strings\SettingsAboutUserControl\SettingsAboutUserControl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsAboutUserControl.Designer.cs</LastGenOutput>
+      <RunCustomToolOn>..\LanguageManager.tt</RunCustomToolOn>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\SettingsSynchronizationUserControl\SettingsSynchronizationUserControl.fr.resx" />
+    <EmbeddedResource Include="Strings\SettingsSynchronizationUserControl\SettingsSynchronizationUserControl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsSynchronizationUserControl.Designer.cs</LastGenOutput>
+      <RunCustomToolOn>..\LanguageManager.tt</RunCustomToolOn>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\SettingsSecurityUserControl\SettingsSecurityUserControl.fr.resx" />
+    <EmbeddedResource Include="Strings\SettingsSecurityUserControl\SettingsSecurityUserControl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsSecurityUserControl.Designer.cs</LastGenOutput>
+      <RunCustomToolOn>..\LanguageManager.tt</RunCustomToolOn>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\SettingsDataUserControl\SettingsDataUserControl.fr.resx" />
+    <EmbeddedResource Include="Strings\SettingsDataUserControl\SettingsDataUserControl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsDataUserControl.Designer.cs</LastGenOutput>
+      <RunCustomToolOn>..\LanguageManager.tt</RunCustomToolOn>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\SettingsGeneralUserControl\SettingsGeneralUserControl.fr.resx" />
+    <EmbeddedResource Include="Strings\SettingsGeneralUserControl\SettingsGeneralUserControl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsGeneralUserControl.Designer.cs</LastGenOutput>
+      <RunCustomToolOn>..\LanguageManager.tt</RunCustomToolOn>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\SettingsWindow\SettingsWindow.fr.resx" />
+    <EmbeddedResource Include="Strings\SettingsWindow\SettingsWindow.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsWindow.Designer.cs</LastGenOutput>
+      <RunCustomToolOn>..\LanguageManager.tt</RunCustomToolOn>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings\MainWindow\MainWindow.fr.resx" />
+    <EmbeddedResource Include="Strings\MainWindow\MainWindow.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainWindow.Designer.cs</LastGenOutput>
+      <RunCustomToolOn>..\LanguageManager.tt</RunCustomToolOn>
+    </EmbeddedResource>
+    <None Include="app.manifest" />
+    <Resource Include="Assets\news\news.ar.json" />
+    <Resource Include="Assets\news\news.en.json" />
+    <Resource Include="Assets\news\news.fr.json" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AssemblyInfo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Passwords.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Passwords.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClipboardZanager.Core.Desktop\ClipboardZanager.Core.Desktop.csproj">
+      <Project>{a09cc9c5-9fb6-40b5-8168-1afbc09e7207}</Project>
+      <Name>ClipboardZanager.Core.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClipboardZanager.Shared\ClipboardZanager.Shared.csproj">
+      <Project>{62617a24-2636-4644-b301-c6907aa29531}</Project>
+      <Name>ClipboardZanager.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\clipboardzanager.ico" />
+    <Resource Include="Assets\paste.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\paste-sync.ico" />
+    <Resource Include="Assets\access_settings.jpg" />
+    <Content Include="ComponentModel\Messages\MessageIdentifiers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MessageIdentifiers.cs</LastGenOutput>
+    </Content>
+    <Content Include="Strings\LanguageManager.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LanguageManager.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\TextTemplating\Microsoft.TextTemplating.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

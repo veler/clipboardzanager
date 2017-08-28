@@ -1,0 +1,98 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="OverBackgroundBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="ForegroundBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    <SolidColorBrush x:Key="DarkerForegroundBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    <SolidColorBrush x:Key="IsHighlightedForegroundBrush" Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
+
+    <SolidColorBrush x:Key="VisualFocusBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="ButtonBorderBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    <SolidColorBrush x:Key="ButtonIsHighlightedBackgroundBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="ButtonIsHighlightedBorderBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="ButtonIsHighlightedForeground" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="ButtonIsPressedBackgroundBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="ButtonIsPressedForeground" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="ButtonIsPressedBorderBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="ButtonIsDisabledForeground" Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+    <SolidColorBrush x:Key="ButtonIsDisabledBorderBrush" Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+
+    <SolidColorBrush x:Key="CheckBoxEnabledBackground" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="CheckBoxEnabledBorder" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    <SolidColorBrush x:Key="CheckBoxEnabledGlyph" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    <SolidColorBrush x:Key="CheckBoxMouseOverBackground" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="CheckBoxMouseOverBorder" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="CheckBoxMouseOverGlyph" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="CheckBoxDisabledBackground" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="CheckBoxDisabledBorder" Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+    <SolidColorBrush x:Key="CheckBoxDisabledGlyph" Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+    <SolidColorBrush x:Key="CheckBoxDisabledTextBrush" Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+    <SolidColorBrush x:Key="CheckBoxPressedBackground" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="CheckBoxPressedBorder" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="CheckBoxPressedGlyph" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+
+    <SolidColorBrush x:Key="ComboBoxEnabledBackgroundBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="ComboBoxEnabledBorderBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    <SolidColorBrush x:Key="ComboBoxOverBorderBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="ComboBoxOverBackground" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="ComboBoxFocusedBorderBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="ComboBoxDisabledBorderBrush" Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+    <SolidColorBrush x:Key="ComboBoxDisabledTextBrush" Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+
+    <SolidColorBrush x:Key="TouchTextBoxEnabledBackgroundBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="TouchTextBoxEnabledBorderBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    <SolidColorBrush x:Key="TouchTextBoxOverBorderBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="TouchTextBoxOverBackground" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="TouchTextBoxFocusedBorderBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="TouchTextBoxDisabledBorderBrush" Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+    <SolidColorBrush x:Key="TouchTextBoxDisabledTextBrush" Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}"/>
+    <SolidColorBrush x:Key="TouchTextBoxCrossBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+
+    <SolidColorBrush x:Key="PasteBarItemBorder" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    <SolidColorBrush x:Key="PasteBarItemIsHighContrastIsHighlightedBorder" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="PasteBarItemTopBarBackground" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="PasteBarItemBackground" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="PasteBarItemCheckerboard" Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+    <SolidColorBrush x:Key="PasteBarItemMouseOverBackground" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="PasteBarItemMouseOverForeground" Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
+    <SolidColorBrush x:Key="PasteBarItemMoreInfoBackground" Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}"/>
+    <SolidColorBrush x:Key="PasteBarItemMoreInfoForeground" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="PasteBarItemMoreInfoButtonMouseOverBackground" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="PasteBarItemMoreInfoButtonMouseOverForeground" Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
+
+    <SolidColorBrush x:Key="ListBoxEnabledBackgroundBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="ListBoxEnabledBorderBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    <SolidColorBrush x:Key="ListBoxOverBorderBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="ListBoxOverBackground" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    <SolidColorBrush x:Key="ListBoxFocusedBorderBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="ListBoxItemMouseOverBackground" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+
+    <SolidColorBrush x:Key="ToolTipBackgroundBrush" Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
+    <SolidColorBrush x:Key="ToolTipBorderBrush" Color="{DynamicResource {x:Static SystemColors.MenuTextColorKey}}"/>
+
+    <SolidColorBrush x:Key="PopupBackground" Color="{DynamicResource {x:Static SystemColors.MenuColorKey}}"/>
+    <SolidColorBrush x:Key="PopupBorder" Color="{DynamicResource {x:Static SystemColors.MenuTextColorKey}}"/>
+
+    <SolidColorBrush x:Key="SeparatorBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+
+    <SolidColorBrush x:Key="MenuItemIsHighlightedBackgroundBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="MenuItemDisabledForeground" Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
+
+    <SolidColorBrush x:Key="SplitViewPaneBorder" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+
+    <SolidColorBrush x:Key="HamburgerMenuItemMouseOverBackground" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="HamburgerMenuItemMouseOverForeground" Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
+
+    <SolidColorBrush x:Key="ScrollBarBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    <SolidColorBrush x:Key="ScrollBarOverBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    <SolidColorBrush x:Key="ScrollBarDraggingBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+
+    <SolidColorBrush x:Key="FlipViewIndicatorStroke" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    <SolidColorBrush x:Key="FlipViewIndicatorSelectedBackground" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}"/>
+    
+    <SolidColorBrush x:Key="PasteBarListBoxItemMouseOverBackground" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+    <SolidColorBrush x:Key="PasteBarListBoxItemMouseOverForeground" Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
+</ResourceDictionary>

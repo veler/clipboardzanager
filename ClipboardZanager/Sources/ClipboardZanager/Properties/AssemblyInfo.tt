@@ -1,0 +1,141 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+    this.ChangeVersionInAndroidProject();
+#>
+using System.Reflection;
+using System.Resources;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Windows;
+
+// General Information about an assembly is controlled through the following
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+[assembly: AssemblyTitle("ClipboardZanager")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Etienne BAUDOUX")]
+[assembly: AssemblyProduct("ClipboardZanager")]
+[assembly: AssemblyCopyright("© 2010 - <#= DateTime.Now.Year.ToString() #> Etienne BAUDOUX. All rights reserved.")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+[assembly: NeutralResourcesLanguage("en")]
+
+// Setting ComVisible to false makes the types in this assembly not visible 
+// to COM components.  If you need to access a type in this assembly from 
+// COM, set the ComVisible attribute to true on that type.
+[assembly: ComVisible(false)]
+
+//In order to begin building localizable applications, set 
+//<UICulture>CultureYouAreCodingWith</UICulture> in your .csproj file
+//inside a <PropertyGroup>.  For example, if you are using US english
+//in your source files, set the <UICulture> to en-US.  Then uncomment
+//the NeutralResourceLanguage attribute below.  Update the "en-US" in
+//the line below to match the UICulture setting in the project file.
+
+//[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
+
+
+[assembly: ThemeInfo(
+    //where theme specific resource dictionaries are located
+    //(used if a resource is not found in the page, 
+    // or application resource dictionaries)
+    ResourceDictionaryLocation.None, 
+
+    //where the generic resource dictionary is located
+    //(used if a resource is not found in the page, 
+    // app, or any theme specific resource dictionaries)
+    ResourceDictionaryLocation.SourceAssembly 
+)]
+
+
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Build and Revision Numbers 
+// by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("<#= this.Version #>")]
+[assembly: AssemblyFileVersion("<#= this.Version #>")]
+
+[assembly: InternalsVisibleTo("ClipboardZanager.Tests")]
+
+<#+
+
+private string _version;
+string Version {
+    get
+    {
+        if (string.IsNullOrEmpty(_version))
+        {
+            _version = GetVersion();
+        }
+
+        return _version;
+    }
+}
+
+string GetVersion()
+{
+    var stringsFolder = Host.ResolvePath(@"");
+    var assemblyInfoFilePath = stringsFolder + @"\AssemblyInfo.cs";
+    var date = System.DateTime.UtcNow;
+
+    if (File.Exists(assemblyInfoFilePath))
+    {
+        var searchedString = $"[assembly: AssemblyVersion(\"{date.Year}.{date.Month}.{date.Day}.";
+        var lines = File.ReadAllLines(assemblyInfoFilePath);
+        var version = lines.FirstOrDefault(line => line.StartsWith(searchedString));
+
+        if (!string.IsNullOrWhiteSpace(version))
+        {
+            var currentRevisionString = version.Replace(searchedString, string.Empty).Replace("\")]", string.Empty);
+            int currentRevision = 0;
+
+            if (int.TryParse(currentRevisionString, out currentRevision))
+            {
+                currentRevision++;
+                return $"{date.Year}.{date.Month}.{date.Day}.{currentRevision}";
+            }
+        }
+    }
+
+    return $"{date.Year}.{date.Month}.{date.Day}.1";
+}
+
+void ChangeVersionInAndroidProject()
+{
+    var stringsFolder = Host.ResolvePath(@"");
+    var androidAssemblyInfoFilePath = stringsFolder + @"..\..\..\..\..\Android\app\build.gradle";
+
+    if (File.Exists(androidAssemblyInfoFilePath))
+    {
+        var searchedString = "        versionName ";
+        var lines = File.ReadAllLines(androidAssemblyInfoFilePath);
+
+        for (var i = 0; i < lines.Length; i++)
+        {
+            if (lines[i].StartsWith(searchedString))
+            {
+                lines[i] = $"        versionName \"{Version}\" // Do NOT change this line manually. It is changed automatically everytime the Windows app is built.";
+            }
+        }
+
+        File.WriteAllLines(androidAssemblyInfoFilePath, lines);
+    }
+    else
+    {
+        throw new FileNotFoundException($"Unable to find the file '{androidAssemblyInfoFilePath}' in the repository.");
+    }
+}
+#>

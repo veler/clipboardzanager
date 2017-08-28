@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="ClipboardZanager.Views.SettingsPanels.SettingsNotificationsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:settingsPanels="clr-namespace:ClipboardZanager.ViewModels.SettingsPanels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <settingsPanels:SettingsNotificationsUserControlViewModel/>
+    </UserControl.DataContext>
+    <StackPanel>
+        <CheckBox Content="{Binding Language.SettingsNotificationsUserControl.SyncFailed}" IsChecked="{Binding NotifySyncFailed, Mode=TwoWay}"/>
+
+        <CheckBox Content="{Binding Language.SettingsNotificationsUserControl.CreditCard}" IsChecked="{Binding NotifyCreditCard, Mode=TwoWay}" Margin="0,20,0,0"/>
+
+        <CheckBox Content="{Binding Language.SettingsNotificationsUserControl.Password}" IsChecked="{Binding NotifyPassword, Mode=TwoWay}" Margin="0,20,0,0"/>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,57 @@
+﻿<Window x:Class="ClipboardZanager.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:ClipboardZanager.ViewModels"
+        xmlns:controls="clr-namespace:ClipboardZanager.ComponentModel.UI.Controls"
+        mc:Ignorable="d"
+        Title="{Binding Language.MainWindow.ApplicationTitle}"
+        Height="0"
+        Width="0"
+        WindowStyle="None"
+        WindowState="Minimized"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Focusable="True"
+        Visibility="Collapsed"
+        Opacity="0"
+        AllowsTransparency="True"
+        Icon="/ClipboardZanager;component/Assets/clipboardzanager.ico">
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <controls:NotifyIcon
+            x:Name="NotifyIcon"
+            Icon="{Binding NotifyIconSource}"
+            IconVisibility="{Binding NotifyIconVisibility}"
+            Text="{Binding Language.MainWindow.ApplicationTitle}"
+            BalloonTipIcon="Info"
+            ContextMenuClosed="NotifyIcon_ContextMenuClosed"
+            MouseClick="NotifyIcon_OnMouseClick">
+            <controls:NotifyIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{Binding Language.MainWindow.Menu_Paste_Text}" ToolTip="{Binding Language.MainWindow.Menu_Paste_Tooltip}" FlowDirection="{Binding Language.FlowDirection}" Command="{Binding PasteCommand}">
+                        <MenuItem.Icon>
+                            <ContentControl Template="{StaticResource IconPaste}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{Binding Language.MainWindow.Menu_Synchronize_Text}" ToolTip="{Binding Language.MainWindow.Menu_Synchronize_Tooltip}" FlowDirection="{Binding Language.FlowDirection}" Command="{Binding SynchronizeCommand}">
+                        <MenuItem.Icon>
+                            <ContentControl Template="{StaticResource IconSynchronize}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{Binding Language.MainWindow.Menu_Settings_Text}" ToolTip="{Binding Language.MainWindow.Menu_Settings_Tooltip}" FlowDirection="{Binding Language.FlowDirection}" Command="{Binding SettingsCommand}">
+                        <MenuItem.Icon>
+                            <ContentControl Template="{StaticResource IconSettings}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="{Binding Language.MainWindow.Menu_Quit_Text}" ToolTip="{Binding Language.MainWindow.Menu_Quit_Tooltip}" FlowDirection="{Binding Language.FlowDirection}" Command="{Binding ExitCommand}"/>
+                </ContextMenu>
+            </controls:NotifyIcon.ContextMenu>
+        </controls:NotifyIcon>
+    </Grid>
+</Window>
+

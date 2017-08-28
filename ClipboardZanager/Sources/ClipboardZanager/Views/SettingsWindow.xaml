@@ -1,0 +1,102 @@
+﻿<controls:BlurredWindow
+        x:Name="blurredWindow"
+        x:Class="ClipboardZanager.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:ClipboardZanager.ComponentModel.UI.Controls"
+        xmlns:converters="clr-namespace:ClipboardZanager.ComponentModel.UI.Converters"
+        xmlns:viewModels="clr-namespace:ClipboardZanager.ViewModels"
+        xmlns:settingsPanels="clr-namespace:ClipboardZanager.Views.SettingsPanels"
+        mc:Ignorable="d"
+        Title="{Binding Language.SettingsWindow.WindowTitle}"
+        Height="550"
+        Width="1000"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        IsBlurred="True"
+        UseAccentColor="No"
+        AutomationProperties.HelpText="{Binding Language.SettingsWindow.WindowAutomationName}">
+    <controls:BlurredWindow.Resources>
+        <converters:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter"/>
+        <converters:BooleanToBrushConverter x:Key="BlurredGridBooleanToBrushConverter" TrueValue="#99232323" FalseValue="#FF464646" HighContrastTrueValue="Black" HighContrastFalseValue="Black"/>
+        <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
+    </controls:BlurredWindow.Resources>
+    <Window.DataContext>
+        <viewModels:SettingsWindowViewModel/>
+    </Window.DataContext>
+    <Grid FlowDirection="{Binding Language.FlowDirection}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Background="{Binding IsBlurRendered, Converter={StaticResource BlurredGridBooleanToBrushConverter}, ElementName=blurredWindow, Mode=OneWay}">
+            <Border BorderBrush="{StaticResource SplitViewPaneBorder}" BorderThickness="0,0,1,0"/>
+            <StackPanel>
+                <Border Margin="0,64,0,0" Height="48">
+                    <TextBlock Margin="48,0,0,0" Text="{Binding Language.MainWindow.ApplicationTitle}" Foreground="White" FontWeight="Bold" VerticalAlignment="Center"/>
+                </Border>
+                <ListBox Style="{StaticResource HamburgerListBox}">
+                    <controls:HamburgerMenuItem Content="{Binding Language.SettingsWindow.Section_General}" IsSelected="{Binding ViewMode, ConverterParameter='General', Converter={StaticResource EnumToBooleanConverter}, Mode=TwoWay}">
+                        <controls:HamburgerMenuItem.Icon>
+                            <TextBlock Text="&#xE713;" Style="{StaticResource HamburgerMenuItemTextBlockStyle}"/>
+                        </controls:HamburgerMenuItem.Icon>
+                    </controls:HamburgerMenuItem>
+                    <controls:HamburgerMenuItem Content="{Binding Language.SettingsWindow.Section_Data}" IsSelected="{Binding ViewMode, ConverterParameter='Data', Converter={StaticResource EnumToBooleanConverter}, Mode=TwoWay}">
+                        <controls:HamburgerMenuItem.Icon>
+                            <TextBlock Text="&#xE160;" Style="{StaticResource HamburgerMenuItemTextBlockStyle}"/>
+                        </controls:HamburgerMenuItem.Icon>
+                    </controls:HamburgerMenuItem>
+                    <controls:HamburgerMenuItem Content="{Binding Language.SettingsWindow.Section_Security}" IsSelected="{Binding ViewMode, ConverterParameter='Security', Converter={StaticResource EnumToBooleanConverter}, Mode=TwoWay}">
+                        <controls:HamburgerMenuItem.Icon>
+                            <TextBlock Text="&#xE72E;" Style="{StaticResource HamburgerMenuItemTextBlockStyle}"/>
+                        </controls:HamburgerMenuItem.Icon>
+                    </controls:HamburgerMenuItem>
+                    <controls:HamburgerMenuItem Content="{Binding Language.SettingsWindow.Section_Synchronization}" IsSelected="{Binding ViewMode, ConverterParameter='Synchronization', Converter={StaticResource EnumToBooleanConverter}, Mode=TwoWay}">
+                        <controls:HamburgerMenuItem.Icon>
+                            <TextBlock Text="&#xE753;" Style="{StaticResource HamburgerMenuItemTextBlockStyle}"/>
+                        </controls:HamburgerMenuItem.Icon>
+                    </controls:HamburgerMenuItem>
+                    <controls:HamburgerMenuItem Content="{Binding Language.SettingsWindow.Section_Notifications}" IsSelected="{Binding ViewMode, ConverterParameter='Notifications', Converter={StaticResource EnumToBooleanConverter}, Mode=TwoWay}">
+                        <controls:HamburgerMenuItem.Icon>
+                            <TextBlock Text="&#xE91C;" Style="{StaticResource HamburgerMenuItemTextBlockStyle}"/>
+                        </controls:HamburgerMenuItem.Icon>
+                    </controls:HamburgerMenuItem>
+                    <controls:HamburgerMenuItem Content="{Binding Language.SettingsWindow.Section_About}" IsSelected="{Binding ViewMode, ConverterParameter='AboutThisApp', Converter={StaticResource EnumToBooleanConverter}, Mode=TwoWay}">
+                        <controls:HamburgerMenuItem.Icon>
+                            <TextBlock Text="&#xE168;" Style="{StaticResource HamburgerMenuItemTextBlockStyle}"/>
+                        </controls:HamburgerMenuItem.Icon>
+                    </controls:HamburgerMenuItem>
+                </ListBox>
+            </StackPanel>
+        </Grid>
+        <Border Grid.Column="1" Background="{StaticResource BackgroundBrush}" Padding="48,122,0,0">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" CanContentScroll="False" PanningMode="VerticalOnly">
+                <Grid Margin="0,0,48,0">
+                    <settingsPanels:SettingsGeneralUserControl Visibility="{Binding Path=DataContext.ViewMode, ElementName=blurredWindow, ConverterParameter=General, Converter={StaticResource EnumToVisibilityConverter}}" Style="{StaticResource SettingsWindowContentStyle}"/>
+                    <settingsPanels:SettingsDataUserControl Visibility="{Binding Path=DataContext.ViewMode, ElementName=blurredWindow, ConverterParameter=Data, Converter={StaticResource EnumToVisibilityConverter}}" Style="{StaticResource SettingsWindowContentStyle}"/>
+                    <settingsPanels:SettingsSecurityUserControl Visibility="{Binding Path=DataContext.ViewMode, ElementName=blurredWindow, ConverterParameter=Security, Converter={StaticResource EnumToVisibilityConverter}}" Style="{StaticResource SettingsWindowContentStyle}"/>
+                    <settingsPanels:SettingsSynchronizationUserControl Visibility="{Binding Path=DataContext.ViewMode, ElementName=blurredWindow, ConverterParameter=Synchronization, Converter={StaticResource EnumToVisibilityConverter}}" Style="{StaticResource SettingsWindowContentStyle}"/>
+                    <settingsPanels:SettingsNotificationsUserControl Visibility="{Binding Path=DataContext.ViewMode, ElementName=blurredWindow, ConverterParameter=Notifications, Converter={StaticResource EnumToVisibilityConverter}}" Style="{StaticResource SettingsWindowContentStyle}"/>
+                    <settingsPanels:SettingsAboutUserControl Visibility="{Binding Path=DataContext.ViewMode, ElementName=blurredWindow, ConverterParameter=AboutThisApp, Converter={StaticResource EnumToVisibilityConverter}}" Style="{StaticResource SettingsWindowContentStyle}"/>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top">
+            <Border Background="Transparent" MouseLeftButtonDown="DragZoneGrid_OnMouseLeftButtonDown"/>
+            <Button Style="{StaticResource IconButtonStyle}"
+                    ToolTip="{Binding Language.SettingsWindow.Close}"
+                    AutomationProperties.AcceleratorKey="{Binding Language.SettingsWindow.Close_AccessibilityKey}" 
+                    AutomationProperties.HelpText="{Binding Language.SettingsWindow.Close_AccessibilityHelp}" 
+                    Content="&#xE10A;"
+                    Margin="0,64,48,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    IsCancel="True"
+                    TabIndex="1"
+                    Command="{Binding CloseButtonCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+        </Grid>
+    </Grid>
+</controls:BlurredWindow>
