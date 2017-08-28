@@ -49,7 +49,10 @@ public class QueryableArrayList<T> extends ArrayList<T> {
             throw new QueryableArrayListException(EmptyCollection);
         }
 
-        for (T item : this) {
+        T item;
+        int size = size();
+        for (int i = 0; i < size; i++) {
+            item = this.get(i);
             if (predicate.apply(item)) {
                 return item;
             }
@@ -82,7 +85,10 @@ public class QueryableArrayList<T> extends ArrayList<T> {
      * @return Null if source is empty or if no element passes the test specified by predicate; otherwise, the first element in source that passes the test specified by predicate.
      */
     public T firstOrDefault(Predicate<T> predicate) {
-        for (T item : this) {
+        T item;
+        int size = size();
+        for (int i = 0; i < size; i++) {
+            item = this.get(i);
             if (predicate.apply(item)) {
                 return item;
             }
@@ -140,7 +146,10 @@ public class QueryableArrayList<T> extends ArrayList<T> {
         }
 
         T result = null;
-        for (T item : this) {
+        T item;
+        int size = size();
+        for (int i = 0; i < size; i++) {
+            item = this.get(i);
             if (predicate.apply(item)) {
                 if (result != null) {
                     throw new QueryableArrayListException("More than one item match this predicate.");
@@ -189,7 +198,10 @@ public class QueryableArrayList<T> extends ArrayList<T> {
         }
 
         T result = null;
-        for (T item : this) {
+        T item;
+        int size = size();
+        for (int i = 0; i < size; i++) {
+            item = this.get(i);
             if (predicate.apply(item)) {
                 if (result != null) {
                     throw new QueryableArrayListException("More than one item match this predicate.");
@@ -225,8 +237,9 @@ public class QueryableArrayList<T> extends ArrayList<T> {
      * @return true if any elements in the source sequence pass the test in the specified predicate; otherwise, false.
      */
     public boolean any(Predicate<T> predicate) {
-        for (T item : this) {
-            if (predicate.apply(item)) {
+        int size = size();
+        for (int i = 0; i < size; i++) {
+            if (predicate.apply(this.get(i))) {
                 return true;
             }
         }
@@ -245,8 +258,9 @@ public class QueryableArrayList<T> extends ArrayList<T> {
      * @return true if every element of the source sequence passes the test in the specified predicate, or if the sequence is empty; otherwise, false.
      */
     public boolean all(Predicate<T> predicate) {
-        for (T item : this) {
-            if (!predicate.apply(item)) {
+        int size = size();
+        for (int i = 0; i < size; i++) {
+            if (!predicate.apply(this.get(i))) {
                 return false;
             }
         }
@@ -267,7 +281,10 @@ public class QueryableArrayList<T> extends ArrayList<T> {
     public QueryableArrayList<T> where(Predicate<T> predicate) {
         QueryableArrayList<T> result = new QueryableArrayList<T>();
 
-        for (T item : this) {
+        int size = size();
+        T item;
+        for (int i = 0; i < size; i++) {
+            item = this.get(i);
             if (predicate.apply(item)) {
                 result.add(item);
             }
@@ -290,7 +307,10 @@ public class QueryableArrayList<T> extends ArrayList<T> {
     public <U> QueryableArrayList<U> ofType(Class<U> type) {
         QueryableArrayList<U> result = new QueryableArrayList<U>();
 
-        for (T item : this) {
+        int size = size();
+        T item;
+        for (int i = 0; i < size; i++) {
+            item = this.get(i);
             if (type.isAssignableFrom(item.getClass())) {
                 result.add(type.cast(item));
             }
@@ -317,7 +337,8 @@ public class QueryableArrayList<T> extends ArrayList<T> {
         }
 
         int i = count;
-        while (i < size()) {
+        int size = size();
+        while (i < size) {
             result.add(get(i));
             i++;
         }
