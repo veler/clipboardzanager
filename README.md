@@ -1,11 +1,11 @@
 # ClipboardZanager
 
-ClipboardZanager is a clipboard manager for ``Windows 10``. It is designed to keep an historic of what the user copy in Windows and let him reuse it later.
+ClipboardZanager is a clipboard manager for ``Windows 10``. It is designed to keep a history of what the user copies in Windows and let him or her reuse it later.
 
-The main feature of ClipboardZanager are :
+The main features of ClipboardZanager are :
 * Clipboard conservation.
-* Synchronization with the personal user Cloud storage service account (actually are supported ``OneDrive`` and ``DropBox``).
-* User's data are encrypted. The user can also decide to ignore all copied data from a specific application.
+* Synchronization with the personal user Cloud storage service account (supports ``OneDrive`` and ``DropBox``).
+* User's data is encrypted. The user can also decide to ignore all copied data from a specific application.
 * Full integration to Windows 10.
 
 [More info here](http://clipboardzanager.velersoftware.com)
@@ -14,7 +14,7 @@ The main feature of ClipboardZanager are :
 
 # Requirements to run ClipboardZanager
 
-* [Windows 10](https://www.microsoft.com/en-us/software-download/windows10) (10240 or upper) edition Home, Pro, Education, Entreprise, S.
+* [Windows 10](https://www.microsoft.com/en-us/software-download/windows10) (10240 or later) edition Home, Pro, Education, Entreprise, S.
 
 # Setup a development environment
 
@@ -54,7 +54,7 @@ The Android app is not built by Visual Studio. The version number is updated but
 
 ### Passwords & AppKey
 
-The user's data are encrypted with a private key. This key is generated thanks to the private ``OneDrive appkey``, ``DropBox appkey``, and ``assembly version`` number (that changes at each build).
+The user's data is encrypted with a private key. This key is generated thanks to the private ``OneDrive appkey``, ``DropBox appkey``, and ``assembly version`` number (that changes at each build).
 
 ## Build the project
 
@@ -63,7 +63,7 @@ You will need to :
 * Create an application on the [OneDrive developers portal](https://dev.onedrive.com/) with the following permissions :
   * ``Files.ReadWrite.AppFolder``
   * ``User.Read``
-* Create an application on the [DropBox developers portal](https://www.dropbox.com/developers) with the folling permissions :
+* Create an application on the [DropBox developers portal](https://www.dropbox.com/developers) with the following permissions :
   * ``AppFolder``
 
 Once done, you will have to rename the ``passwords-sample.txt`` file to ``passwords.txt`` and complete it with the ``appkey`` and ``redirection URI`` provided by OneDrive and DropBox.
