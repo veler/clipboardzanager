@@ -13,6 +13,7 @@ namespace ClipboardZanager.Core.Desktop.ComponentModel
         public WebClient()
         {
             Timeout = (int)TimeSpan.FromSeconds(10).TotalMilliseconds;
+            Headers.Add("User-Agent: Other");
         }
 
         protected override WebRequest GetWebRequest(Uri uri)

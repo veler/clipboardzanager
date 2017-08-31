@@ -1,6 +1,6 @@
 # ClipboardZanager
 
-ClipboardZanager is a clipboard manager for ``Windows 10``. It is designed to keep a history of what the user copies in Windows and let him or her reuse it later.
+ClipboardZanager is a clipboard manager for ``Windows 10`` initiated by Etienne BAUDOUX in 2010. It is designed to keep a history of what the user copies in Windows and let him or her reuse it later. Since August 28th, 2017, ClipboardZanager is open source and is developed with the help of contributors.
 
 The main features of ClipboardZanager are :
 * Clipboard conservation.
@@ -76,6 +76,10 @@ Once done, open the solution in Visual Studio and build the solution. The privat
 
 Those two files and ``passwords.txt`` are git ignored.
 You can then open Android Studio and build the smartphone app.
+
+## Unit tests
+
+On Windows, when we run all the unit tests, ``PasteBarWindowViewModel_Search`` fails, but success when we run it independently. It will be fix soon.
 
 # Contribute
 
