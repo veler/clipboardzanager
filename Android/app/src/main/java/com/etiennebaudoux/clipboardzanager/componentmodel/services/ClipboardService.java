@@ -66,7 +66,7 @@ public class ClipboardService implements Service, Pausable {
 
         DataService dataService = ServiceLocator.getService(DataService.class);
 
-        String text = clipboardDataItem.getText().toString();
+        String text = clipboardDataItem.coerceToText(App.getContext()).toString();
         if (StringUtils.isNullOrEmpty(text)) {
             dataIgnored = true;
         } else {
@@ -166,7 +166,7 @@ public class ClipboardService implements Service, Pausable {
                     bufferSize = dataSize - readLength;
                 }
 
-                byte[] buffer = Arrays.copyOfRange(data, readLength, bufferSize);
+                byte[] buffer = Arrays.copyOfRange(data, readLength, readLength + bufferSize);
                 aesStream.write(buffer, 0, buffer.length);
 
                 readLength += bufferSize;
