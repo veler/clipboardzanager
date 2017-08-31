@@ -294,6 +294,8 @@ namespace ClipboardZanager.Core.Desktop.Services
             Requires.NotNull(identifiers, nameof(identifiers));
             Requires.NotNull(foregroundWindow, nameof(foregroundWindow));
 
+            bool shouldSynchronize = isCreditCard && isPassword;
+
             var entry = new DataEntry
             {
                 Identifier = GenerateNewGuid(),
@@ -302,7 +304,7 @@ namespace ClipboardZanager.Core.Desktop.Services
                 Date = new DateTime(e.Time),
                 IsCut = e.IsCut,
                 IsFavorite = false,
-                CanSynchronize = true,
+                CanSynchronize = shouldSynchronize,
                 IconIsFromWindowStore = foregroundWindow.IsWindowsStoreApp,
                 DataIdentifiers = identifiers
             };
