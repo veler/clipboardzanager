@@ -1,5 +1,15 @@
 ﻿[
   {
+    "Icon": "\uEB9F",
+    "Title": "Bar de recherche améliorée",
+    "Description": "Vous pouvez à présent filtrer les images."
+  },
+  {
+    "Icon": "\uE1F5",
+    "Title": "Version 2017.8.22.1",
+    "Description": ""
+  },
+  {
     "Icon": "\uE72E",
     "Title": "Nouvelles options de sécurité",
     "Description": "Vos données sont protégées par un nouvel algorithme. Aussi, vous pouvez définir des applications à ignorer, comme les gestionnaires de mots de passe."

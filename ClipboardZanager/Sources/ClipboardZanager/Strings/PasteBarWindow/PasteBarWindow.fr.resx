@@ -177,6 +177,9 @@
   <data name="Filter_Files" xml:space="preserve">
     <value>Filtrer uniquement les fichiers</value>
   </data>
+  <data name="Filter_Images" xml:space="preserve">
+    <value>Filtrer uniquement les images</value>
+  </data>
   <data name="Filter_Link" xml:space="preserve">
     <value>Filtrer uniquement les liens</value>
   </data>

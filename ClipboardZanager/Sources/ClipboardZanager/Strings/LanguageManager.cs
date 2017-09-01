@@ -501,6 +501,11 @@ namespace ClipboardZanager.Strings
         public string Filter_Files => PasteBarWindow.PasteBarWindow.Filter_Files;
 
         /// <summary>
+        /// Gets the resource Filter_Images.
+        /// </summary>
+        public string Filter_Images => PasteBarWindow.PasteBarWindow.Filter_Images;
+
+        /// <summary>
         /// Gets the resource Filter_Link.
         /// </summary>
         public string Filter_Link => PasteBarWindow.PasteBarWindow.Filter_Link;

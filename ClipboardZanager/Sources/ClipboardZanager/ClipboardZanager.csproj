@@ -449,7 +449,6 @@
       <RunCustomToolOn>..\LanguageManager.tt</RunCustomToolOn>
     </EmbeddedResource>
     <None Include="app.manifest" />
-    <Resource Include="Assets\news\news.ar.json" />
     <Resource Include="Assets\news\news.en.json" />
     <Resource Include="Assets\news\news.fr.json" />
     <None Include="packages.config" />
