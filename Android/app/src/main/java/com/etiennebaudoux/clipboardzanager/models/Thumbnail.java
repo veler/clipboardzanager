@@ -39,14 +39,14 @@ public class Thumbnail implements Serializable {
     //region Type
 
     @SerializedName("Type")
-    private ThumbnailDataType _type;
+    private int _type;
 
     /**
      * Gets the type of the value.
      *
      * @return
      */
-    public ThumbnailDataType getType() {
+    public int getType() {
         return _type;
     }
 
@@ -55,7 +55,7 @@ public class Thumbnail implements Serializable {
      *
      * @param value
      */
-    public void setType(ThumbnailDataType value) {
+    public void setType(@ThumbnailDataType int value) {
         _type = value;
     }
 

@@ -149,8 +149,8 @@ public class DataServiceTests {
 
         assertEquals(1, service.getDataEntries().size());
         assertEquals(2, service.getCache().size());
-        assertEquals(DataEntryStatus.Deleted, service.getCache().first().getStatus());
-        assertEquals(DataEntryStatus.Added, service.getCache().last().getStatus());
+        assertEquals(DataEntryStatus.DELETED, service.getCache().first().getStatus());
+        assertEquals(DataEntryStatus.ADDED, service.getCache().last().getStatus());
     }
 
     @Test
@@ -169,7 +169,7 @@ public class DataServiceTests {
         assertTrue(dataEntry.getDate() != null);
 
         assertEquals(dataEntry.getIdentifier(), dataEntryCache.getIdentifier());
-        assertEquals(DataEntryStatus.Added, dataEntryCache.getStatus());
+        assertEquals(DataEntryStatus.ADDED, dataEntryCache.getStatus());
     }
 
     @Test
@@ -182,7 +182,7 @@ public class DataServiceTests {
 
         DataEntry dataEntry = service.getDataEntries().get(0);
 
-        assertEquals(dataEntry.getThumbnail().getType(), ThumbnailDataType.String);
+        assertEquals(dataEntry.getThumbnail().getType(), ThumbnailDataType.STRING);
         assertEquals(DataHelper.fromBase64(dataEntry.getThumbnail().getValue(), String.class), "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It h...");
     }
 
@@ -195,7 +195,7 @@ public class DataServiceTests {
         service.addDataEntry(entry, new QueryableArrayList<>(), false, false);
         DataEntry dataEntry = service.getDataEntries().get(0);
 
-        assertEquals(dataEntry.getThumbnail().getType(), ThumbnailDataType.Link);
+        assertEquals(dataEntry.getThumbnail().getType(), ThumbnailDataType.LINK);
         assertEquals(DataHelper.fromBase64(dataEntry.getThumbnail().getValue(), Link.class).getUri(), "http://www.google.com");
         assertEquals(DataHelper.fromBase64(dataEntry.getThumbnail().getValue(), Link.class).getTitle(), "Google");
     }
@@ -269,14 +269,14 @@ public class DataServiceTests {
         assertEquals(service.getDataEntries().size(), 10);
         assertEquals(service.getCache().size(), 10);
 
-        assertTrue(service.getCache().all(dataEntryCache -> dataEntryCache.getStatus() == DataEntryStatus.Added));
+        assertTrue(service.getCache().all(dataEntryCache -> dataEntryCache.getStatus() == DataEntryStatus.ADDED));
 
         service.removeAllDataAsync().await();
 
         assertEquals(service.getDataEntries().size(), 0);
         assertEquals(service.getCache().size(), 10);
 
-        assertTrue(service.getCache().all(dataEntryCache -> dataEntryCache.getStatus() == DataEntryStatus.Deleted));
+        assertTrue(service.getCache().all(dataEntryCache -> dataEntryCache.getStatus() == DataEntryStatus.DELETED));
     }
 
     private DataService getDataService() {

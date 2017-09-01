@@ -295,13 +295,13 @@ public class DataService implements Service {
 
         DataEntryCache cache = new DataEntryCache();
         cache.setIdentifier(entry.getIdentifier());
-        cache.setStatus(DataEntryStatus.Added);
+        cache.setStatus(DataEntryStatus.ADDED);
 
         getDataEntries().add(0, entry);
         getCache().add(0, cache);
 
         entry = getDataEntries().get(0);
-        if (entry.getThumbnail().getType() == ThumbnailDataType.Link) {
+        if (entry.getThumbnail().getType() == ThumbnailDataType.LINK) {
             // We doing it here to avoid blocking the part that runs on the UI thread.
             Link value = DataHelper.fromBase64(entry.getThumbnail().getValue(), Link.class);
             value.setTitle(SystemInfoHelper.getWebPageTitle(value.getUri()).await());
@@ -354,7 +354,7 @@ public class DataService implements Service {
                                     return dataEntryCache.getIdentifier().equals(identifier);
                                 }
                             }
-                    ).setStatus(DataEntryStatus.Deleted);
+                    ).setStatus(DataEntryStatus.DELETED);
                 } else {
                     getCache().remove(getCache().single(
                             new Predicate<DataEntryCache>() {
@@ -394,7 +394,7 @@ public class DataService implements Service {
                 getDataEntries().clear();
 
                 for (DataEntryCache dataEntryCache : getCache()) {
-                    dataEntryCache.setStatus(DataEntryStatus.Deleted);
+                    dataEntryCache.setStatus(DataEntryStatus.DELETED);
                 }
 
                 clearCache();
@@ -555,7 +555,7 @@ public class DataService implements Service {
      * @return A {@link Thumbnail} that represent a small part of the clipboard's data
      */
     private Thumbnail generateThumbnail(String text, boolean isCreditCard, boolean isPassword) throws IOException {
-        ThumbnailDataType type = ThumbnailDataType.Unknow;
+        @ThumbnailDataType int type = ThumbnailDataType.UNKNOWN;
 
         if (isCreditCard) {
             if (!StringUtils.isNullOrEmpty(text)) {
@@ -579,12 +579,12 @@ public class DataService implements Service {
         String value;
         boolean isUri = _uriPattern.matcher(text).matches();
         if (isUri) {
-            type = ThumbnailDataType.Link;
+            type = ThumbnailDataType.LINK;
             Link link = new Link();
             link.setUri(text);
             value = DataHelper.toBase64(link);
         } else {
-            type = ThumbnailDataType.String;
+            type = ThumbnailDataType.STRING;
             value = DataHelper.toBase64(text);
         }
 
