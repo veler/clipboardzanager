@@ -489,7 +489,7 @@ namespace ClipboardZanager.Core.Desktop.Services
                 case SearchType.Image:
                     if (dataEntry.Thumbnail.Type == ThumbnailDataType.Bitmap)
                     {
-                        return true;
+                        return string.IsNullOrEmpty(searchQuery.Query);
                     }
                     break;
 
