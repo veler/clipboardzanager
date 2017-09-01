@@ -242,7 +242,7 @@ namespace ClipboardZanager.Strings.MainWindow {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you decide to quit ClipboardZanager, your computer will loose its capicity to conserve datas copied in the clipboard. Do you want to continue?.
+        ///   Looks up a localized string similar to If you decide to quit ClipboardZanager, your computer will loose its capacity to conserve datas copied in the clipboard. Do you want to continue?.
         /// </summary>
         internal static string Message_Quit {
             get {
