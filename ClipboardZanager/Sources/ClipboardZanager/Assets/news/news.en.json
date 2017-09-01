@@ -2,7 +2,12 @@
   {
     "Icon": "\uEB9F",
     "Title": "Search bar improved",
-    "Description": "You can now filter your the pictures."
+    "Description": "You can now filter the pictures."
+  },
+  {
+    "Icon": "\uE2AC",
+    "Title": "Stability improved",
+    "Description": "Fixed five issues. More information on GitHub."
   },
   {
     "Icon": "\uE1F5",
