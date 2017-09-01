@@ -113,9 +113,17 @@ namespace ClipboardZanager.Core.Desktop.Services
                                 dataService.EnsureDataFolderExists();
                                 using (var clipboardReader = new ClipboardReader(e.DataObject))
                                 {
-                                    foreach (var format in identifiers)
+                                    for (var i = 0; i < identifiers.Count; i++)
                                     {
-                                        WriteClipboardDataToFile(clipboardReader, format, dataService.ClipboardDataPath);
+                                        try
+                                        {
+                                            WriteClipboardDataToFile(clipboardReader, identifiers[i], dataService.ClipboardDataPath);
+                                        }
+                                        catch
+                                        {
+                                            identifiers.RemoveAt(i);
+                                            i--;
+                                        }
                                     }
                                 }
                             }
