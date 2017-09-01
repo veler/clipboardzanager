@@ -5,6 +5,11 @@
     "Description": "Vous pouvez à présent filtrer les images."
   },
   {
+    "Icon": "\uE2AC",
+    "Title": "Stabilité améliorée",
+    "Description": "Cinq problèmes corrigés. Plus d'informations sur GitHub."
+  },
+  {
     "Icon": "\uE1F5",
     "Title": "Version 2017.8.22.1",
     "Description": ""

@@ -105,6 +105,11 @@ namespace ClipboardZanager.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets a value that defines whether a migration is required. It usually means that the current instance is the first start after an update.
+        /// </summary>
+        public bool IsMigrationRequired { get; }
+
         #endregion 
 
         #region Constructors
@@ -118,9 +123,14 @@ namespace ClipboardZanager.ViewModels
 
             _settingProvider = new ServiceSettingProvider();
 
+            IsMigrationRequired = !string.IsNullOrWhiteSpace(Settings.Default.CurrentVersion) && Settings.Default.DataMigrationRequired;
             News = new ObservableCollection<SoftwareNewItem>();
             LoadNews();
-            DetectPasswordsManager();
+
+            if (!IsMigrationRequired)
+            {
+                DetectPasswordsManager();
+            }
         }
 
         #endregion

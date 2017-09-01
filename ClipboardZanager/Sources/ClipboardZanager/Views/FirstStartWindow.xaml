@@ -23,6 +23,7 @@
         AutomationProperties.HelpText="{Binding Language.FirstStartWindow.WindowAutomationName}">
     <controls:BlurredWindow.Resources>
         <converters:ActiveColorSetToSolidColorBrushConverter x:Key="ActiveColorSetToSolidColorBrushConverter" ColorName="SystemAccent"/>
+        <converters:BooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" IsInverted="True" />
         <Storyboard x:Key="TutorialStoryboard" RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
@@ -250,7 +251,7 @@
         </Grid>
         <Grid Grid.Row="1">
             <controls:FlipView x:Name="FlipView" SelectedIndex="0">
-                <Grid>
+                <Grid x:Name="LanguageTab">
                     <TextBlock Text="{Binding Language.FirstStartWindow.Welcome_Title}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" TextWrapping="Wrap" Foreground="{DynamicResource ForegroundBrush}" FontFamily="Segoe UI Light" Focusable="{Binding IsScreenReaderRunning}"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="{Binding Language.SettingsGeneralUserControl.Language}" VerticalAlignment="Center"/>
@@ -300,7 +301,7 @@
                         </ItemsControl>
                     </ScrollViewer>
                 </Grid>
-                <Grid>
+                <Grid x:Name="IgnoredAppTab">
                     <TextBlock Text="{Binding Language.FirstStartWindow.Security_Title}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" TextWrapping="Wrap" Foreground="{DynamicResource ForegroundBrush}" FontFamily="Segoe UI Light" Focusable="{Binding IsScreenReaderRunning}"/>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
                         <TextBlock Text="{Binding Language.FirstStartWindow.Security_Description}" VerticalAlignment="Center" TextWrapping="Wrap" Focusable="{Binding IsScreenReaderRunning}"/>
@@ -367,14 +368,14 @@
                         </StackPanel>
                     </StackPanel>
                 </Grid>
-                <Grid>
+                <Grid x:Name="SynchronizationTab">
                     <TextBlock Text="{Binding Language.FirstStartWindow.Synchronization_Title}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" TextWrapping="Wrap" Foreground="{DynamicResource ForegroundBrush}" FontFamily="Segoe UI Light" Focusable="{Binding IsScreenReaderRunning}"/>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
                         <TextBlock Text="{Binding Language.FirstStartWindow.Synchronization_Description}" VerticalAlignment="Center" TextWrapping="Wrap" Focusable="{Binding IsScreenReaderRunning}"/>
                         <Image Source="/ClipboardZanager;component/Assets/access_settings.jpg" Width="350" Margin="0,20,0,0"/>
                     </StackPanel>
                 </Grid>
-                <Grid>
+                <Grid x:Name="TutorialTab">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="1*"/>
@@ -447,7 +448,7 @@
                     </Button>
                 </Grid>
             </controls:FlipView>
-            <controls:FlipViewIndicator FlipView="{Binding ElementName=FlipView}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+            <controls:FlipViewIndicator FlipView="{Binding ElementName=FlipView}" Visibility="{Binding IsMigrationRequired, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20"/>
             <StackPanel VerticalAlignment="Bottom">
                 <TextBlock Text="{Binding MigrationStatus}" FontSize="12" Margin="20,0,17,2" TextTrimming="CharacterEllipsis"/>
                 <ProgressBar Value="{Binding MigrationProgress}" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Height="5"/>
