@@ -120,6 +120,7 @@ namespace ClipboardZanager
             var st = new StackTrace(e.Exception, true);
             var frame = st.GetFrame(0);
             Logger.Instance.Fatal($"A unhandled exception occured : {e.Exception.Message}\nStack trace :\n{GetStackTrace(st)}\n", null, frame.GetMethod().Name, frame.GetFileName(), frame.GetFileLineNumber());
+            Logger.Instance.Dispose();
 
             if (!Debugger.IsAttached)
             {
