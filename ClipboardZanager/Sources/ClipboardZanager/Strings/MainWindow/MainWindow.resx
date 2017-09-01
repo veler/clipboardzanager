@@ -179,7 +179,7 @@ Copy it again if you want to keep it anyway.</value>
     <value>Synchronize now the data with the Cloud</value>
   </data>
   <data name="Message_Quit" xml:space="preserve">
-    <value>If you decide to quit ClipboardZanager, your computer will loose its capicity to conserve datas copied in the clipboard. Do you want to continue?</value>
+    <value>If you decide to quit ClipboardZanager, your computer will loose its capacity to conserve datas copied in the clipboard. Do you want to continue?</value>
   </data>
   <data name="PasswordDetectedButSaved_Text" xml:space="preserve">
     <value>It seems that you just copied a password, and we kept it. Change the settings to avoid it.</value>
