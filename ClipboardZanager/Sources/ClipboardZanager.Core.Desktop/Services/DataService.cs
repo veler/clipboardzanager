@@ -414,7 +414,7 @@ namespace ClipboardZanager.Core.Desktop.Services
         /// <returns>Returns True if it match.</returns>
         internal bool MatchSearchQuery(SearchQuery searchQuery, DataEntry dataEntry)
         {
-            if (dataEntry.Thumbnail.Type == ThumbnailDataType.Bitmap || dataEntry.Thumbnail.Type == ThumbnailDataType.Unknow)
+            if (dataEntry.Thumbnail.Type == ThumbnailDataType.Unknow)
             {
                 return false;
             }
@@ -451,6 +451,8 @@ namespace ClipboardZanager.Core.Desktop.Services
             switch (searchQuery.Type)
             {
                 case SearchType.All:
+                    // We avoid the pictures because it makes no sense to search a picture with a text in the case of this app.
+
                     if (dataEntry.Thumbnail.Type == ThumbnailDataType.Link)
                     {
                         return MatchLink(DataHelper.FromBase64<Link>(dataEntry.Thumbnail.Value), searchQuery.Query);
@@ -481,6 +483,13 @@ namespace ClipboardZanager.Core.Desktop.Services
                     if (dataEntry.Thumbnail.Type == ThumbnailDataType.Files)
                     {
                         return MatchFiles(dataEntry.Thumbnail.GetFilesPath(), searchQuery.QueryRegex);
+                    }
+                    break;
+
+                case SearchType.Image:
+                    if (dataEntry.Thumbnail.Type == ThumbnailDataType.Bitmap)
+                    {
+                        return true;
                     }
                     break;
 

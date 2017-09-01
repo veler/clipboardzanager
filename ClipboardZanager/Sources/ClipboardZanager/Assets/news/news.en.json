@@ -1,5 +1,15 @@
 ﻿[
   {
+    "Icon": "\uEB9F",
+    "Title": "Search bar improved",
+    "Description": "You can now filter your the pictures."
+  },
+  {
+    "Icon": "\uE1F5",
+    "Title": "Version 2017.8.22.1",
+    "Description": ""
+  },
+  {
     "Icon": "\uE72E",
     "Title": "New security options",
     "Description": "Your data are protected by a new algorithm. Also, you can define an application to ignore like password managers and banking apps."

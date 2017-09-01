@@ -5,6 +5,7 @@
         All,
         Text,
         Link,
-        File
+        File,
+        Image
     }
 }

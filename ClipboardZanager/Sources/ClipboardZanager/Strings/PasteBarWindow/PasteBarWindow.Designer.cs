@@ -241,6 +241,15 @@ namespace ClipboardZanager.Strings.PasteBarWindow {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter only the pictures.
+        /// </summary>
+        internal static string Filter_Images {
+            get {
+                return ResourceManager.GetString("Filter_Images", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter only the links.
         /// </summary>
         internal static string Filter_Link {
