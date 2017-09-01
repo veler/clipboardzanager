@@ -26,6 +26,7 @@ using Newtonsoft.Json;
 using Application = System.Windows.Application;
 using Message = ClipboardZanager.ComponentModel.Messages.Message;
 using MessageBox = System.Windows.MessageBox;
+using ClipboardZanager.ComponentModel.Services;
 
 namespace ClipboardZanager.ViewModels
 {
@@ -105,6 +106,9 @@ namespace ClipboardZanager.ViewModels
                 {
                     Settings.Default.CurrentVersion = previousVersion;
                 }
+
+                ServiceLocator.SettingProvider = new ServiceSettingProvider();
+                ServiceLocator.GetService<WindowsService>();
 
                 var firstStartWindow = new FirstStartWindow();
                 firstStartWindow.ShowDialog();
