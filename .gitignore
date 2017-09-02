@@ -248,4 +248,5 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-/Tools/Windows Store/ClipboardZanager
+/ClipboardZanager/Windows Store/ClipboardZanagerApp/win32
+/ClipboardZanager/Windows Store/ClipboardZanagerApp/Package.StoreAssociation.xml

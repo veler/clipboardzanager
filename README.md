@@ -27,6 +27,7 @@ You will need the following tools :
 * .Net 4.6
 * Visual Studio 2017 with ``Windows development`` and ``Visual Studio extension development toolset``
 * ``AutoRunCustomTool`` extension (that you can find in repository/Tools/AutoRunCustomTool.vsix)
+* ``DesktopBridgeDebuggingProject`` extension (that you can find in repository/Tools/DesktopBridgeDebuggingProject.vsix)
 
 ### For Android
 
@@ -70,7 +71,7 @@ Once done, you will have to rename the ``passwords-sample.txt`` file to ``passwo
 
 In general, the security process can be improved and simplified.
 
-Once done, open the solution in Visual Studio and build the solution. The private keys will be updated in the Windows Desktop project and Android project at the following locations :
+Once done, open the solution in Visual Studio. Set ``DesktopBridgeDebuggingProject`` as the ``StartUp Project`` and ``Rebuild the Solution``. The private keys will be updated in the Windows Desktop project and Android project at the following locations :
 * For the Windows Desktop app : ``ClipboardZanager\Sources\ClipboardZanager\Properties\Passwords.cs``
 * For the Android app : ``Android\app\src\main\res\values\passwords.xml``
 

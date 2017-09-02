@@ -34,7 +34,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
-        versionName "2017.9.1.26" // Do NOT change this line manually. It is changed automatically everytime the Windows app is built.
+        versionName "2017.9.2.44" // Do NOT change this line manually. It is changed automatically everytime the Windows app is built.
         // Do NOT change this line manually. It is changed automatically everytime the Windows app is built.
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         jackOptions {
