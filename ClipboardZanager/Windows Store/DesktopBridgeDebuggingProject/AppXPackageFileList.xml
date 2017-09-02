@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MyProjectOutputPath>..\..\Sources\ClipboardZanager\bin\$(Configuration)</MyProjectOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <LayoutFile Include="$(MyProjectOutputPath)\ClipboardZanager.exe">
+      <PackagePath>$(PackageLayout)\win32\ClipboardZanager.exe</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\ClipboardZanager.Core.Desktop.dll">
+      <PackagePath>$(PackageLayout)\win32\ClipboardZanager.Core.Desktop.dll</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\ClipboardZanager.Shared.dll">
+      <PackagePath>$(PackageLayout)\win32\ClipboardZanager.Shared.dll</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\Dropbox.Api.dll">
+      <PackagePath>$(PackageLayout)\win32\Dropbox.Api.dll</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\GalaSoft.MvvmLight.dll">
+      <PackagePath>$(PackageLayout)\win32\GalaSoft.MvvmLight.dll</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\GalaSoft.MvvmLight.Extras.dll">
+      <PackagePath>$(PackageLayout)\win32\GalaSoft.MvvmLight.Extras.dll</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\GalaSoft.MvvmLight.Platform.dll">
+      <PackagePath>$(PackageLayout)\win32\GalaSoft.MvvmLight.Platform.dll</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\Microsoft.Graph.Core.dll">
+      <PackagePath>$(PackageLayout)\win32\Microsoft.Graph.Core.dll</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\Microsoft.IdentityModel.Clients.ActiveDirectory.dll">
+      <PackagePath>$(PackageLayout)\win32\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\Microsoft.OneDrive.Sdk.Authentication.Desktop.dll">
+      <PackagePath>$(PackageLayout)\win32\Microsoft.OneDrive.Sdk.Authentication.Desktop.dll</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\Microsoft.OneDrive.Sdk.dll">
+      <PackagePath>$(PackageLayout)\win32\Microsoft.OneDrive.Sdk.dll</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\Microsoft.Practices.ServiceLocation.dll">
+      <PackagePath>$(PackageLayout)\win32\Microsoft.Practices.ServiceLocation.dll</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\Newtonsoft.Json.dll">
+      <PackagePath>$(PackageLayout)\win32\Newtonsoft.Json.dll</PackagePath>
+    </LayoutFile>
+    <LayoutFile Include="$(MyProjectOutputPath)\System.Windows.Interactivity.dll">
+      <PackagePath>$(PackageLayout)\win32\System.Windows.Interactivity.dll</PackagePath>
+    </LayoutFile>
+  </ItemGroup>
+</Project>
