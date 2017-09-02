@@ -48,7 +48,7 @@ namespace ClipboardZanager.ComponentModel.UI.Converters
 
             switch (parameterValue)
             {
-                case ThumbnailDataType.Unknow:
+                case ThumbnailDataType.Unknown:
                     return null;
 
                 case ThumbnailDataType.Link:
