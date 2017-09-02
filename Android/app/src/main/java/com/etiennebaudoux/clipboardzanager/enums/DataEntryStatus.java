@@ -12,15 +12,15 @@ public @interface DataEntryStatus
     /**
      * The data has been added locally and has not been synchronized yet.
      */
-    int ADDED = 1;
+    int ADDED = 0;
 
     /**
      * The data has been synchronized with the cloud and did not changed since the last synchronization.
      */
-    int DID_NOT_CHANGED = 0;
+    int DID_NOT_CHANGED = 1;
 
     /**
      * The data has been removed locally and has not been synchronized yet.
      */
-    int DELETED = -1;
+    int DELETED = 2;
 }
