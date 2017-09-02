@@ -414,7 +414,7 @@ namespace ClipboardZanager.Core.Desktop.Services
         /// <returns>Returns True if it match.</returns>
         internal bool MatchSearchQuery(SearchQuery searchQuery, DataEntry dataEntry)
         {
-            if (dataEntry.Thumbnail.Type == ThumbnailDataType.Unknow)
+            if (dataEntry.Thumbnail.Type == ThumbnailDataType.Unknown)
             {
                 return false;
             }
@@ -1056,7 +1056,7 @@ namespace ClipboardZanager.Core.Desktop.Services
         private Thumbnail GenerateThumbnail(DataObject dataObject, bool isCreditCard, bool isPassword)
         {
             var value = string.Empty;
-            var type = ThumbnailDataType.Unknow;
+            var type = ThumbnailDataType.Unknown;
 
             if (dataObject.ContainsImage() && dataObject.GetDataPresent(DataFormats.Dib, false))
             {

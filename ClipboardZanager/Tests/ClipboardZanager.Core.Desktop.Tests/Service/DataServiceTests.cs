@@ -267,7 +267,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             var dataEntry = service.DataEntries.FirstOrDefault();
 
             Assert.IsNotNull(dataEntry);
-            Assert.AreEqual(dataEntry.Thumbnail.Type, ThumbnailDataType.Unknow);
+            Assert.AreEqual(dataEntry.Thumbnail.Type, ThumbnailDataType.Unknown);
         }
 
         [TestMethod]

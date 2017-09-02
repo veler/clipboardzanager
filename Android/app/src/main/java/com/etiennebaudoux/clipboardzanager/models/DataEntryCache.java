@@ -40,23 +40,23 @@ public class DataEntryCache implements Serializable {
     //region IsFavorite
 
     @SerializedName("Status")
-    private DataEntryStatus _status;
+    private @DataEntryStatus int _status;
 
     /**
      * Gets a value that defines whether this data is a favorite or not.
      *
-     * @return
+     * @return @DataEntryStatus int
      */
-    public DataEntryStatus getStatus() {
+    public @DataEntryStatus int getStatus() {
         return _status;
     }
 
     /**
      * Sets a value that defines whether this data is a favorite or not.
      *
-     * @param value
+     * @param @DataEntryStatus int
      */
-    public void setStatus(DataEntryStatus value) {
+    public void setStatus(@DataEntryStatus int value) {
         _status = value;
     }
 
