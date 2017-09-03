@@ -9,6 +9,7 @@
              xmlns:converters="clr-namespace:ClipboardZanager.ComponentModel.UI.Converters"
              xmlns:controls="clr-namespace:ClipboardZanager.ComponentModel.UI.Controls"
              mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <converters:IntegerManipulationConverter x:Key="IntegerManipulationConverter" Value="40" Manipulation="Addition"/>

@@ -101,12 +101,12 @@ namespace ClipboardZanager.Tests.ViewModels.SettingsPanel
             viewmodel.ChangeHotKeyPopupClosedCommand.CheckBeginExecute();
         }
 
-        private void RestoreDefault(SettingsGeneralUserControlViewModel viewModel)
+        private async void RestoreDefault(SettingsGeneralUserControlViewModel viewModel)
         {
             viewModel.ConfirmRestoreDefaultCommand.CheckBeginExecute();
             Task.Delay(1000).Wait();
 
-            CoreHelper.UpdateStartWithWindowsShortcut(false);
+            CoreHelper.SetAppStartsAtLogin(false);
         }
     }
 }

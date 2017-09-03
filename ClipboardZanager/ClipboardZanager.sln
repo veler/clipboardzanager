@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\passwords.txt = ..\passwords.txt
 		..\README.md = ..\README.md
+		..\RELEASENOTES.md = ..\RELEASENOTES.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android", "Android", "{60723C47-7CBB-4CCD-B39B-46DA4FB9052B}"
@@ -34,12 +35,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows Store", "Windows St
 EndProject
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "ClipboardZanager", "Windows Store\ClipboardZanagerApp\ClipboardZanager.jsproj", "{1583491B-1DFD-4D67-99CD-BA4477DC671C}"
 	ProjectSection(ProjectDependencies) = postProject
+		{62617A24-2636-4644-B301-C6907AA29531} = {62617A24-2636-4644-B301-C6907AA29531}
 		{619D814C-C85A-493A-8EAB-8EEE4175FB6C} = {619D814C-C85A-493A-8EAB-8EEE4175FB6C}
+		{A09CC9C5-9FB6-40B5-8168-1AFBC09E7207} = {A09CC9C5-9FB6-40B5-8168-1AFBC09E7207}
 	EndProjectSection
 EndProject
-Project("{365BE41E-7993-430D-A5E6-1381A54BC077}") = "DesktopBridgeDebuggingProject", "Windows Store\DesktopBridgeDebuggingProject\DesktopBridgeDebuggingProject.vsdproj", "{A012A888-8774-4736-9885-2AE1AF7853DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopBridgeDebuggingProject", "Windows Store\DesktopBridgeDebuggingProject\DesktopBridgeDebuggingProject.vsdproj", "{A012A888-8774-4736-9885-2AE1AF7853DF}"
 	ProjectSection(ProjectDependencies) = postProject
-		{1583491B-1DFD-4D67-99CD-BA4477DC671C} = {1583491B-1DFD-4D67-99CD-BA4477DC671C}
 		{62617A24-2636-4644-B301-C6907AA29531} = {62617A24-2636-4644-B301-C6907AA29531}
 		{619D814C-C85A-493A-8EAB-8EEE4175FB6C} = {619D814C-C85A-493A-8EAB-8EEE4175FB6C}
 		{A09CC9C5-9FB6-40B5-8168-1AFBC09E7207} = {A09CC9C5-9FB6-40B5-8168-1AFBC09E7207}

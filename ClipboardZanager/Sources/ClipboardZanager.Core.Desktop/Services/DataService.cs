@@ -1246,7 +1246,7 @@ namespace ClipboardZanager.Core.Desktop.Services
                 { SupportedDataType.Image, new[] { DataFormats.Dib } },
                 { SupportedDataType.Files, new[] { "Shell IDList Array", "DataObjectAttributes", "DataObjectAttributesRequiringElevation", "Preferred DropEffect", "AsyncFlag", DataFormats.FileDrop, "FileName", "FileNameW", "FileGroupDescriptorW" } },
                 { SupportedDataType.Text, new[] { "Text", DataFormats.UnicodeText, "HTML Format", "Rich Text Format", "Locale", "OEMText" } },
-                { SupportedDataType.Unknow, new[] { string.Empty } }
+                { SupportedDataType.Unknown, new[] { string.Empty } }
             };
             return result;
         }

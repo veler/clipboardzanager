@@ -77,7 +77,7 @@ namespace ClipboardZanager.Core.Desktop.ComponentModel
         internal const int SingleInstanceProcessExitCode = 334534;
 
         internal static readonly string[] WebBrowserIdentifier = { "Microsoft.MicrosoftEdge", "firefox.exe", "chrome.exe", "opera.exe" };
-        internal static readonly string StartWithWindowsShortcutFileName = Environment.GetFolderPath(Environment.SpecialFolder.Startup) + "/ClipboardZanager.lnk";
+        internal static readonly string WindowsStoreStartupTask = "ClipboardZanagerStartupTask";
 
         internal static readonly ArrayList DEFAULT_KeyboardHotKeys = new ArrayList { Key.LeftAlt, Key.V };
         internal static readonly ArrayList DEFAULT_DataTypesToKeep = new ArrayList

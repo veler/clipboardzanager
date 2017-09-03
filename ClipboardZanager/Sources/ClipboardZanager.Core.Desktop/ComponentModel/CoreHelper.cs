@@ -9,6 +9,7 @@ using System.Security;
 using System.Windows;
 using ClipboardZanager.Core.Desktop.Interop;
 using ClipboardZanager.Shared.Logs;
+using System.Threading.Tasks;
 
 namespace ClipboardZanager.Core.Desktop.ComponentModel
 {
@@ -110,19 +111,29 @@ namespace ClipboardZanager.Core.Desktop.ComponentModel
         }
 
         /// <summary>
-        /// Create or delete the shortcut that makes the application starting with Windows.
+        /// Enable or disabled the startup of the app at Windows login.
         /// </summary>
         /// <param name="startWithWindows">Defines if the application must start with Windows.</param>
-        internal static void UpdateStartWithWindowsShortcut(bool startWithWindows)
+        internal static async void SetAppStartsAtLogin(bool startWithWindows)
         {
+            var startupTask = await Windows.ApplicationModel.StartupTask.GetAsync(Consts.WindowsStoreStartupTask);
             if (startWithWindows)
             {
-                ShortcutHelper.CreateShortcut(Consts.StartWithWindowsShortcutFileName, true);
+                await startupTask.RequestEnableAsync();
             }
-            else if (File.Exists(Consts.StartWithWindowsShortcutFileName))
+            else
             {
-                File.Delete(Consts.StartWithWindowsShortcutFileName);
+                startupTask.Disable();
             }
+        }
+
+        /// <summary>
+        /// Retrieves a value that defines whether the app starts at Windows login.
+        /// </summary>
+        internal static async Task<bool> IsAppStartsAtLogin()
+        {
+            var startupTask = await Windows.ApplicationModel.StartupTask.GetAsync(Consts.WindowsStoreStartupTask);
+            return startupTask.State == Windows.ApplicationModel.StartupTaskState.Enabled;
         }
 
         /// <summary>

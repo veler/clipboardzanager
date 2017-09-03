@@ -250,3 +250,5 @@ ModelManifest.xml
 .fake/
 /ClipboardZanager/Windows Store/ClipboardZanagerApp/win32
 /ClipboardZanager/Windows Store/ClipboardZanagerApp/Package.StoreAssociation.xml
+/ClipboardZanager/Windows Store/DesktopBridgeDebuggingProject/PackageFiles/images
+/ClipboardZanager/Windows Store/DesktopBridgeDebuggingProject/PackageFiles/win32

@@ -4,6 +4,9 @@
     <MyProjectOutputPath>..\..\Sources\ClipboardZanager\bin\$(Configuration)</MyProjectOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <LayoutFile Include="$(MyProjectOutputPath)\fr\ClipboardZanager.resources.dll">
+      <PackagePath>$(PackageLayout)\win32\fr\ClipboardZanager.resources.dll</PackagePath>
+    </LayoutFile>
     <LayoutFile Include="$(MyProjectOutputPath)\ClipboardZanager.exe">
       <PackagePath>$(PackageLayout)\win32\ClipboardZanager.exe</PackagePath>
     </LayoutFile>

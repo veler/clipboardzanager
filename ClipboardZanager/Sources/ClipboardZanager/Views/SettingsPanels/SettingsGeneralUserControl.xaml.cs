@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using ClipboardZanager.ComponentModel.Messages;
 using GalaSoft.MvvmLight.Messaging;
+using ClipboardZanager.ViewModels.SettingsPanels;
 
 namespace ClipboardZanager.Views.SettingsPanels
 {
@@ -20,6 +21,15 @@ namespace ClipboardZanager.Views.SettingsPanels
 
             Messenger.Default.Register<Message>(this, MessageIdentifiers.ChangeHotKeyPopupOpened, ChangeHotKeyPopupOpened);
             Messenger.Default.Register<Message>(this, MessageIdentifiers.RestoreDefaultSettingsPopupOpened, RestoreDefaultSettingsPopupOpened);
+        }
+
+        #endregion
+
+        #region Handled Methods
+
+        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ((SettingsGeneralUserControlViewModel)DataContext).LoadStartWithWindows();
         }
 
         #endregion

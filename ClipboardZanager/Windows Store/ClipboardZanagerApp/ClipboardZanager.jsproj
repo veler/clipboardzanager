@@ -49,7 +49,7 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en</DefaultLanguage>
     <PackageCertificateKeyFile>ClipboardZanager_StoreKey.pfx</PackageCertificateKeyFile>
@@ -976,7 +976,14 @@
     <Content Include="images\storelogo.scale-400.png" />
     <None Include="ClipboardZanager_TemporaryKey.pfx" />
   </ItemGroup>
+  <ItemGroup>
+    <_ImagesItems Include="$(ProjectDir)\images\*.*" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="$(ProjectDir)package.appxmanifest" DestinationFiles="$(SolutionDir)Windows Store\DesktopBridgeDebuggingProject\PackageFiles\AppxManifest.xml" OverwriteReadOnlyFiles="True" SkipUnchangedFiles="False" />
+    <Copy SourceFiles="@(_ImagesItems)" DestinationFolder="$(SolutionDir)Windows Store\DesktopBridgeDebuggingProject\PackageFiles\images" OverwriteReadOnlyFiles="True" SkipUnchangedFiles="False" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below then uncomment
        that target and the DisableFastUpToDateCheck PropertyGroup. 
        Other similar extension points exist, see Microsoft.Common.targets.
