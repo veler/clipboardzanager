@@ -8,13 +8,15 @@ The main features of ClipboardZanager are :
 * User's data is encrypted. The user can also decide to ignore all copied data from a specific application.
 * Full integration to Windows 10.
 
+[Release notes](https://github.com/veler/clipboardzanager/blob/master/RELEASENOTES.md)
+
 [More info here](http://clipboardzanager.velersoftware.com)
 
 ![clipboardzanager](http://medias.velersoftware.com/images/clipboardzanager/1.png)
 
 # Requirements to run ClipboardZanager
 
-* [Windows 10](https://www.microsoft.com/en-us/software-download/windows10) (10240 or later) edition Home, Pro, Education, Entreprise, S.
+* [Windows 10](https://www.microsoft.com/en-us/software-download/windows10) (Anniversary Update (14393) or later) edition Home, Pro, Education, Entreprise, S.
 
 # Setup a development environment
 
@@ -77,6 +79,12 @@ Once done, open the solution in Visual Studio. Set ``DesktopBridgeDebuggingProje
 
 Those two files and ``passwords.txt`` are git ignored.
 You can then open Android Studio and build the smartphone app.
+
+## Run the project on Windows
+
+There is two ways to debug :
+* Running ``Windows Store\DesktopBridgeDebuggingProject`` in ``Debug`` mode. Put on some machine dependencies are not well detected.
+* The other solution that works everywhere but that is less practical consist in deploying the ``Windows Store\ClipboardZanager`` project in ``Debug`` mode and then use the ``Debug/Other Debug Targets/Debug Installed App Package`` to debug the ``ClipboardZanager`` package.
 
 ## Unit tests
 

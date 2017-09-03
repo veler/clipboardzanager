@@ -2,7 +2,7 @@
 {
     internal enum SupportedDataType
     {
-        Unknow,
+        Unknown,
         AdobePhotoshop,
         MicrosoftOutlook,
         MicrosoftPowerPoint,

@@ -1,5 +1,15 @@
 ﻿[
   {
+    "Icon": "\uE2AC",
+    "Title": "Démarrage et mise à jour",
+    "Description": "Le processus de mise à jour et le démarrage automatique avec Windows a ont été corrigés."
+  },
+  {
+    "Icon": "\uE1F5",
+    "Title": "Version 2017.9.1.27",
+    "Description": ""
+  },
+  {
     "Icon": "\uEB9F",
     "Title": "Bar de recherche améliorée",
     "Description": "Vous pouvez à présent filtrer les images."

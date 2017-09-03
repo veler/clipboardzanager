@@ -12,26 +12,35 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DefineConstants>DEBUG</DefineConstants>
     <OutputPath>bin\x86\Debug\</OutputPath>
+    <PackageLayout>PackageFiles</PackageLayout>
+    <StartupTile>ClipboardZanager</StartupTile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
+    <PackageLayout>PackageFiles</PackageLayout>
+    <StartupTile>ClipboardZanager</StartupTile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DefineConstants>DEBUG</DefineConstants>
     <OutputPath>bin\x64\Debug\</OutputPath>
+    <PackageLayout>PackageFiles</PackageLayout>
+    <StartupTile>ClipboardZanager</StartupTile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
+    <PackageLayout>PackageFiles</PackageLayout>
+    <StartupTile>ClipboardZanager</StartupTile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DefineConstants>DEBUG</DefineConstants>
     <OutputPath>bin\AnyCPU\Debug\</OutputPath>
-    <PackageLayout>..\ClipboardZanagerApp\bin\Debug\Appx</PackageLayout>
+    <PackageLayout>PackageFiles</PackageLayout>
     <StartupTile>ClipboardZanager</StartupTile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\AnyCPU\Release\</OutputPath>
-    <PackageLayout>..\ClipboardZanagerApp\bin\Release\AppX</PackageLayout>
+    <PackageLayout>PackageFiles</PackageLayout>
+    <StartupTile>ClipboardZanager</StartupTile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DefineConstants>DEBUG</DefineConstants>
@@ -44,6 +53,12 @@
     <None Include="AppXPackageFileList.xml">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="PackageFiles\AppxManifest.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
@@ -65,8 +80,12 @@
       <PdbToCopy Condition="Exists(%(LayoutFile.Identity))" Include="$([System.String]::Copy('%(LayoutFile.FullPath)').Replace('%(LayoutFile.Extension)','.pdb'))">
         <PackagePath>$([System.String]::Copy('%(LayoutFile.PackagePath)').Replace('%(LayoutFile.Extension)','.pdb'))</PackagePath>
       </PdbToCopy>
+      <ConfigToCopy Condition="Exists(%(LayoutFile.Identity))" Include="$([System.String]::Copy('%(LayoutFile.FullPath)').Replace('%(LayoutFile.Extension)','.config'))">
+        <PackagePath>$([System.String]::Copy('%(LayoutFile.PackagePath)').Replace('%(LayoutFile.Extension)','.config'))</PackagePath>
+      </ConfigToCopy>
     </ItemGroup>
     <Copy Condition="Exists(%(PdbToCopy.Identity))" SourceFiles="@(PdbToCopy)" DestinationFiles="@(PdbToCopy->'%(PackagePath)')" SkipUnchangedFiles="true" />
+    <Copy Condition="Exists(%(ConfigToCopy.Identity))" SourceFiles="@(ConfigToCopy)" DestinationFiles="@(ConfigToCopy->'%(PackagePath)')" SkipUnchangedFiles="true" />
   </Target>
   <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" />
   <Target Name="Rebuild" DependsOnTargets="Build" />

@@ -19,6 +19,8 @@ using ClipboardZanager.Shared.Logs;
 using ClipboardZanager.Shared.Services;
 using ClipboardZanager.Strings;
 using Newtonsoft.Json;
+using Microsoft.Win32;
+using ClipboardZanager.Core.Desktop.Interop;
 
 namespace ClipboardZanager
 {
@@ -56,6 +58,7 @@ namespace ClipboardZanager
             SwitchColorTheme(SystemParameters.HighContrast);
             SystemParameters.StaticPropertyChanged += SystemParameters_StaticPropertyChanged;
             NetworkChange.NetworkAvailabilityChanged += NetworkChange_NetworkAvailabilityChanged;
+            SystemEvents.SessionEnding += SystemEvents_SessionEnding;
 
             if (Settings.Default.FirstStart)
             {
@@ -66,7 +69,8 @@ namespace ClipboardZanager
                     Settings.Default.Language = operatingSystemCulture.Name;
                 }
 
-                CoreHelper.UpdateStartWithWindowsShortcut(true);
+
+                CoreHelper.SetAppStartsAtLogin(true);
                 Settings.Default.KeyboardShortcut = Consts.DEFAULT_KeyboardHotKeys;
                 Settings.Default.KeepDataTypes = Consts.DEFAULT_DataTypesToKeep;
                 Settings.Default.IgnoredApplications = JsonConvert.SerializeObject(new ObservableCollection<IgnoredApplication>());
@@ -78,13 +82,15 @@ namespace ClipboardZanager
         }
 
         /// <summary>
-        /// Occurs when the user ends the Windows session by logging off or shutting down the operating system.
+        /// Occurs when the user ends the Windows session by logging off or shutting down the operating system or that the Windows Store is updating the app.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
         /// <param name="e">The event data.</param>
-        private void Application_SessionEnding(object sender, SessionEndingCancelEventArgs e)
+        private void SystemEvents_SessionEnding(object sender, SessionEndingEventArgs e)
         {
-            Logger.Instance.Information($"The user user ends the Windows session by logging off or shutting down the operating system. The application will stop.");
+            NativeMethods.RegisterApplicationRestart(string.Empty, 0);
+
+            Logger.Instance.Information($"The user user ends the Windows session by logging off or shutting down the operating system or that the Windows Store is updating the app. The application will stop.");
         }
 
         /// <summary>
@@ -124,7 +130,7 @@ namespace ClipboardZanager
 
             if (!Debugger.IsAttached)
             {
-                Process.Start(Assembly.GetEntryAssembly().Location, string.Join(" ", Environment.GetCommandLineArgs(), "-skipsingleinstance"));
+                NativeMethods.RegisterApplicationRestart(string.Join(" ", Environment.GetCommandLineArgs(), "-skipsingleinstance"), 0);
                 Current.Shutdown(0);
             }
         }

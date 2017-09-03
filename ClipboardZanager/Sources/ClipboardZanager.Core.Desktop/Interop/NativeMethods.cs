@@ -135,6 +135,15 @@ namespace ClipboardZanager.Core.Desktop.Interop
         [DllImport(Consts.Kernel32, SetLastError = true)]
         internal static extern bool QueryFullProcessImageName(IntPtr hprocess, int dwFlags, StringBuilder lpExeName, out int size);
 
+        /// <summary>
+        /// Registers the active instance of an application for restart.
+        /// </summary>
+        /// <param name="commandLineArgs">A pointer to a Unicode string that specifies the command-line arguments for the application when it is restarted. The maximum size of the command line that you can specify is RESTART_MAX_CMD_LINE characters. Do not include the name of the executable in the command line; this function adds it for you. If this parameter is NULL or an empty string, the previously registered command line is removed.If the argument contains spaces, use quotes around the argument.</param>
+        /// <param name="Flags"></param>
+        /// <returns>This function returns S_OK on success or one of the following error codes.</returns>
+        [DllImport(Consts.Kernel32, SetLastError = true)]
+        internal static extern int RegisterApplicationRestart([MarshalAs(UnmanagedType.LPWStr)] string commandLineArgs, int Flags);
+
         #endregion
 
         #region Ole32

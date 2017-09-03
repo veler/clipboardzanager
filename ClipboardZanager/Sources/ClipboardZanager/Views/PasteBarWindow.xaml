@@ -273,7 +273,7 @@
                                         </Canvas>
                                         <Image Source="{Binding Thumbnail, ConverterParameter=Bitmap, Converter={StaticResource ThumbnailToValueConverter}, Mode=OneTime}"/>
                                     </Grid>
-                                    <DockPanel Visibility="{Binding Thumbnail.Type, ConverterParameter=Unknow, Converter={StaticResource EnumToVisibilityConverter}, Mode=OneTime}">
+                                    <DockPanel Visibility="{Binding Thumbnail.Type, ConverterParameter=Unknown, Converter={StaticResource EnumToVisibilityConverter}, Mode=OneTime}">
                                         <TextBlock Text="{Binding DataContext.Language.PasteBarWindow.NoThumbnail, ElementName=blurredWindow}" Foreground="{StaticResource ForegroundBrush}" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" TextWrapping="Wrap"/>
                                     </DockPanel>
                                 </Grid>

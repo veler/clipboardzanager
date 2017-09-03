@@ -21,6 +21,7 @@ using ClipboardZanager.Strings;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace ClipboardZanager.ViewModels.SettingsPanels
 {
@@ -36,6 +37,7 @@ namespace ClipboardZanager.ViewModels.SettingsPanels
         private readonly MouseAndKeyboardHookService _mouseAndKeyboardHookService;
         private readonly ServiceSettingProvider _settingProvider;
 
+        private bool _startWithWindows;
         private bool _isChangeHotKeyPopupOpened;
         private bool _isRestoreDefaultPopupOpened;
         private string _displayedCurrentKeyboardShortcut;
@@ -80,11 +82,12 @@ namespace ClipboardZanager.ViewModels.SettingsPanels
         /// </summary>
         public bool StartWithWindows
         {
-            get { return File.Exists(Consts.StartWithWindowsShortcutFileName); }
+            get { return _startWithWindows; }
             set
             {
                 Logger.Instance.Information($"The setting '{nameof(StartWithWindows)}' has been set to '{value}'.");
-                CoreHelper.UpdateStartWithWindowsShortcut(value);
+                _startWithWindows = value;
+                CoreHelper.SetAppStartsAtLogin(value);
                 RaisePropertyChanged();
             }
         }
@@ -347,7 +350,7 @@ namespace ClipboardZanager.ViewModels.SettingsPanels
 
             await ServiceLocator.GetService<CloudStorageService>().SignOutAllAsync();
 
-            CoreHelper.UpdateStartWithWindowsShortcut(true);
+            CoreHelper.SetAppStartsAtLogin(true);
             Settings.Default.Reset();
 
             Settings.Default.FirstStart = false;
@@ -401,6 +404,15 @@ namespace ClipboardZanager.ViewModels.SettingsPanels
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Load the value of <see cref="StartWithWindows"/>. This method must be called once the window is loaded and visible.
+        /// </summary>
+        internal async Task LoadStartWithWindows()
+        {
+            _startWithWindows = await CoreHelper.IsAppStartsAtLogin();
+            RaisePropertyChanged(nameof(StartWithWindows));
+        }
 
         /// <summary>
         /// Generate a string that represents the current keyboard shortcut and display it

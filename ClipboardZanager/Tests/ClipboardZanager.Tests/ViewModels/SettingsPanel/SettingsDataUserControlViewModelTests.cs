@@ -39,12 +39,12 @@ namespace ClipboardZanager.Tests.ViewModels.SettingsPanel
             Assert.AreEqual(viewmodel.MaxDataToKeep, "1");
         }
 
-        private void RestoreDefault(SettingsGeneralUserControlViewModel viewModel)
+        private async void RestoreDefault(SettingsGeneralUserControlViewModel viewModel)
         {
             viewModel.ConfirmRestoreDefaultCommand.CheckBeginExecute();
             Task.Delay(300).Wait();
 
-            CoreHelper.UpdateStartWithWindowsShortcut(false);
+            CoreHelper.SetAppStartsAtLogin(false);
         }
     }
 }
