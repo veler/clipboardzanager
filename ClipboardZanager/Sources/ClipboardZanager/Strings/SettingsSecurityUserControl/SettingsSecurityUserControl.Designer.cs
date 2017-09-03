@@ -19,7 +19,7 @@ namespace ClipboardZanager.Strings.SettingsSecurityUserControl {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class SettingsSecurityUserControl {
@@ -84,6 +84,24 @@ namespace ClipboardZanager.Strings.SettingsSecurityUserControl {
         internal static string CreditCard_Description {
             get {
                 return ResourceManager.GetString("CreditCard_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable by default synchronization of passwords and credit cards.
+        /// </summary>
+        internal static string DisableSync {
+            get {
+                return ResourceManager.GetString("DisableSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the copied data is marked as a password or a credit card, the synchronization with the cloud will be disabled by default for it..
+        /// </summary>
+        internal static string DisableSync_Description {
+            get {
+                return ResourceManager.GetString("DisableSync_Description", resourceCulture);
             }
         }
         

@@ -13,6 +13,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Mocks
         internal bool KeepDataAfterReboot;
         internal bool AvoidPasswords;
         internal bool AvoidCreditCard;
+        internal bool DisablePasswordAndCreditCardSync;
         internal int MaxDataToKeep;
         internal int DateExpireLimit;
         internal ArrayList KeepDataTypes;
@@ -78,6 +79,10 @@ namespace ClipboardZanager.Core.Desktop.Tests.Mocks
                                                             };
                     break;
 
+                case "DisablePasswordAndCreditCardSync":
+                    value = DisablePasswordAndCreditCardSync;
+                    break;
+
                 default:
                     Logger.Instance.Fatal(new KeyNotFoundException($"{settingName} not found."));
                     return default(T);
@@ -96,6 +101,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Mocks
             KeepDataAfterReboot = true;
             AvoidPasswords = true;
             AvoidCreditCard = true;
+            DisablePasswordAndCreditCardSync = true;
             MaxDataToKeep = 25;
             DateExpireLimit = 30;
             IgnoredApplications = new List<IgnoredApplication>();

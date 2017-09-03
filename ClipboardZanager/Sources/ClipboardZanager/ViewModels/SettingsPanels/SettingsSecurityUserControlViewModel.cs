@@ -43,6 +43,21 @@ namespace ClipboardZanager.ViewModels.SettingsPanels
         public LanguageManager Language => LanguageManager.GetInstance();
 
         /// <summary>
+        /// Gets or sets whether the credit card numbers and password must be synchronized when it is detected
+        /// </summary>
+        public bool DisablePasswordAndCreditCardSync
+        {
+            get { return Settings.Default.DisablePasswordAndCreditCardSync; }
+            set
+            {
+                Logger.Instance.Information($"The setting '{nameof(DisablePasswordAndCreditCardSync)}' has been set to '{value}'.");
+                Settings.Default.DisablePasswordAndCreditCardSync = value;
+                RaisePropertyChanged();
+                _settingProvider.SaveAndApplySettings();
+            }
+        }
+
+        /// <summary>
         /// Gets or sets whether the credit card numbers must be captured when it is detected.
         /// </summary>
         public bool AvoidCreditCard
