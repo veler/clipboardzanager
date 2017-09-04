@@ -364,6 +364,49 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             Assert.IsTrue(service.Cache.All(dataEntryCache => dataEntryCache.Status == DataEntryStatus.Deleted));
         }
 
+        [TestMethod]
+        public void DataService_DisablePasswordAndCreditCardSync()
+        {
+            var window = new Models.Window(IntPtr.Zero, "Edge", new Process(), "Microsoft.MicrosoftEdge", null, true);
+
+            var service = GetDataService();
+            var dataObject = new DataObject();
+            var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
+
+            service.AddDataEntry(entry, new List<DataIdentifier>(), window, false, false);
+
+            var dataEntry = service.DataEntries[0];
+            Assert.IsTrue(dataEntry.CanSynchronize);
+
+            service.AddDataEntry(entry, new List<DataIdentifier>(), window, true, false);
+
+            dataEntry = service.DataEntries[0];
+            Assert.IsFalse(dataEntry.CanSynchronize);
+
+            service.AddDataEntry(entry, new List<DataIdentifier>(), window, false, true);
+
+            dataEntry = service.DataEntries[0];
+            Assert.IsFalse(dataEntry.CanSynchronize);
+
+            TestUtilities.GetSettingProvider().DisablePasswordAndCreditCardSync = false;
+
+            service.AddDataEntry(entry, new List<DataIdentifier>(), window, false, false);
+
+            dataEntry = service.DataEntries[0];
+            Assert.IsTrue(dataEntry.CanSynchronize);
+
+            service.AddDataEntry(entry, new List<DataIdentifier>(), window, true, false);
+
+            dataEntry = service.DataEntries[0];
+            Assert.IsTrue(dataEntry.CanSynchronize);
+
+            service.AddDataEntry(entry, new List<DataIdentifier>(), window, false, true);
+
+            dataEntry = service.DataEntries[0];
+            Assert.IsTrue(dataEntry.CanSynchronize);
+
+        }
+
         private DataService GetDataService()
         {
             return ServiceLocator.GetService<DataService>();

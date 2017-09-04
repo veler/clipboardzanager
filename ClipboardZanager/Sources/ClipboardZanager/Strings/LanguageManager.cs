@@ -866,6 +866,16 @@ namespace ClipboardZanager.Strings
         public string CreditCard_Description => SettingsSecurityUserControl.SettingsSecurityUserControl.CreditCard_Description;
 
         /// <summary>
+        /// Gets the resource DisableSync.
+        /// </summary>
+        public string DisableSync => SettingsSecurityUserControl.SettingsSecurityUserControl.DisableSync;
+
+        /// <summary>
+        /// Gets the resource DisableSync_Description.
+        /// </summary>
+        public string DisableSync_Description => SettingsSecurityUserControl.SettingsSecurityUserControl.DisableSync_Description;
+
+        /// <summary>
         /// Gets the resource IgnoreFromApps.
         /// </summary>
         public string IgnoreFromApps => SettingsSecurityUserControl.SettingsSecurityUserControl.IgnoreFromApps;

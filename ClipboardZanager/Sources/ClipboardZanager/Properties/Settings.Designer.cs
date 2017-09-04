@@ -308,5 +308,17 @@ namespace ClipboardZanager.Properties {
                 this["CurrentVersion"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DisablePasswordAndCreditCardSync {
+            get {
+                return ((bool)(this["DisablePasswordAndCreditCardSync"]));
+            }
+            set {
+                this["DisablePasswordAndCreditCardSync"] = value;
+            }
+        }
     }
 }

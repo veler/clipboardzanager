@@ -76,6 +76,10 @@ namespace ClipboardZanager.ComponentModel.Services
                     value = Settings.Default.SynchronizationInterval;
                     break;
 
+                case "DisablePasswordAndCreditCardSync":
+                    value = Settings.Default.DisablePasswordAndCreditCardSync;
+                    break;
+
                 case "CloudStorageProviders":
                     value = new List<ICloudStorageProvider> {
                                                                 new DropBoxProvider(new DropBoxTokenProvider()),
