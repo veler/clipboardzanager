@@ -88,7 +88,7 @@ namespace ClipboardZanager.Strings.SettingsSecurityUserControl {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable by default synchronization of passwords and credit cards.
+        ///   Looks up a localized string similar to Disable by default passwords and credit cards cloud synchronization..
         /// </summary>
         internal static string DisableSync {
             get {
@@ -97,7 +97,7 @@ namespace ClipboardZanager.Strings.SettingsSecurityUserControl {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If the copied data is marked as a password or a credit card, the synchronization with the cloud will be disabled by default for it..
+        ///   Looks up a localized string similar to If the copied data is marked as a password or a credit card, the synchronization with the cloud will be disabled by default..
         /// </summary>
         internal static string DisableSync_Description {
             get {

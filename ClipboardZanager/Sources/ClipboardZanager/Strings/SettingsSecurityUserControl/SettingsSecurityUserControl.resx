@@ -127,10 +127,10 @@
     <value>Try to detect a copied text that looks like a credit card number, and avoid to keep it in memory for safety.</value>
   </data>
   <data name="DisableSync" xml:space="preserve">
-    <value>Disable by default synchronization of passwords and credit cards</value>
+    <value>Disable by default passwords and credit cards cloud synchronization.</value>
   </data>
   <data name="DisableSync_Description" xml:space="preserve">
-    <value>If the copied data is marked as a password or a credit card, the synchronization with the cloud will be disabled by default for it.</value>
+    <value>If the copied data is marked as a password or a credit card, the synchronization with the cloud will be disabled by default.</value>
   </data>
   <data name="IgnoreFromApps" xml:space="preserve">
     <value>Ignore the copied data from the following applications</value>
