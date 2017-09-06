@@ -94,6 +94,8 @@
             <ListBox x:Name="DataListBox" Grid.Row="1" ItemsSource="{Binding DataEntries, IsAsync=True, Mode=OneWay}" Style="{StaticResource PasteBarListBox}" Visibility="{Binding NoPresentData, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                 <ListBox.InputBindings>
                     <KeyBinding Key="Enter" Command="{Binding PasteCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=SelectedValue}"/>
+                    <KeyBinding Modifiers="Ctrl" Key="V" Command="{Binding PasteCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=SelectedValue}"/>
+                    <KeyBinding Modifiers="Ctrl" Key="C" Command="{Binding CopyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=SelectedValue}"/>
                 </ListBox.InputBindings>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
