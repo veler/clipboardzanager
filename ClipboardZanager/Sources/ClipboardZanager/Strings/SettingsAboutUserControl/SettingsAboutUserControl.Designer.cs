@@ -82,9 +82,14 @@ namespace ClipboardZanager.Strings.SettingsAboutUserControl {
         ///Jean-Edouard Chamalet, Ky Van Doan, Miriam Djebloun for their advice about the user interface.
         ///Jérémie Rabusseau, Johnathan Abraham, Paul Fasola, Valentin Michalak for their feedbacks during the development phase.
         ///
+        ///CONTRIBUTORS IN THEIR FREE TIME
+        ///
+        ///- Christophe Chichmanian
+        ///- Valentin Michalak
+        ///
         ///TRANSLATORS
         ///
-        ///- French : Etienne Baudoux.
+        ///- French : Eti [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Credit {
             get {
