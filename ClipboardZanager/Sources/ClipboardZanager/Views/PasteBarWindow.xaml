@@ -221,7 +221,7 @@
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Button>
-                                                <TextBlock Text="{Binding Date, Converter={StaticResource DateTimeToTimeSpanStringConverter}}" Margin="10,0,0,0" FontSize="20" Foreground="{StaticResource PasteBarItemMoreInfoForeground}" VerticalAlignment="Center" Focusable="{Binding IsScreenReaderRunning}"/>
+                                                <TextBlock Text="{Binding Date, Converter={StaticResource DateTimeToTimeSpanStringConverter}}" Margin="10,0,0,0" FontSize="20" Foreground="{StaticResource PasteBarItemMoreInfoForeground}" VerticalAlignment="Center" Focusable="{Binding DataContext.IsScreenReaderRunning, ElementName=blurredWindow}"/>
                                             </StackPanel>
                                         </ScrollViewer>
                                     </DockPanel>

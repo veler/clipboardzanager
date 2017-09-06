@@ -219,7 +219,7 @@ namespace ClipboardZanager.Core.Desktop.ComponentModel
                 try
                 {
                     var ptr = new IntPtr((long)gch.AddrOfPinnedObject() + 40);
-                    bmp = new Bitmap(width, height, width * 4, PixelFormat.Format32bppArgb, ptr);
+                    bmp = new Bitmap(width, height, width * 4, PixelFormat.Format32bppRgb, ptr);
                     bmp.MakeTransparent(Color.Transparent);
                     bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
 
