@@ -426,6 +426,11 @@ namespace ClipboardZanager.Strings
         public string Copy_Tooltip => PasteBarWindow.PasteBarWindow.Copy_Tooltip;
 
         /// <summary>
+        /// Gets the resource DataColor.
+        /// </summary>
+        public string DataColor => PasteBarWindow.PasteBarWindow.DataColor;
+
+        /// <summary>
         /// Gets the resource DataFile.
         /// </summary>
         public string DataFile => PasteBarWindow.PasteBarWindow.DataFile;

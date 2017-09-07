@@ -40,6 +40,26 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
         }
 
         [TestMethod]
+        public void DataService_IsHexColor()
+        {
+            var service = GetDataService();
+
+            Assert.IsTrue(service.IsHexColor("#1f1f1F"));
+            Assert.IsTrue(service.IsHexColor("#AFAFAF"));
+            Assert.IsTrue(service.IsHexColor("#1AFFa1"));
+            Assert.IsTrue(service.IsHexColor("#222fff"));
+            Assert.IsTrue(service.IsHexColor("#F00"));
+            Assert.IsTrue(service.IsHexColor("#bbffffff"));
+            Assert.IsFalse(service.IsHexColor("123456"));
+            Assert.IsFalse(service.IsHexColor("#afafah"));
+            Assert.IsFalse(service.IsHexColor("#123abce"));
+            Assert.IsFalse(service.IsHexColor("aFaE3f"));
+            Assert.IsFalse(service.IsHexColor("F00"));
+            Assert.IsFalse(service.IsHexColor("#afaf"));
+            Assert.IsFalse(service.IsHexColor("#F0h"));
+        }
+
+        [TestMethod]
         public void DataService_IsCreditCard()
         {
             var service = GetDataService();
@@ -205,6 +225,21 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
 
             Assert.AreEqual(dataEntry.Thumbnail.Type, ThumbnailDataType.String);
             Assert.AreEqual(DataHelper.FromBase64<string>(dataEntry.Thumbnail.Value), "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It h...");
+        }
+
+        [TestMethod]
+        public void DataService_DataEntry_Thumbnail_Color()
+        {
+            var service = GetDataService();
+            var dataObject = new DataObject();
+            dataObject.SetText("#Fff002");
+            var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
+
+            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+
+            var dataEntry = service.DataEntries.First();
+
+            Assert.AreEqual(dataEntry.Thumbnail.Type, ThumbnailDataType.Color);
         }
 
         [TestMethod]

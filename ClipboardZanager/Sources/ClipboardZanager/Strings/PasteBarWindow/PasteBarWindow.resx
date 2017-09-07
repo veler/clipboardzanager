@@ -132,6 +132,9 @@
   <data name="Copy_Tooltip" xml:space="preserve">
     <value>Put the data in the clipboard</value>
   </data>
+  <data name="DataColor" xml:space="preserve">
+    <value>This data is a color : {0}</value>
+  </data>
   <data name="DataFile" xml:space="preserve">
     <value>This data is a set of copied files : {0}</value>
   </data>

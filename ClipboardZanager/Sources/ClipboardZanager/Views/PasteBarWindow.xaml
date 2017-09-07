@@ -233,6 +233,16 @@
                                         <TextBlock Text="{Binding Thumbnail, ConverterParameter=String, Converter={StaticResource ThumbnailToValueConverter}, Mode=OneTime}" Foreground="{StaticResource ForegroundBrush}" Margin="10,5,10,0" TextAlignment="Left" FontSize="20" TextWrapping="Wrap"/>
                                         <Border Height="40" VerticalAlignment="Bottom" Background="{StaticResource PasteBarItemLinearGradentBorderBackground}"/>
                                     </Grid>
+                                    <Grid Visibility="{Binding Thumbnail.Type, ConverterParameter=Color, Converter={StaticResource EnumToVisibilityConverter}, Mode=OneTime}">
+                                        <Canvas>
+                                            <Canvas.CacheMode>
+                                                <BitmapCache EnableClearType="True" RenderAtScale="1.0" PresentationOptions:Freeze="True"/>
+                                            </Canvas.CacheMode>
+                                            <Rectangle Width="{Binding ActualWidth, Mode=OneWay, ElementName=ThumbnailGrid}" Height="{Binding ActualHeight, Mode=OneWay, ElementName=ThumbnailGrid}" Fill="{StaticResource PasteBarItemTiledImageBackground}"/>
+                                        </Canvas>
+                                        <DockPanel Background="{Binding Thumbnail, ConverterParameter=SolidColorBrush, Converter={StaticResource ThumbnailToValueConverter}, Mode=OneTime}"/>
+                                        <TextBlock Text="{Binding Thumbnail, ConverterParameter=ColorString, Converter={StaticResource ThumbnailToValueConverter}, Mode=OneTime}" Foreground="{Binding Thumbnail, ConverterParameter=ForegroundSolidColorBrush, Converter={StaticResource ThumbnailToValueConverter}, Mode=OneTime}" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" TextWrapping="Wrap"/>
+                                    </Grid>
                                     <Grid Visibility="{Binding Thumbnail.Type, ConverterParameter=Link, Converter={StaticResource EnumToVisibilityConverter}, Mode=OneTime}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>

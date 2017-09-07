@@ -51,6 +51,9 @@ namespace ClipboardZanager.ComponentModel.UI.Converters
                     case Core.Desktop.Enums.ThumbnailDataType.String:
                         return string.Format(language.PasteBarWindow.DataText, DataHelper.FromBase64<string>(dataEntry.Thumbnail.Value));
 
+                    case Core.Desktop.Enums.ThumbnailDataType.Color:
+                        return string.Format(language.PasteBarWindow.DataColor, DataHelper.FromBase64<string>(dataEntry.Thumbnail.Value));
+
                     case Core.Desktop.Enums.ThumbnailDataType.Unknown:
                         return language.PasteBarWindow.DataUnknow;
                 }
