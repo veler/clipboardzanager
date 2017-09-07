@@ -143,7 +143,7 @@ namespace ClipboardZanager.Core.Desktop.Services
         /// <returns>Returns True is the string looks like a hex color</returns>
         internal bool IsHexColor(string input)
         {
-            return (input.Length == 9 || input.Length == 7 || input.Length == 4) && _hexColorRegex.IsMatch(input);
+            return _hexColorRegex.IsMatch(input);
         }
 
         /// <summary>

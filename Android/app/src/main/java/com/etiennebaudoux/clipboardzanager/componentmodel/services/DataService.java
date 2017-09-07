@@ -133,7 +133,7 @@ public class DataService implements Service {
      * @return Returns True is the string looks like a hex color number
      */
     public boolean isHexColor(String input) {
-        return (input.length() == 9 || input.length() == 7 || input.length() == 4) && _hexColorRegex.matcher(input).matches();
+        return _hexColorRegex.matcher(input).matches();
     }
 
     /**
