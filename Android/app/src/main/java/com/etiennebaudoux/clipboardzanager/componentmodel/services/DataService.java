@@ -49,6 +49,7 @@ public class DataService implements Service {
     private final Pattern _hasNumber = Pattern.compile("^(?=.*\\d).+$");
     private final Pattern _hasUpperChar = Pattern.compile("^(?=.*[A-Z]).+$");
     private final Pattern _uriPattern = Pattern.compile("\\b(https?|ftp)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
+    private final Pattern _hexColorRegex = Pattern.compile("^#([A-Fa-f0-9]{8}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
 
     private boolean _lastCopiedDataWasCreditCard;
     private boolean _lastCopiedDataWasPassword;
@@ -123,6 +124,16 @@ public class DataService implements Service {
         _lastCopiedDataWasCreditCard = false;
         _lastCopiedDataWasPassword = false;
         _detectedPasswordOrCreditCard = null;
+    }
+
+    /**
+     * Determines whether the input string looks like a hex color or not.
+     *
+     * @param input The string to test
+     * @return Returns True is the string looks like a hex color number
+     */
+    public boolean isHexColor(String input) {
+        return _hexColorRegex.matcher(input).matches();
     }
 
     /**
@@ -556,6 +567,7 @@ public class DataService implements Service {
      */
     private Thumbnail generateThumbnail(String text, boolean isCreditCard, boolean isPassword) throws IOException {
         @ThumbnailDataType int type = ThumbnailDataType.UNKNOWN;
+        String value = "";
 
         if (isCreditCard) {
             if (!StringUtils.isNullOrEmpty(text)) {
@@ -571,21 +583,25 @@ public class DataService implements Service {
             }
         } else if (isPassword) {
             text = text.substring(0, 1) + new String(new char[text.length() - 2]).replace("\0", Consts.PasswordMask) + text.substring(text.length() - 1);
+        } else if (isHexColor(text)) {
+            type = ThumbnailDataType.COLOR;
+            value = DataHelper.toBase64(text);
         } else if (text.length() > 253) {
             text = text.substring(0, Math.min(text.length(), 250));
             text += "...";
         }
 
-        String value;
-        boolean isUri = _uriPattern.matcher(text).matches();
-        if (isUri) {
-            type = ThumbnailDataType.LINK;
-            Link link = new Link();
-            link.setUri(text);
-            value = DataHelper.toBase64(link);
-        } else {
-            type = ThumbnailDataType.STRING;
-            value = DataHelper.toBase64(text);
+        if (type == ThumbnailDataType.UNKNOWN) {
+            boolean isUri = _uriPattern.matcher(text).matches();
+            if (isUri) {
+                type = ThumbnailDataType.LINK;
+                Link link = new Link();
+                link.setUri(text);
+                value = DataHelper.toBase64(link);
+            } else {
+                type = ThumbnailDataType.STRING;
+                value = DataHelper.toBase64(text);
+            }
         }
 
         Thumbnail thumbnail = new Thumbnail();

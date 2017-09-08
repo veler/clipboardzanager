@@ -119,6 +119,16 @@ namespace ClipboardZanager.Tests.ViewModels
             }, 100);
 
             dataObject = new DataObject();
+            dataObject.SetText("#ffffff");
+            entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
+            DispatcherUtil.ExecuteOnDispatcherThread(() =>
+            {
+                service.ClipboardHook_ClipboardChanged(null, entry);
+                Task.Delay(300).Wait();
+                DispatcherUtil.DoEvents();
+            }, 100);
+
+            dataObject = new DataObject();
             dataObject.SetText("http://www.ipsum.com/");
             entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);  
             DispatcherUtil.ExecuteOnDispatcherThread(() =>
@@ -139,7 +149,7 @@ namespace ClipboardZanager.Tests.ViewModels
             }, 100);
 
             var viewmodel = new PasteBarWindowViewModel();
-            Assert.AreEqual(viewmodel.CollectionView.Cast<DataEntry>().Count(), 4);
+            Assert.AreEqual(viewmodel.CollectionView.Cast<DataEntry>().Count(), 5);
 
             viewmodel.SearchQueryString = "ipsum";
             viewmodel.SearchCommand.CheckBeginExecute(true);
@@ -150,6 +160,14 @@ namespace ClipboardZanager.Tests.ViewModels
             Assert.AreEqual(viewmodel.CollectionView.Cast<DataEntry>().Count(), 3);
 
             viewmodel.SearchQueryString = "Ipsum";
+            viewmodel.SearchCommand.CheckBeginExecute(true);
+            viewmodel.IgnoreSearch = false;
+            await Task.Delay(500);
+            DispatcherUtil.DoEvents();
+
+            Assert.AreEqual(viewmodel.CollectionView.Cast<DataEntry>().Count(), 1);
+
+            viewmodel.SearchQueryString = "#fff";
             viewmodel.SearchCommand.CheckBeginExecute(true);
             viewmodel.IgnoreSearch = false;
             await Task.Delay(500);

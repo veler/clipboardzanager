@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace ClipboardZanager.ComponentModel.UI.Converters
 {
@@ -39,6 +40,10 @@ namespace ClipboardZanager.ComponentModel.UI.Converters
                 {
                     parameterValue = ThumbnailDataType.Link;
                 }
+                else if (parameterStringLower == "solidcolorbrush" || parameterStringLower == "foregroundsolidcolorbrush" || parameterStringLower == "colorstring")
+                {
+                    parameterValue = ThumbnailDataType.Color;
+                }
             }
 
             if (parameterValue != thumbnail.Type)
@@ -61,6 +66,24 @@ namespace ClipboardZanager.ComponentModel.UI.Converters
 
                 case ThumbnailDataType.String:
                     return DataHelper.FromBase64<string>(thumbnail.Value);
+
+                case ThumbnailDataType.Color:
+                    var colorString = DataHelper.FromBase64<string>(thumbnail.Value);
+                    if (parameterStringLower == "solidcolorbrush")
+                    {
+                        return new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorString));
+                    }
+                    else if (parameterStringLower == "foregroundsolidcolorbrush") 
+                    {
+                        var color = (Color)ColorConverter.ConvertFromString(colorString);
+                        // check the brightness of the color to determine whether the text must be black or white.
+                        if ((int)Math.Sqrt(color.R * color.R * .241 + color.G * color.G * .691 + color.B * color.B * .068) > 130)
+                        {
+                            return new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                        }
+                        return new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                    }
+                    return colorString;
 
                 case ThumbnailDataType.Files:
                     var filesSource = thumbnail.GetFilesPath();

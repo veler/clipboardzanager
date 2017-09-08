@@ -31,6 +31,7 @@ namespace ClipboardZanager.Core.Desktop.Services
         private readonly Regex _creditCardRegex = new Regex(@"^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$", RegexOptions.Compiled);
         private readonly Regex _hasNumber = new Regex(@"[0-9]+", RegexOptions.Compiled);
         private readonly Regex _hasUpperChar = new Regex(@"[A-Z]+", RegexOptions.Compiled);
+        private readonly Regex _hexColorRegex = new Regex(@"^#([A-Fa-f0-9]{8}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$", RegexOptions.Compiled);
 
         private bool _lastCopiedDataWasCreditCard;
         private bool _lastCopiedDataWasPassword;
@@ -133,6 +134,16 @@ namespace ClipboardZanager.Core.Desktop.Services
             _lastCopiedDataWasCreditCard = false;
             _lastCopiedDataWasPassword = false;
             _detectedPasswordOrCreditCard = null;
+        }
+
+        /// <summary>
+        /// Determines whether the input string looks like a hex color or not.
+        /// </summary>
+        /// <param name="input">The string to test</param>
+        /// <returns>Returns True is the string looks like a hex color</returns>
+        internal bool IsHexColor(string input)
+        {
+            return _hexColorRegex.IsMatch(input);
         }
 
         /// <summary>
@@ -428,7 +439,7 @@ namespace ClipboardZanager.Core.Desktop.Services
 
             var dataObject = new DataObject();
 
-            if (dataEntry.Thumbnail.Type == ThumbnailDataType.String)
+            if (dataEntry.Thumbnail.Type == ThumbnailDataType.String || dataEntry.Thumbnail.Type == ThumbnailDataType.Color)
             {
                 var identifier = dataEntry.DataIdentifiers.FirstOrDefault(id => id.FormatName == DataFormats.UnicodeText);
                 if (identifier != null)
@@ -471,7 +482,7 @@ namespace ClipboardZanager.Core.Desktop.Services
                     return MatchText(dataObject, searchQuery.Query);
 
                 case SearchType.Text:
-                    if (dataEntry.Thumbnail.Type == ThumbnailDataType.String)
+                    if (dataEntry.Thumbnail.Type == ThumbnailDataType.String || dataEntry.Thumbnail.Type == ThumbnailDataType.Color)
                     {
                         return MatchText(dataObject, searchQuery.Query);
                     }
@@ -1110,22 +1121,30 @@ namespace ClipboardZanager.Core.Desktop.Services
                 {
                     text = text.Substring(0, 1) + new string(Consts.PasswordMask, text.Length - 2) + text.Substring(text.Length - 1);
                 }
+                else if (IsHexColor(text))
+                {
+                    type = ThumbnailDataType.Color;
+                    value = DataHelper.ToBase64(text);
+                }
                 else if (text.Length > 253)
                 {
                     text = text.Substring(0, Math.Min(text.Length, 250));
                     text += "...";
                 }
 
-                var isUri = Uri.TryCreate(text, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps || uriResult.Scheme == Uri.UriSchemeFtp || uriResult.Scheme == Uri.UriSchemeMailto);
-                if (isUri)
+                if (type == ThumbnailDataType.Unknown)
                 {
-                    type = ThumbnailDataType.Link;
-                    value = DataHelper.ToBase64(new Link { Uri = text });
-                }
-                else
-                {
-                    type = ThumbnailDataType.String;
-                    value = DataHelper.ToBase64(text);
+                    var isUri = Uri.TryCreate(text, UriKind.Absolute, out Uri uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps || uriResult.Scheme == Uri.UriSchemeFtp || uriResult.Scheme == Uri.UriSchemeMailto);
+                    if (isUri)
+                    {
+                        type = ThumbnailDataType.Link;
+                        value = DataHelper.ToBase64(new Link { Uri = text });
+                    }
+                    else
+                    {
+                        type = ThumbnailDataType.String;
+                        value = DataHelper.ToBase64(text);
+                    }
                 }
             }
 

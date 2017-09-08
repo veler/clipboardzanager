@@ -53,6 +53,25 @@ public class DataServiceTests {
     }
 
     @Test
+    public void isHexColor() throws Exception {
+        DataService service = getDataService();
+
+        assertTrue(service.isHexColor("#1f1f1F"));
+        assertTrue(service.isHexColor("#AFAFAF"));
+        assertTrue(service.isHexColor("#1AFFa1"));
+        assertTrue(service.isHexColor("#222fff"));
+        assertTrue(service.isHexColor("#F00"));
+        assertTrue(service.isHexColor("#bbffffff"));
+        assertFalse(service.isHexColor("123456"));
+        assertFalse(service.isHexColor("#afafah"));
+        assertFalse(service.isHexColor("#123abce"));
+        assertFalse(service.isHexColor("aFaE3f"));
+        assertFalse(service.isHexColor("F00"));
+        assertFalse(service.isHexColor("#afaf"));
+        assertFalse(service.isHexColor("#F0h"));
+    }
+
+    @Test
     public void isCreditCard() throws Exception {
         DataService service = getDataService();
 

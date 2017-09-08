@@ -106,6 +106,15 @@ namespace ClipboardZanager.Strings.PasteBarWindow {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This data is a color : {0}.
+        /// </summary>
+        internal static string DataColor {
+            get {
+                return ResourceManager.GetString("DataColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This data is a set of copied files : {0}.
         /// </summary>
         internal static string DataFile {
