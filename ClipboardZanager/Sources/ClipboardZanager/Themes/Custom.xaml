@@ -497,7 +497,7 @@
                                     <Style TargetType="TextBlock" BasedOn="{x:Null}"/>
                                 </ContentPresenter.Resources>
                             </ContentPresenter>
-                            <TextBlock Grid.Column="2" Grid.ColumnSpan="2" x:Name="InputGestureText" Text="{TemplateBinding InputGestureText}" Margin="5,2,0,2" DockPanel.Dock="Right"/>
+                            <TextBlock Grid.Column="2" Grid.ColumnSpan="2" x:Name="InputGestureText" Text="{TemplateBinding InputGestureText}" Margin="5,5,10,5" DockPanel.Dock="Right"/>
                             <Popup Grid.Column="0" Grid.ColumnSpan="4" Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade">
                                 <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="{StaticResource PopupBackground}" BorderBrush="{StaticResource PopupBorder}" BorderThickness="1" Padding="{StaticResource ContextMenuPadding}">
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>

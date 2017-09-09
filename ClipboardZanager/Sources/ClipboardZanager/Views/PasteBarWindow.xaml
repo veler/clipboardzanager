@@ -104,8 +104,8 @@
                 </i:Interaction.Triggers>
                 <ListBox.ContextMenu>
                     <ContextMenu IsVisibleChanged="ContextMenu_OnIsVisibleChanged">
-                        <MenuItem Header="{Binding Language.PasteBarWindow.Copy}" ToolTip="{Binding Language.PasteBarWindow.Copy_Tooltip}" Command="{Binding CopyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedValue}"/>
-                        <MenuItem Header="{Binding Language.PasteBarWindow.Paste}" ToolTip="{Binding Language.PasteBarWindow.Paste_Tooltip}" Command="{Binding PasteCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedValue}"/>
+                        <MenuItem Header="{Binding Language.PasteBarWindow.Copy}" ToolTip="{Binding Language.PasteBarWindow.Copy_Tooltip}" Command="{Binding CopyCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedValue}" InputGestureText="Ctrl+C"/>
+                        <MenuItem Header="{Binding Language.PasteBarWindow.Paste}" ToolTip="{Binding Language.PasteBarWindow.Paste_Tooltip}" Command="{Binding PasteCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedValue}" InputGestureText="Ctrl+V"/>
                         <MenuItem Header="{Binding Language.PasteBarWindow.Delete}" ToolTip="{Binding Language.PasteBarWindow.Delete_ToolTip}">
                             <MenuItem Header="{Binding Language.PasteBarWindow.Delete_ToolTip}" ToolTip="{Binding Language.PasteBarWindow.DeleteConfirm}" Command="{Binding DeleteItemCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedValue}"/>
                         </MenuItem>
