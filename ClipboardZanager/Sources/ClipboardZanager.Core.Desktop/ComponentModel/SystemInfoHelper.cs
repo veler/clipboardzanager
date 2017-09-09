@@ -81,7 +81,12 @@ namespace ClipboardZanager.Core.Desktop.ComponentModel
                 return false;
             }
 
-            var connectionCost = NetworkInformation.GetInternetConnectionProfile().GetConnectionCost();
+            if (connectionProfile.GetConnectionCost() == null)
+            {
+                return false;
+            }
+
+            var connectionCost = connectionProfile.GetConnectionCost();
             return connectionCost.NetworkCostType != NetworkCostType.Unknown && connectionCost.NetworkCostType != NetworkCostType.Unrestricted;
         }
 
