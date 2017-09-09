@@ -295,12 +295,18 @@ public class DataService implements Service {
         Requires.notNull(data, "data");
         Requires.notNull(identifiers, "identifiers");
 
+        boolean shouldSynchronize = true;
+
+        if (Boolean.parseBoolean(_settingProvider.getSetting("DisablePasswordAndCreditCardSync"))) {
+            shouldSynchronize = !(isPassword || isCreditCard);
+        }
+
         DataEntry entry = new DataEntry();
         entry.setIdentifier(generateNewUUID());
         entry.setThumbnail(generateThumbnail(data.getData(), isCreditCard, isPassword));
         entry.setDate(data.getDate());
         entry.setIsFavorite(false);
-        entry.setCanSynchronize(true);
+        entry.setCanSynchronize(shouldSynchronize);
         entry.setIconIsFromWindowStore(false);
         entry.setDataIdentifiers(identifiers);
 

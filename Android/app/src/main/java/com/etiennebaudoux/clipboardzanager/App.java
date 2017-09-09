@@ -35,6 +35,7 @@ public class App extends Application {
             CoreHelper.setSetting("MaxDataToKeep", "25");
             CoreHelper.setSetting("DateExpireLimit", "30");
             CoreHelper.setSetting("KeepDataAfterReboot", "true");
+            CoreHelper.setSetting("DisablePasswordAndCreditCardSync", "true");
 
             ServiceLocator.setSettingProvider(new SettingProvider());
 

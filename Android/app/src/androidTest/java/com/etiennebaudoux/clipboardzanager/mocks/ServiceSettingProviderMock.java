@@ -8,6 +8,7 @@ public class ServiceSettingProviderMock implements ServiceSettingProvider {
     public String KeepDataAfterReboot;
     public String AvoidPasswords;
     public String AvoidCreditCard;
+    public String DisablePasswordAndCreditCardSync;
     public String MaxDataToKeep;
     public String DateExpireLimit;
 
@@ -39,6 +40,10 @@ public class ServiceSettingProviderMock implements ServiceSettingProvider {
                 value = AvoidCreditCard;
                 break;
 
+            case "DisablePasswordAndCreditCardSync":
+                value = DisablePasswordAndCreditCardSync;
+                break;
+
             case "MaxDataToKeep":
                 value = MaxDataToKeep;
                 break;
@@ -67,9 +72,11 @@ public class ServiceSettingProviderMock implements ServiceSettingProvider {
     }
 
     public void resetSettings() {
-        KeepDataAfterReboot = "true";
-        AvoidPasswords = "true";
-        AvoidCreditCard = "true";
+        String trueString = "true";
+        KeepDataAfterReboot = trueString;
+        AvoidPasswords = trueString;
+        AvoidCreditCard = trueString;
+        DisablePasswordAndCreditCardSync = trueString;
         MaxDataToKeep = "25";
         DateExpireLimit = "30";
     }

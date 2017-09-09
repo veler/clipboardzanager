@@ -289,13 +289,40 @@ public class DataServiceTests {
         assertEquals(service.getCache().size(), 10);
 
         assertTrue(service.getCache().all(dataEntryCache -> dataEntryCache.getStatus() == DataEntryStatus.ADDED));
-
         service.removeAllDataAsync().await();
 
         assertEquals(service.getDataEntries().size(), 0);
+
         assertEquals(service.getCache().size(), 10);
 
         assertTrue(service.getCache().all(dataEntryCache -> dataEntryCache.getStatus() == DataEntryStatus.DELETED));
+    }
+
+    @Test
+    public void disablePasswordAndCreditCardSync() throws Exception {
+        DataService service = getDataService();
+        Date date = new Date(System.currentTimeMillis());
+        String value = "Hello";
+
+        service.addDataEntry(new ClipboardData(value, date), new QueryableArrayList<>(), false, false);
+        assertTrue(service.getDataEntries().first().canSynchronize());
+
+        service.addDataEntry(new ClipboardData(value, date), new QueryableArrayList<>(), true, false);
+        assertFalse(service.getDataEntries().first().canSynchronize());
+
+        service.addDataEntry(new ClipboardData(value, date), new QueryableArrayList<>(), false, true);
+        assertFalse(service.getDataEntries().first().canSynchronize());
+
+        TestUtilities.getSettingProvider().DisablePasswordAndCreditCardSync = "false";
+
+        service.addDataEntry(new ClipboardData(value, date), new QueryableArrayList<>(), false, false);
+        assertTrue(service.getDataEntries().first().canSynchronize());
+
+        service.addDataEntry(new ClipboardData(value, date), new QueryableArrayList<>(), true, false);
+        assertTrue(service.getDataEntries().first().canSynchronize());
+
+        service.addDataEntry(new ClipboardData(value, date), new QueryableArrayList<>(), false, true);
+        assertTrue(service.getDataEntries().first().canSynchronize());
     }
 
     private DataService getDataService() {
