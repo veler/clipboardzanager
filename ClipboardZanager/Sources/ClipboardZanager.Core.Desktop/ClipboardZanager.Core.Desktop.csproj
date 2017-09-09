@@ -112,7 +112,6 @@
     <Compile Include="Enums\SearchType.cs" />
     <Compile Include="Events\DataMigrationProgressEventArgs.cs" />
     <Compile Include="Events\DelayerActionEventArgs.cs" />
-    <Compile Include="Hooking\RegistryMonitor.cs" />
     <Compile Include="ComponentModel\WebClient.cs">
       <SubType>Component</SubType>
     </Compile>

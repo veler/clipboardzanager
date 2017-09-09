@@ -9,6 +9,8 @@ using ClipboardZanager.Core.Desktop.Enums;
 using ClipboardZanager.Core.Desktop.Hooking;
 using ClipboardZanager.Core.Desktop.Interop;
 using ClipboardZanager.Core.Desktop.Interop.Structs;
+using ClipboardZanager.Core.Desktop.ComponentModel;
+using Microsoft.Win32;
 
 namespace ClipboardZanager.ComponentModel.UI.Controls
 {
@@ -19,7 +21,7 @@ namespace ClipboardZanager.ComponentModel.UI.Controls
     {
         #region Fields
 
-        private readonly RegistryMonitor _enableTransparencyRegistryMonitor;
+        private readonly RegistryKey _personalizeRegistryKey;
         private bool _customBackground;
 
         #endregion
@@ -87,8 +89,10 @@ namespace ClipboardZanager.ComponentModel.UI.Controls
         /// </summary>
         public BlurredWindow()
         {
-            _enableTransparencyRegistryMonitor = new RegistryMonitor(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", RegistryNotifyChange.LAST_SET);
-            _enableTransparencyRegistryMonitor.Changed += EnableTransparencyRegistryMonitor_Changed;
+            lock(this)
+            {
+                _personalizeRegistryKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize");
+            }
 
             Loaded += BlurredWindow_Loaded;
             Closed += BlurredWindow_Closed;
@@ -98,17 +102,11 @@ namespace ClipboardZanager.ComponentModel.UI.Controls
 
         #region Handled Methods
 
-        internal void EnableTransparencyRegistryMonitor_Changed(object sender, EventArgs e)
+        internal void SystemEvents_UserPreferenceChanged(object sender, EventArgs e)
         {
             Dispatcher.Invoke(() =>
             {
-                var monitoredKey = _enableTransparencyRegistryMonitor.MonitoredKey;
-                var transparency = 0;
-
-                if (monitoredKey != null)
-                {
-                    transparency = (int)monitoredKey.GetValue("EnableTransparency", 1);
-                }
+                var transparency = (int)_personalizeRegistryKey.GetValue("EnableTransparency", 1);
 
                 if (!_customBackground)
                 {
@@ -141,11 +139,7 @@ namespace ClipboardZanager.ComponentModel.UI.Controls
                             break;
 
                         case AccentColorUse.Auto:
-                            var useAccentColorOnTaskBarAndStarMenu = 0;
-                            if (monitoredKey != null)
-                            {
-                                useAccentColorOnTaskBarAndStarMenu = (int)monitoredKey.GetValue("ColorPrevalence", 0);
-                            }
+                            var useAccentColorOnTaskBarAndStarMenu = (int)_personalizeRegistryKey.GetValue("ColorPrevalence", 0);
 
                             if (useAccentColorOnTaskBarAndStarMenu == 1)
                             {
@@ -201,21 +195,17 @@ namespace ClipboardZanager.ComponentModel.UI.Controls
 
             if (!_customBackground)
             {
-                SystemParameters.StaticPropertyChanged += SystemParameters_StaticPropertyChanged;
+                SystemParameters.StaticPropertyChanged += SystemEvents_UserPreferenceChanged;
+                SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
             }
 
-            EnableTransparencyRegistryMonitor_Changed(sender, e);
+            SystemEvents_UserPreferenceChanged(sender, e);
         }
 
         private void BlurredWindow_Closed(object sender, EventArgs e)
         {
-            _enableTransparencyRegistryMonitor.Changed -= EnableTransparencyRegistryMonitor_Changed;
-            _enableTransparencyRegistryMonitor.Dispose();
-        }
-
-        private void SystemParameters_StaticPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            EnableTransparencyRegistryMonitor_Changed(sender, e);
+            SystemParameters.StaticPropertyChanged -= SystemEvents_UserPreferenceChanged;
+            SystemEvents.UserPreferenceChanged -= SystemEvents_UserPreferenceChanged;
         }
 
         #endregion
@@ -293,7 +283,7 @@ namespace ClipboardZanager.ComponentModel.UI.Controls
 
             if (window.IsLoaded)
             {
-                window.EnableTransparencyRegistryMonitor_Changed(window, null);
+                window.SystemEvents_UserPreferenceChanged(window, null);
             }
         }
 
