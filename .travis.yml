@@ -4,6 +4,8 @@ jdk: oraclejdk8
 android:
   before_install: ./Android/build_travis.sh
 
+  script : gradle clean check
+
   components:
     # Uncomment the lines below if you want to
     # use the latest revision of Android SDK Tools
