@@ -2,9 +2,11 @@ language: android
 jdk: oraclejdk8
 
 android:
-  before_install: ./Android/build_travis.sh
+  install : 
+    - ./Android/gradlew assemble
 
-  script : gradle clean check
+  script :
+    - ./Android/gradlew connectedAndroidTest
 
   components:
     # Uncomment the lines below if you want to
