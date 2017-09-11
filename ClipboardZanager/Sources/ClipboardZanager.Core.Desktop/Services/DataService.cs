@@ -307,41 +307,10 @@ namespace ClipboardZanager.Core.Desktop.Services
             Requires.NotNull(identifiers, nameof(identifiers));
             Requires.NotNull(foregroundWindow, nameof(foregroundWindow));
 
+
             var shouldSynchronize = true;
 
             BitmapImage icon = foregroundWindow.Icon;
-
-            if (icon == null)
-            {
-                icon = new BitmapImage();
-                StringBuilder className = new StringBuilder(256);
-                if (ServiceLocator.GetService<WindowsService>().GetClassName(NativeMethods.GetForegroundWindow(), className, 256) > 0)
-                {
-                    string cName = className.ToString();
-                    if (cName == "Progman" || cName == "WorkerW")
-                    {
-                        Bitmap bitIcon = Icon.ExtractAssociatedIcon(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe").ToBitmap();
-                        using (var memory = new MemoryStream())
-                        {
-                            bitIcon.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
-                            memory.Position = 0;
-                            icon.BeginInit();
-                            icon.StreamSource = memory;
-                            icon.CacheOption = BitmapCacheOption.OnLoad;
-                            icon.EndInit();
-                            icon.Freeze();
-                        }
-                    }
-                    else
-                    {
-                        icon.BeginInit();
-                        icon.UriSource = new Uri("pack://application:,,,/ClipboardZanager;component/Assets/NoIcon.png", UriKind.RelativeOrAbsolute);
-                        icon.CacheOption = BitmapCacheOption.OnLoad;
-                        icon.EndInit();
-                        icon.Freeze();
-                    }
-                }
-            }
 
             if (_settingProvider.GetSetting<bool>("DisablePasswordAndCreditCardSync"))
                 shouldSynchronize = !(isPassword || isCreditCard);

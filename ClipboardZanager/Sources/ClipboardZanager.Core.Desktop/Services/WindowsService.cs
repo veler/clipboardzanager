@@ -256,6 +256,34 @@ namespace ClipboardZanager.Core.Desktop.Services
                 icon = GetWin32WindowIcon(windowHandle, applicationIdentifier);
             }
 
+            if (icon == null)
+            {
+                icon = new BitmapImage();
+                if (applicationIdentifier == Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe" && stringBuilder.ToString() == "") // Desktop
+                {
+                    Bitmap bitIcon = Icon.ExtractAssociatedIcon(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe").ToBitmap();
+                    using (var memory = new MemoryStream())
+                    {
+                        bitIcon.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                        memory.Position = 0;
+                        icon.BeginInit();
+                        icon.StreamSource = memory;
+                        icon.CacheOption = BitmapCacheOption.OnLoad;
+                        icon.EndInit();
+                        icon.Freeze();
+                    }
+                }
+                else // Other app without icon
+                {
+                    icon.BeginInit();
+                    icon.UriSource = new Uri("pack://application:,,,/ClipboardZanager;component/Assets/NoIcon.png", UriKind.RelativeOrAbsolute);
+                    icon.CacheOption = BitmapCacheOption.OnLoad;
+                    icon.EndInit();
+                    icon.Freeze();
+                }
+
+            }
+
             if (string.IsNullOrEmpty(applicationIdentifier))
             {
                 return null;
@@ -372,18 +400,6 @@ namespace ClipboardZanager.Core.Desktop.Services
             }
 
             return new IntPtr(NativeMethods.GetClassLongPtr32(windowHandle, nIndex));
-        }
-
-        /// <summary>
-        /// Retrieves the name of the class to which the specified window belongs.
-        /// </summary>
-        /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
-        /// <param name="lpClassName">The class name string</param>
-        /// <param name="nMaxCount">The length of the lpClassName buffer, in characters. The buffer must be large enough to include the terminating null character; otherwise, the class name string is truncated to nMaxCount-1 characters.</param>
-        /// <returns>The return value is the number of characters copied to the buffer, not including the terminating null character.</returns>
-        internal int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount)
-        {
-            return NativeMethods.GetClassName(hWnd, lpClassName, nMaxCount);
         }
 
         #endregion
