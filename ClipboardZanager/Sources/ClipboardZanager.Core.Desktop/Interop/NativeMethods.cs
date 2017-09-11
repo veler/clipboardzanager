@@ -481,6 +481,16 @@ namespace ClipboardZanager.Core.Desktop.Interop
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool SystemParametersInfo(uint uiAction, uint uiParam, ref bool pvParam, uint fWinIni);
 
+        /// <summary>
+        /// Retrieves the name of the class to which the specified window belongs.
+        /// </summary>
+        /// <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs.</param>
+        /// <param name="lpClassName">The class name string</param>
+        /// <param name="nMaxCount">The length of the lpClassName buffer, in characters. The buffer must be large enough to include the terminating null character; otherwise, the class name string is truncated to nMaxCount-1 characters.</param>
+        /// <returns>The return value is the number of characters copied to the buffer, not including the terminating null character.</returns>
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+
         #endregion
 
         #region UxTheme

@@ -18,6 +18,8 @@ using ClipboardZanager.Shared.Core;
 using ClipboardZanager.Shared.Logs;
 using ClipboardZanager.Shared.Services;
 using Window = ClipboardZanager.Core.Desktop.Models.Window;
+using ClipboardZanager.Core.Desktop.Interop;
+using System.Drawing;
 
 namespace ClipboardZanager.Core.Desktop.Services
 {
@@ -306,14 +308,48 @@ namespace ClipboardZanager.Core.Desktop.Services
             Requires.NotNull(foregroundWindow, nameof(foregroundWindow));
 
             var shouldSynchronize = true;
-            
+
+            BitmapImage icon = foregroundWindow.Icon;
+
+            if (icon == null)
+            {
+                icon = new BitmapImage();
+                StringBuilder className = new StringBuilder(256);
+                if (ServiceLocator.GetService<WindowsService>().GetClassName(NativeMethods.GetForegroundWindow(), className, 256) > 0)
+                {
+                    string cName = className.ToString();
+                    if (cName == "Progman" || cName == "WorkerW")
+                    {
+                        Bitmap bitIcon = Icon.ExtractAssociatedIcon(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe").ToBitmap();
+                        using (var memory = new MemoryStream())
+                        {
+                            bitIcon.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                            memory.Position = 0;
+                            icon.BeginInit();
+                            icon.StreamSource = memory;
+                            icon.CacheOption = BitmapCacheOption.OnLoad;
+                            icon.EndInit();
+                            icon.Freeze();
+                        }
+                    }
+                    else
+                    {
+                        icon.BeginInit();
+                        icon.UriSource = new Uri("pack://application:,,,/ClipboardZanager;component/Assets/NoIcon.png", UriKind.RelativeOrAbsolute);
+                        icon.CacheOption = BitmapCacheOption.OnLoad;
+                        icon.EndInit();
+                        icon.Freeze();
+                    }
+                }
+            }
+
             if (_settingProvider.GetSetting<bool>("DisablePasswordAndCreditCardSync"))
                 shouldSynchronize = !(isPassword || isCreditCard);
 
             var entry = new DataEntry
             {
                 Identifier = GenerateNewGuid(),
-                Icon = foregroundWindow.Icon,
+                Icon = icon,
                 Thumbnail = GenerateThumbnail(e.DataObject, isCreditCard, isPassword),
                 Date = new DateTime(e.Time),
                 IsCut = e.IsCut,
