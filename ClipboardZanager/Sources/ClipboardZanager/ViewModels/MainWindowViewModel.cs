@@ -43,6 +43,7 @@ namespace ClipboardZanager.ViewModels
         private Visibility _notifyIconVisibility;
         private ImageSource _notifyIconSource;
         private bool _pasteBarDisplayed;
+        private bool _pasteBarMustBeRecreatedAutomatically;
 
         #endregion
 
@@ -94,7 +95,7 @@ namespace ClipboardZanager.ViewModels
             {
                 return;
             }
- 
+
             var firstStart = Settings.Default.FirstStart;
             if (firstStart)
             {
@@ -142,8 +143,7 @@ namespace ClipboardZanager.ViewModels
             _delayedPasteCommand.Action += DelayedPasteCommand;
 
             mouseAndKeyboardHookService.Pause();
-            _pasteBarWindow = new PasteBarWindow();
-            _pasteBarWindow.Show();
+            CreateNewPasteBar();
             mouseAndKeyboardHookService.DelayedResume(TimeSpan.FromSeconds(1));
 
             Messenger.Default.Register<Message>(this, MessageIdentifiers.PasteData, PasteData);
@@ -243,13 +243,13 @@ namespace ClipboardZanager.ViewModels
             Logger.Instance.Information("Settings menu from icon in the task bar clicked. The settings window will be displayed");
             HideNotifyIcon();
 
+            _pasteBarMustBeRecreatedAutomatically = false;
             _pasteBarWindow.Close();
 
             var window = new SettingsWindow(viewMode);
             window.ShowDialog();
 
-            _pasteBarWindow = new PasteBarWindow();
-            _pasteBarWindow.Show();
+            CreateNewPasteBar();
 
             Logger.Instance.Information("The settings window is closed.");
             ShowNotifyIcon();
@@ -282,6 +282,7 @@ namespace ClipboardZanager.ViewModels
                         throw new OperationCanceledException("Unable to quit a unit test");
                     }
 
+                    _pasteBarMustBeRecreatedAutomatically = false;
                     _pasteBarWindow.Close();
                     Application.Current.Shutdown(0);
                 }
@@ -327,6 +328,16 @@ namespace ClipboardZanager.ViewModels
         #endregion
 
         #region Handled Methods
+
+        private void PasteBarWindow_Closed(object sender, EventArgs e)
+        {
+            if (_pasteBarMustBeRecreatedAutomatically)
+            {
+                Logger.Instance.Information("The paste bar has been totally closed (disposed) for an unknown reason (the application is not closing and the settings are not opening). A new instance is created.");
+
+                CreateNewPasteBar();
+            }
+        }
 
         private void MouseAndKeyboardHookService_MouseAction(object sender, MouseHookEventArgs e)
         {
@@ -542,6 +553,22 @@ namespace ClipboardZanager.ViewModels
             icon.UriSource = new Uri(@"pack://application:,,,/ClipboardZanager;component/Assets/paste-sync.ico");
             icon.EndInit();
             NotifyIconSource = icon;
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="PasteBarWindow"/> and initialize it.
+        /// </summary>
+        private void CreateNewPasteBar()
+        {
+            if (_pasteBarWindow != null)
+            {
+                _pasteBarWindow.Closed -= PasteBarWindow_Closed;
+            }
+
+            _pasteBarWindow = new PasteBarWindow();
+            _pasteBarWindow.Closed += PasteBarWindow_Closed;
+            _pasteBarWindow.Show();
+            _pasteBarMustBeRecreatedAutomatically = true;
         }
 
         /// <summary>
