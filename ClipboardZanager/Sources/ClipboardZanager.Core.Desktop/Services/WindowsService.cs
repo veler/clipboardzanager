@@ -261,6 +261,34 @@ namespace ClipboardZanager.Core.Desktop.Services
                 return null;
             }
 
+            if (icon == null)
+            {
+                icon = new BitmapImage();
+                if (applicationIdentifier == Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe" && stringBuilder.ToString() == "") // Desktop
+                {
+                    Bitmap bitIcon = Icon.ExtractAssociatedIcon(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe").ToBitmap();
+                    using (var memory = new MemoryStream())
+                    {
+                        bitIcon.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                        memory.Position = 0;
+                        icon.BeginInit();
+                        icon.StreamSource = memory;
+                        icon.CacheOption = BitmapCacheOption.OnLoad;
+                        icon.EndInit();
+                        icon.Freeze();
+                    }
+                }
+                else // Other app without icon
+                {
+                    icon.BeginInit();
+                    icon.UriSource = new Uri("pack://application:,,,/ClipboardZanager;component/Assets/NoIcon.png", UriKind.RelativeOrAbsolute);
+                    icon.CacheOption = BitmapCacheOption.OnLoad;
+                    icon.EndInit();
+                    icon.Freeze();
+                }
+
+            }
+
             return new Window(windowHandle, stringBuilder.ToString(), process, applicationIdentifier, icon, isWindowsStoreApp);
         }
 

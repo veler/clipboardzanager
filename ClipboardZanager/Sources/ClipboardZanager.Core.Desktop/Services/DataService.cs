@@ -306,7 +306,7 @@ namespace ClipboardZanager.Core.Desktop.Services
             Requires.NotNull(foregroundWindow, nameof(foregroundWindow));
 
             var shouldSynchronize = true;
-            
+
             if (_settingProvider.GetSetting<bool>("DisablePasswordAndCreditCardSync"))
                 shouldSynchronize = !(isPassword || isCreditCard);
 
