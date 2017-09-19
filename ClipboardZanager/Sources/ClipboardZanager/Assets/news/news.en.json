@@ -1,5 +1,25 @@
 ﻿[
   {
+    "Icon": "\uE2B1",
+    "Title": "Colors support",
+    "Description": "A new render in the paste bar will appear when you copy a color in hexadecimal format."
+  },
+  {
+    "Icon": "\uE72E",
+    "Title": "Safety improved",
+    "Description": "Now, by default, passwords and credit card numbers will not be synchronized."
+  },
+  {
+    "Icon": "\uE2AC",
+    "Title": "Stability improved",
+    "Description": "Fixed four issues. More information on GitHub."
+  },
+  {
+    "Icon": "\uE1F5",
+    "Title": "Version 2017.9.3.56",
+    "Description": ""
+  },
+  {
     "Icon": "\uE2AC",
     "Title": "Start and update",
     "Description": "The update process and start with Windows feature have been fixed."

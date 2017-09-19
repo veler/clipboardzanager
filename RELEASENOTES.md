@@ -1,5 +1,16 @@
 # Release notes
 
+## 2017.9.19.7
+
+### Colors support
+A new render in the paste bar will appear when you copy a color in hexadecimal format.
+
+### Safety improved
+Now, by default, passwords and credit card numbers will not be synchronized.
+
+### Stability improved
+Fixed four issues. More information on GitHub.
+
 ## 2017.9.3.56
 
 ### Start and update
