@@ -256,6 +256,11 @@ namespace ClipboardZanager.Core.Desktop.Services
                 icon = GetWin32WindowIcon(windowHandle, applicationIdentifier);
             }
 
+            if (string.IsNullOrEmpty(applicationIdentifier))
+            {
+                return null;
+            }
+
             if (icon == null)
             {
                 icon = new BitmapImage();
@@ -282,11 +287,6 @@ namespace ClipboardZanager.Core.Desktop.Services
                     icon.Freeze();
                 }
 
-            }
-
-            if (string.IsNullOrEmpty(applicationIdentifier))
-            {
-                return null;
             }
 
             return new Window(windowHandle, stringBuilder.ToString(), process, applicationIdentifier, icon, isWindowsStoreApp);

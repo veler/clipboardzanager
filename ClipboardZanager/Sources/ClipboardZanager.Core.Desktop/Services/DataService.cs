@@ -18,8 +18,6 @@ using ClipboardZanager.Shared.Core;
 using ClipboardZanager.Shared.Logs;
 using ClipboardZanager.Shared.Services;
 using Window = ClipboardZanager.Core.Desktop.Models.Window;
-using ClipboardZanager.Core.Desktop.Interop;
-using System.Drawing;
 
 namespace ClipboardZanager.Core.Desktop.Services
 {
@@ -307,10 +305,7 @@ namespace ClipboardZanager.Core.Desktop.Services
             Requires.NotNull(identifiers, nameof(identifiers));
             Requires.NotNull(foregroundWindow, nameof(foregroundWindow));
 
-
             var shouldSynchronize = true;
-
-            BitmapImage icon = foregroundWindow.Icon;
 
             if (_settingProvider.GetSetting<bool>("DisablePasswordAndCreditCardSync"))
                 shouldSynchronize = !(isPassword || isCreditCard);
@@ -318,7 +313,7 @@ namespace ClipboardZanager.Core.Desktop.Services
             var entry = new DataEntry
             {
                 Identifier = GenerateNewGuid(),
-                Icon = icon,
+                Icon = foregroundWindow.Icon,
                 Thumbnail = GenerateThumbnail(e.DataObject, isCreditCard, isPassword),
                 Date = new DateTime(e.Time),
                 IsCut = e.IsCut,
