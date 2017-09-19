@@ -1,5 +1,25 @@
 ﻿[
   {
+    "Icon": "\uE2B1",
+    "Title": "Support des couleurs",
+    "Description": "Un nouveau rendu apparaitra dans la barre de collage lorsque vous copiez une couleur au format hexadécimal."
+  },
+  {
+    "Icon": "\uE72E",
+    "Title": "Sécurité améliorée",
+    "Description": "Désormais, par défaut, les mots de passes et numéro de carte de crédit ne sont pas synchronisés."
+  },
+  {
+    "Icon": "\uE2AC",
+    "Title": "Stabilité améliorée",
+    "Description": "Quatre problèmes corrigés. Plus d'informations sur GitHub."
+  },
+  {
+    "Icon": "\uE1F5",
+    "Title": "Version 2017.9.3.56",
+    "Description": ""
+  },
+  {
     "Icon": "\uE2AC",
     "Title": "Démarrage et mise à jour",
     "Description": "Le processus de mise à jour et le démarrage automatique avec Windows ont été corrigés."
