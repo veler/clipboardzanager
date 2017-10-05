@@ -264,7 +264,6 @@ namespace ClipboardZanager.Core.Desktop.Services
             if (icon == null)
             {
                 icon = new BitmapImage();
-                var test = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe";
                 if (applicationIdentifier.ToLower() == (Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe").ToLower() && stringBuilder.ToString() == "") // Desktop
                 {
                     Bitmap bitIcon = Icon.ExtractAssociatedIcon(Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe").ToBitmap();
