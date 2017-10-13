@@ -120,25 +120,33 @@ namespace ClipboardZanager.Core.Desktop.Hooking
                 return IntPtr.Zero;
             }
 
-            var data = System.Windows.Clipboard.GetDataObject() as DataObject;
-            var isCut = false;
-
-            if (data == null)
+            try
             {
-                return IntPtr.Zero;
-            }
+                var data = System.Windows.Clipboard.GetDataObject() as DataObject;
+                var isCut = false;
 
-            if (data.GetDataPresent(Consts.DropEffectFormatName))
-            {
-                var preferredDropEffect = data.GetData(Consts.DropEffectFormatName) as System.IO.MemoryStream;
-                if (preferredDropEffect != null)
+                if (data == null)
                 {
-                    isCut = preferredDropEffect.ToArray().SequenceEqual(new byte[] { 2, 0, 0, 0 });
+                    return IntPtr.Zero;
                 }
-            }
 
-            Logger.Instance.Information("New data detected into the Windows clipboard.");
-            ClipboardChanged?.Invoke(this, new ClipboardHookEventArgs(data, isCut, DateTime.Now.Ticks));
+                if (data.GetDataPresent(Consts.DropEffectFormatName))
+                {
+                    var preferredDropEffect = data.GetData(Consts.DropEffectFormatName) as System.IO.MemoryStream;
+                    if (preferredDropEffect != null)
+                    {
+                        isCut = preferredDropEffect.ToArray().SequenceEqual(new byte[] { 2, 0, 0, 0 });
+                    }
+                }
+
+                Logger.Instance.Information("New data detected into the Windows clipboard.");
+                ClipboardChanged?.Invoke(this, new ClipboardHookEventArgs(data, isCut, DateTime.Now.Ticks));
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Warning($"A data has been copied by the user, but the app is not able to retrieve it.");
+                Logger.Instance.Error(ex);
+            }
 
             return IntPtr.Zero;
         }
