@@ -509,23 +509,29 @@ namespace ClipboardZanager.ViewModels
 
             if (mustClose)
             {
-                _mouseAndKeyboardHookService.MouseAction -= MouseAndKeyboardHookService_MouseAction;
+                if (_mouseAndKeyboardHookService != null)
+                {
+                    _mouseAndKeyboardHookService.MouseAction -= MouseAndKeyboardHookService_MouseAction;
+                }
                 Logger.Instance.Information($"Mouse moves away from the paste bar.");
 
                 var delayer = new Delayer<object>(TimeSpan.FromMilliseconds(10));
-                delayer.Action += (o, args) => HideBarButtonCommand.Execute(null);
+                delayer.Action += (o, args) => HideBarButtonCommand?.Execute(null);
                 delayer.ResetAndTick();
             }
         }
 
         private void MouseAndKeyboardHookService_HotKeyDetected(object sender, HotKeyEventArgs e)
         {
-            _mouseAndKeyboardHookService.HotKeyDetected -= MouseAndKeyboardHookService_HotKeyDetected;
+            if (_mouseAndKeyboardHookService != null)
+            {
+                _mouseAndKeyboardHookService.HotKeyDetected -= MouseAndKeyboardHookService_HotKeyDetected;
+            }
             Logger.Instance.Information($"The keyboard shortcut has hit.");
             e.Handled = true;
 
             var delayer = new Delayer<object>(TimeSpan.FromMilliseconds(10));
-            delayer.Action += (o, args) => HideBarButtonCommand.Execute(null);
+            delayer.Action += (o, args) => HideBarButtonCommand?.Execute(null);
             delayer.ResetAndTick();
         }
 
