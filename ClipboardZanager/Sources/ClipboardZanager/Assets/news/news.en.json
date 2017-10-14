@@ -1,5 +1,15 @@
 ﻿[
   {
+    "Icon": "\uE2AC",
+    "Title": "Stability improved",
+    "Description": "Fixed five issues. More information on GitHub."
+  },
+  {
+    "Icon": "\uE1F5",
+    "Title": "Version 2017.9.19.7",
+    "Description": ""
+  },
+  {
     "Icon": "\uE2B1",
     "Title": "Colors support",
     "Description": "A new render in the paste bar will appear when you copy a color in hexadecimal format."

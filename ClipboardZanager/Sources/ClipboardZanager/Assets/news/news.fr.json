@@ -1,5 +1,15 @@
 ﻿[
   {
+    "Icon": "\uE2AC",
+    "Title": "Stabilité améliorée",
+    "Description": "Cinq problèmes corrigés. Plus d'informations sur GitHub."
+  },
+  {
+    "Icon": "\uE1F5",
+    "Title": "Version 2017.9.19.7",
+    "Description": ""
+  },
+  {
     "Icon": "\uE2B1",
     "Title": "Support des couleurs",
     "Description": "Un nouveau rendu apparaitra dans la barre de collage lorsque vous copiez une couleur au format hexadécimal."

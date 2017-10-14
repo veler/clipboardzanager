@@ -1,5 +1,10 @@
 # Release notes
 
+## 2017.10.14.4
+
+### Stability improved
+Fixed five issues. More info [here](https://github.com/veler/clipboardzanager/issues)
+
 ## 2017.9.19.7
 
 ### Colors support
@@ -9,7 +14,7 @@ A new render in the paste bar will appear when you copy a color in hexadecimal f
 Now, by default, passwords and credit card numbers will not be synchronized.
 
 ### Stability improved
-Fixed four issues. More information on GitHub.
+Fixed four issues.More info [here](https://github.com/veler/clipboardzanager/issues)
 
 ## 2017.9.3.56
 
@@ -22,7 +27,7 @@ The update process and start with Windows feature have been fixed.
 You can now filter the pictures.
 
 ### Stability improved
-Fixed five issues. More information on GitHub.
+Fixed five issues. More info [here](https://github.com/veler/clipboardzanager/issues)
 
 ## 2017.8.22.1
 
