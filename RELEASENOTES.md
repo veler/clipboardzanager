@@ -1,5 +1,10 @@
 # Release notes
 
+## 2017.12.16.10
+
+### Stability improved
+Seven five issues. More info [here](https://github.com/veler/clipboardzanager/issues)
+
 ## 2017.10.14.4
 
 ### Stability improved
