@@ -152,6 +152,6 @@ TRANSLATORS
     <value>Privacy policy</value>
   </data>
   <data name="SendLog" xml:space="preserve">
-    <value>Send the logs to the author</value>
+    <value>Send logs to the author</value>
   </data>
 </root>
