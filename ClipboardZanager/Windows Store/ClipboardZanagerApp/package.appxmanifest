@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap rescap mp desktop">
-  <Identity Name="64360VelerSoftware.9606A2D6F057" Version="2017.10.14.0" Publisher="CN=3D87C8C2-C6F4-4875-B258-5FEC13B08F81" />
+  <Identity Name="64360VelerSoftware.9606A2D6F057" Version="2017.12.16.0" Publisher="CN=3D87C8C2-C6F4-4875-B258-5FEC13B08F81" />
   <mp:PhoneIdentity PhoneProductId="33b9bcd2-ef21-4e6f-8664-ebdd7dc6120d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>ClipboardZanager</DisplayName>
