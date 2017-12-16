@@ -125,7 +125,7 @@ namespace ClipboardZanager.Strings.SettingsAboutUserControl {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Send the logs to the author.
+        ///   Looks up a localized string similar to Send logs to the author.
         /// </summary>
         internal static string SendLog {
             get {
