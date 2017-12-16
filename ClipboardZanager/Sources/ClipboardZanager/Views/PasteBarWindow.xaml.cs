@@ -16,6 +16,7 @@ using ClipboardZanager.Shared.Logs;
 using ClipboardZanager.ViewModels;
 using GalaSoft.MvvmLight.Messaging;
 using ClipboardZanager.ComponentModel.UI;
+using ClipboardZanager.Core.Desktop.Models;
 
 namespace ClipboardZanager.Views
 {
@@ -41,7 +42,10 @@ namespace ClipboardZanager.Views
         public PasteBarWindow()
         {
             InitializeComponent();
-            InitializePosition();
+
+            var activeScreen = Screen.FromPoint(new System.Drawing.Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y));
+            var screen = SystemInfoHelper.GetAllScreenInfos().Single(s => s.DeviceName == activeScreen.DeviceName);
+            InitializePosition(screen);
 
             if (Debugger.IsAttached)
             {
@@ -123,8 +127,11 @@ namespace ClipboardZanager.Views
             _isDisplayed = true;
             _actionOnHidding = actionOnHidding;
 
-            InitializePosition();
-            InitializeStoryboards();
+            var activeScreen = Screen.FromPoint(new System.Drawing.Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y));
+            var screen = SystemInfoHelper.GetAllScreenInfos().Single(s => s.DeviceName == activeScreen.DeviceName);
+
+            InitializePosition(screen);
+            InitializeStoryboards(screen);
 
             Messenger.Default.Register<ComponentModel.Messages.Message>(this, MessageIdentifiers.HidePasteBarWindow, HidePasteBarWindow);
 
@@ -157,10 +164,9 @@ namespace ClipboardZanager.Views
         /// <summary>
         /// Determines the size and location of the window on the screen before it is displayed.
         /// </summary>
-        private void InitializePosition()
+        /// <param name="screen">The information about the monitor where the paste bar must be displayed.</param>
+        private void InitializePosition(ScreenInfo screen)
         {
-            var activeScreen = Screen.FromPoint(new System.Drawing.Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y));
-            var screen = SystemInfoHelper.GetAllScreenInfos().Single(s => s.DeviceName == activeScreen.DeviceName);
             var scale = screen.Scale / 100.0;
 
             WindowStartupLocation = WindowStartupLocation.Manual;
@@ -179,7 +185,7 @@ namespace ClipboardZanager.Views
             }
             else
             {
-                Top = screen.Bounds.Bottom / scale;
+                Top = screen.Bounds.Top + (screen.Bounds.Bottom / scale);
             }
 
             Hide();
@@ -188,7 +194,8 @@ namespace ClipboardZanager.Views
         /// <summary>
         /// Initialize the opening and closing storyboard.
         /// </summary>
-        private void InitializeStoryboards()
+        /// <param name="screen">The information about the monitor where the paste bar must be displayed.</param>
+        private void InitializeStoryboards(ScreenInfo screen)
         {
             double openFrom;
             double openTo;
@@ -198,7 +205,7 @@ namespace ClipboardZanager.Views
             if (Settings.Default.PasteBarPosition == PasteBarPosition.Top)
             {
                 openFrom = -Height;
-                openTo = 0;
+                openTo = screen.Bounds.Top;
             }
             else
             {

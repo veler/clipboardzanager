@@ -476,7 +476,7 @@ namespace ClipboardZanager.ViewModels
             switch (Settings.Default.PasteBarPosition)
             {
                 case PasteBarPosition.Top:
-                    if (e.Coords.Y >= (screen.Bounds.Bottom - screen.Bounds.Top) / 2)
+                    if (e.Coords.Y - screen.Bounds.Top >= screen.Bounds.Bottom / 2)
                     {
                         if (_canCloseIfMouseMovesAway)
                         {
@@ -490,7 +490,7 @@ namespace ClipboardZanager.ViewModels
                     break;
 
                 case PasteBarPosition.Bottom:
-                    if (e.Coords.Y <= (screen.Bounds.Bottom - screen.Bounds.Top) / 2)
+                    if (e.Coords.Y - screen.Bounds.Top <= screen.Bounds.Bottom / 2)
                     {
                         if (_canCloseIfMouseMovesAway)
                         {

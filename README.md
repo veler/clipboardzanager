@@ -27,7 +27,7 @@ The main features of ClipboardZanager are :
 You will need the following tools :
 * Windows 10
 * .Net 4.6
-* Visual Studio 2017 with ``Windows development`` and ``Visual Studio extension development toolset``
+* Visual Studio 2017 with ``Windows development`` and ``Visual Studio extension development toolset`` and ``Windows 10 SDK (10.0.14393.0)``
 * ``AutoRunCustomTool`` extension (that you can find in repository/Tools/AutoRunCustomTool.vsix)
 * ``DesktopBridgeDebuggingProject`` extension (that you can find in repository/Tools/DesktopBridgeDebuggingProject.vsix)
 
@@ -83,7 +83,7 @@ You can then open Android Studio and build the smartphone app.
 ## Run the project on Windows
 
 There is two ways to debug :
-* Running ``Windows Store\DesktopBridgeDebuggingProject`` in ``Debug`` mode. Put on some machine dependencies are not well detected.
+* Running ``Windows Store\DesktopBridgeDebuggingProject`` in ``Debug`` mode. But on some machine dependencies are not well detected.
 * The other solution that works everywhere but that is less practical consist in deploying the ``Windows Store\ClipboardZanager`` project in ``Debug`` mode and then use the ``Debug/Other Debug Targets/Debug Installed App Package`` to debug the ``ClipboardZanager`` package.
 
 ## Unit tests
