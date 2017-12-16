@@ -67,9 +67,15 @@ namespace ClipboardZanager.Core.Desktop.IO
                 LogFilePath = file1;
             }
 
-            if (File.Exists(LogFilePath))
+            try
             {
-                File.Delete(LogFilePath);
+                if (File.Exists(LogFilePath))
+                {
+                    File.Delete(LogFilePath);
+                }
+            }
+            catch
+            {
             }
 
             _stream = File.AppendText(LogFilePath);
