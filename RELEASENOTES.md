@@ -3,7 +3,14 @@
 ## 2017.12.16.10
 
 ### Stability improved
-Seven five issues. More info [here](https://github.com/veler/clipboardzanager/issues)
+Seven five issues :
+- https://github.com/veler/clipboardzanager/pull/47
+- https://github.com/veler/clipboardzanager/issues/61
+- https://github.com/veler/clipboardzanager/issues/58
+- https://github.com/veler/clipboardzanager/issues/56
+- https://github.com/veler/clipboardzanager/issues/50
+- https://github.com/veler/clipboardzanager/issues/48
+- https://github.com/veler/clipboardzanager/issues/34
 
 ## 2017.10.14.4
 
