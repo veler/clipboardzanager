@@ -2,11 +2,11 @@
 
 ## 2018.11.24.14
 
-### Improvment of the experience
+### Improvement of the experience
 Clicking on a link in the paste bar will no longer open the link. An option has been added to allow to detect the web page titles when a URL has been copied.
 
 ### Colors support
-Improvment of the support of colors. The '#' is not required anymore to detect a color.
+Improvement of the support of colors. The '#' is not required anymore to detect a color.
 
 ## 2017.12.16.10
 
