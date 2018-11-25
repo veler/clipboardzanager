@@ -127,10 +127,10 @@
     <value>Essaye de détecter un texte copié qui ressemble à un numéro de carte de crédit, et évite de le conserver dans l'historique par sécurité.</value>
   </data>
   <data name="DisableSync" xml:space="preserve">
-    <value>Désactiver par défaut la synchronisation des mots de passes et cartes de crédit</value>
+    <value>Désactiver par défaut la synchronisation des cartes de crédit</value>
   </data>
   <data name="DisableSync_Description" xml:space="preserve">
-    <value>Si le texte copié est marqué comme mot de passe ou carte de crédit, la synchronisation avec le cloud sera désactivée par défaut.</value>
+    <value>Si le texte copié est marqué comme carte de crédit, la synchronisation avec le cloud sera désactivée par défaut.</value>
   </data>
   <data name="IgnoreFromApps" xml:space="preserve">
     <value>Ignorer les données copiées provenant des applications suivantes</value>
@@ -140,11 +140,5 @@
   </data>
   <data name="IgnoreFromApps_DeleteHelpText" xml:space="preserve">
     <value>Appuyer sur Suppr pour supprimer l'élément sélectionné de la liste des applications ignorées.</value>
-  </data>
-  <data name="Passwords" xml:space="preserve">
-    <value>Ne pas conserver les mots de passe</value>
-  </data>
-  <data name="Passwords_Description" xml:space="preserve">
-    <value>Essaye de détecter un texte copié qui ressemble à un mot de passe depuis votre navigateur internet, et évite de le conserver en mémoire par sécurité. Comme il est difficile de déterminer si ce que vous copiez est un mot de passe ou pas, nous suggérons de garder en tête que ce logiciel peut se tromper. Ainsi, si vous voyez qu'un mot de passe a été conservé par erreur, supprimez-le.</value>
   </data>
 </root>

@@ -34,6 +34,21 @@ namespace ClipboardZanager.ViewModels.SettingsPanels
         public bool IsScreenReaderRunning => SystemInfoHelper.IsScreenReaderRunning();
 
         /// <summary>
+        /// Gets or sets whether the title of a page must be retrieved when a URI is copied.
+        /// </summary>
+        public bool DisplayUriTitle
+        {
+            get { return Settings.Default.DisplayUriTitle; }
+            set
+            {
+                Logger.Instance.Information($"The setting '{nameof(DisplayUriTitle)}' has been set to '{value}'.");
+                Settings.Default.DisplayUriTitle = value;
+                RaisePropertyChanged();
+                _settingProvider.SaveAndApplySettings();
+            }
+        }
+
+        /// <summary>
         /// Gets or sets whether the data must be kept after reboot or not
         /// </summary>
         public bool KeepDataAfterReboot

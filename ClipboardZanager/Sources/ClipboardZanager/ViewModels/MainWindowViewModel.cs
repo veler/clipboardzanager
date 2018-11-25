@@ -128,8 +128,6 @@ namespace ClipboardZanager.ViewModels
 
             dataService.CreditCardNumberDetected += DataService_CreditCardNumberDetected;
             dataService.CreditCardNumberSaved += DataService_CreditCardNumberSaved;
-            dataService.PasswordDetected += DataService_PasswordDetected;
-            dataService.PasswordSaved += DataService_PasswordSaved;
             cloudStorageService.SynchronizationStarted += CloudStorageService_SynchronizationStarted;
             cloudStorageService.SynchronizationFailed += CloudStorageService_SynchronizationFailed;
             cloudStorageService.SynchronizationEnded += CloudStorageService_SynchronizationEnded;
@@ -413,31 +411,6 @@ namespace ClipboardZanager.ViewModels
             }
         }
 
-        private void DataService_PasswordDetected(object sender, EventArgs e)
-        {
-            Logger.Instance.Information($"A password has been detected.");
-            if (Settings.Default.NotifyPassword)
-            {
-                if (Settings.Default.AvoidPasswords)
-                {
-                    MessengerInstance.Send(new Message(Language.MainWindow.PasswordDetected_Title, Language.MainWindow.PasswordDetected_Text), MessageIdentifiers.ShowNotifyIconBalloon);
-                }
-                else
-                {
-                    MessengerInstance.Send(new Message(Language.MainWindow.PasswordDetectedButSaved_Title, Language.MainWindow.PasswordDetectedButSaved_Text), MessageIdentifiers.ShowNotifyIconBalloon);
-                }
-            }
-        }
-
-        private void DataService_PasswordSaved(object sender, EventArgs e)
-        {
-            Logger.Instance.Information($"A password has been saved.");
-            if (Settings.Default.NotifyPassword)
-            {
-                MessengerInstance.Send(new Message(Language.MainWindow.PasswordSaved_Title, Language.MainWindow.PasswordSaved_Text), MessageIdentifiers.ShowNotifyIconBalloon);
-            }
-        }
-
         private void CloudStorageService_SynchronizationFailed(object sender, EventArgs e)
         {
             Logger.Instance.Information($"The synchronization has failed.");
@@ -507,28 +480,32 @@ namespace ClipboardZanager.ViewModels
         /// </summary>
         private void ShowNotifyIcon()
         {
-            DispatcherHelper.ThrowIfNotStaThread();
-
-            NotifyIconVisibility = Visibility.Visible;
-
-            var mouseAndKeyboardHookService = ServiceLocator.GetService<MouseAndKeyboardHookService>();
-
-            if (Settings.Default.UseMouseGesture)
+            try
             {
-                mouseAndKeyboardHookService.MouseAction += MouseAndKeyboardHookService_MouseAction;
-                Logger.Instance.Information($"The mouse is listened.");
-            }
+                DispatcherHelper.ThrowIfNotStaThread();
 
-            if (Settings.Default.UseKeyboardHotKeys)
-            {
-                mouseAndKeyboardHookService.HotKeyDetected += MouseAndKeyboardHookService_HotKeyDetected;
-                mouseAndKeyboardHookService.RegisterHotKey(Consts.PasteShortcutName, Settings.Default.KeyboardShortcut.Cast<Key>().ToArray());
-                Logger.Instance.Information($"The keyboard is listened. The expecting shortcut is {JsonConvert.SerializeObject(Settings.Default.KeyboardShortcut.Cast<Key>().ToArray())}.");
-            }
+                NotifyIconVisibility = Visibility.Visible;
 
-            ServiceLocator.GetService<ClipboardService>().Resume();
-            mouseAndKeyboardHookService.DelayedResume(TimeSpan.FromMilliseconds(1000));
-            Logger.Instance.Information($"The icon in the task bar is shown.");
+                var mouseAndKeyboardHookService = ServiceLocator.GetService<MouseAndKeyboardHookService>();
+
+                if (Settings.Default.UseMouseGesture)
+                {
+                    mouseAndKeyboardHookService.MouseAction += MouseAndKeyboardHookService_MouseAction;
+                    Logger.Instance.Information($"The mouse is listened.");
+                }
+
+                if (Settings.Default.UseKeyboardHotKeys)
+                {
+                    mouseAndKeyboardHookService.HotKeyDetected += MouseAndKeyboardHookService_HotKeyDetected;
+                    mouseAndKeyboardHookService.RegisterHotKey(Consts.PasteShortcutName, Settings.Default.KeyboardShortcut.Cast<Key>().ToArray());
+                    Logger.Instance.Information($"The keyboard is listened. The expecting shortcut is {JsonConvert.SerializeObject(Settings.Default.KeyboardShortcut.Cast<Key>().ToArray())}.");
+                }
+
+                ServiceLocator.GetService<ClipboardService>().Resume();
+                mouseAndKeyboardHookService.DelayedResume(TimeSpan.FromMilliseconds(1000));
+                Logger.Instance.Information($"The icon in the task bar is shown.");
+            }
+            catch { }
         }
 
         /// <summary>

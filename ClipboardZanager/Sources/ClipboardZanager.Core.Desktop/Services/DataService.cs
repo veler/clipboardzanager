@@ -1,4 +1,12 @@
-﻿using System;
+﻿using ClipboardZanager.Core.Desktop.ComponentModel;
+using ClipboardZanager.Core.Desktop.Enums;
+using ClipboardZanager.Core.Desktop.Events;
+using ClipboardZanager.Core.Desktop.IO;
+using ClipboardZanager.Core.Desktop.Models;
+using ClipboardZanager.Shared.Core;
+using ClipboardZanager.Shared.Logs;
+using ClipboardZanager.Shared.Services;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -9,14 +17,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using ClipboardZanager.Core.Desktop.ComponentModel;
-using ClipboardZanager.Core.Desktop.Enums;
-using ClipboardZanager.Core.Desktop.Events;
-using ClipboardZanager.Core.Desktop.IO;
-using ClipboardZanager.Core.Desktop.Models;
-using ClipboardZanager.Shared.Core;
-using ClipboardZanager.Shared.Logs;
-using ClipboardZanager.Shared.Services;
 using Window = ClipboardZanager.Core.Desktop.Models.Window;
 
 namespace ClipboardZanager.Core.Desktop.Services
@@ -31,14 +31,13 @@ namespace ClipboardZanager.Core.Desktop.Services
         private readonly Regex _creditCardRegex = new Regex(@"^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$", RegexOptions.Compiled);
         private readonly Regex _hasNumber = new Regex(@"[0-9]+", RegexOptions.Compiled);
         private readonly Regex _hasUpperChar = new Regex(@"[A-Z]+", RegexOptions.Compiled);
-        private readonly Regex _hexColorRegex = new Regex(@"^#([A-Fa-f0-9]{8}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$", RegexOptions.Compiled);
+        private readonly Regex _hexColorRegex = new Regex(@"^(#)?([A-Fa-f0-9]{8}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$", RegexOptions.Compiled);
 
         private bool _lastCopiedDataWasCreditCard;
-        private bool _lastCopiedDataWasPassword;
         private string _dataEntryFilePath;
         private string _cacheFilePath;
         private SecureString _dataEntryFilePassword;
-        private SecureString _detectedPasswordOrCreditCard;
+        private SecureString _detectedCreditCard;
         private IServiceSettingProvider _settingProvider;
 
         #endregion
@@ -73,16 +72,6 @@ namespace ClipboardZanager.Core.Desktop.Services
         /// Raised when a credit card number is kept.
         /// </summary>
         internal event EventHandler<EventArgs> CreditCardNumberSaved;
-
-        /// <summary>
-        /// Raised when a password is detected.
-        /// </summary>
-        internal event EventHandler<EventArgs> PasswordDetected;
-
-        /// <summary>
-        /// Raised when a password is kept.
-        /// </summary>
-        internal event EventHandler<EventArgs> PasswordSaved;
 
         /// <summary>
         /// Raised when the migration is completed.
@@ -132,8 +121,7 @@ namespace ClipboardZanager.Core.Desktop.Services
         public void Reset()
         {
             _lastCopiedDataWasCreditCard = false;
-            _lastCopiedDataWasPassword = false;
-            _detectedPasswordOrCreditCard = null;
+            _detectedCreditCard = null;
         }
 
         /// <summary>
@@ -158,29 +146,6 @@ namespace ClipboardZanager.Core.Desktop.Services
         }
 
         /// <summary>
-        /// Determines whether the input string looks like a password or not and comes from a web browser.
-        /// </summary>
-        /// <param name="input">The string to test</param>
-        /// <param name="foregroundWindow">The windows where the user copied the data</param>
-        /// <returns>Returns True is the string looks like a password and comes from a web browser.</returns>
-        internal bool IsPassword(string input, Window foregroundWindow)
-        {
-            if (!Consts.WebBrowserIdentifier.Any(identifier => foregroundWindow.ApplicationIdentifier.Contains(identifier)))
-            {
-                return false;
-            }
-
-            var hasNumber = _hasNumber.IsMatch(input);
-            var hasUpperChar = _hasUpperChar.IsMatch(input);
-            var hasMinimum8Chars = input.Length >= 8;
-            var hasMaximum32Chars = input.Length <= 32;
-            var hasMaximum2Whitespaces = input.Count(char.IsWhiteSpace) <= 2;
-            var inputWithoutSpecial = new string(input.Where(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c)).ToArray());
-
-            return hasNumber && hasUpperChar && hasMinimum8Chars && hasMaximum32Chars && hasMaximum2Whitespaces && input != inputWithoutSpecial;
-        }
-
-        /// <summary>
         /// One time on two, if the passed text is exactly equals to the last call to this method, returns true and raise event to notify that a credit card will be kept by the application.
         /// </summary>
         /// <param name="text">The supposed credit card number.</param>
@@ -189,7 +154,7 @@ namespace ClipboardZanager.Core.Desktop.Services
         {
             var ignored = false;
 
-            if (_lastCopiedDataWasCreditCard && SecurityHelper.ToUnsecureString(_detectedPasswordOrCreditCard) == text)
+            if (_lastCopiedDataWasCreditCard && SecurityHelper.ToUnsecureString(_detectedCreditCard) == text)
             {
                 CreditCardNumberSaved?.Invoke(this, new EventArgs());
             }
@@ -199,37 +164,10 @@ namespace ClipboardZanager.Core.Desktop.Services
                 {
                     ignored = true;
                     _lastCopiedDataWasCreditCard = true;
-                    _detectedPasswordOrCreditCard = SecurityHelper.ToSecureString(text);
+                    _detectedCreditCard = SecurityHelper.ToSecureString(text);
                 }
 
                 CreditCardNumberDetected?.Invoke(this, new EventArgs());
-            }
-
-            return ignored;
-        }
-
-        /// <summary>
-        /// One time on two, if the passed text is exactly equals to the last call to this method, returns true and raise event to notify that a password will be kept by the application.
-        /// </summary>
-        /// <param name="text">The supposed password.</param>
-        /// <returns>True if the passed text is exactly equals to the last call to this method and that the application's settings defines that the software must avoid the passwords.</returns>
-        internal bool KeepOrIgnorePassword(string text)
-        {
-            var ignored = false;
-
-            if (_lastCopiedDataWasPassword && SecurityHelper.ToUnsecureString(_detectedPasswordOrCreditCard) == text)
-            {
-                PasswordSaved?.Invoke(this, new EventArgs());
-            }
-            else
-            {
-                if (_settingProvider.GetSetting<bool>("AvoidPasswords"))
-                {
-                    ignored = true;
-                    _lastCopiedDataWasPassword = true;
-                    _detectedPasswordOrCreditCard = SecurityHelper.ToSecureString(text);
-                }
-                PasswordDetected?.Invoke(this, new EventArgs());
             }
 
             return ignored;
@@ -298,8 +236,7 @@ namespace ClipboardZanager.Core.Desktop.Services
         /// <param name="identifiers">The list of identifiers for each data format.</param>
         /// <param name="foregroundWindow">The foreground window.</param>
         /// <param name="isCreditCard">Determines whether the data is a credit card number.</param>
-        /// <param name="isPassword">Determines whether the data is a password.</param>
-        internal async void AddDataEntry(ClipboardHookEventArgs e, List<DataIdentifier> identifiers, Window foregroundWindow, bool isCreditCard, bool isPassword)
+        internal async void AddDataEntry(ClipboardHookEventArgs e, List<DataIdentifier> identifiers, Window foregroundWindow, bool isCreditCard)
         {
             Requires.NotNull(e, nameof(e));
             Requires.NotNull(identifiers, nameof(identifiers));
@@ -308,13 +245,15 @@ namespace ClipboardZanager.Core.Desktop.Services
             var shouldSynchronize = true;
 
             if (_settingProvider.GetSetting<bool>("DisablePasswordAndCreditCardSync"))
-                shouldSynchronize = !(isPassword || isCreditCard);
+            {
+                shouldSynchronize = !isCreditCard;
+            }
 
             var entry = new DataEntry
             {
                 Identifier = GenerateNewGuid(),
                 Icon = foregroundWindow.Icon,
-                Thumbnail = GenerateThumbnail(e.DataObject, isCreditCard, isPassword),
+                Thumbnail = GenerateThumbnail(e.DataObject, isCreditCard),
                 Date = new DateTime(e.Time),
                 IsCut = e.IsCut,
                 IsFavorite = false,
@@ -337,7 +276,10 @@ namespace ClipboardZanager.Core.Desktop.Services
             {
                 // We doing it here to avoid blocking the part that runs on the UI thread.
                 var value = DataHelper.FromBase64<Link>(entry.Thumbnail.Value);
-                value.Title = SystemInfoHelper.GetWebPageTitle(value.Uri);
+                if (_settingProvider.GetSetting<bool>("DisplayUriTitle"))
+                {
+                    value.Title = SystemInfoHelper.GetWebPageTitle(value.Uri);
+                }
                 entry.Thumbnail.Value = DataHelper.ToBase64<Link>(value);
             }
 
@@ -1067,9 +1009,8 @@ namespace ClipboardZanager.Core.Desktop.Services
         /// </summary>
         /// <param name="dataObject">The <see cref="DataObject"/> that contains the clipboard's data</param>
         /// <param name="isCreditCard">Indicated that the <see cref="DataObject"/> contains a credit card number</param>
-        /// <param name="isPassword">Indicated that the <see cref="DataObject"/> contains a password</param>
         /// <returns>A <see cref="Thumbnail"/> that represent a small part of the clipboard's data</returns>
-        private Thumbnail GenerateThumbnail(DataObject dataObject, bool isCreditCard, bool isPassword)
+        private Thumbnail GenerateThumbnail(DataObject dataObject, bool isCreditCard)
         {
             var value = string.Empty;
             var type = ThumbnailDataType.Unknown;
@@ -1116,10 +1057,6 @@ namespace ClipboardZanager.Core.Desktop.Services
                     {
                         text = new string(Consts.PasswordMask, text.Length);
                     }
-                }
-                else if (isPassword)
-                {
-                    text = text.Substring(0, 1) + new string(Consts.PasswordMask, text.Length - 2) + text.Substring(text.Length - 1);
                 }
                 else if (IsHexColor(text))
                 {

@@ -81,12 +81,12 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             var dataObject = new DataObject();
             dataObject.SetText("Hello");
             var entry = new ClipboardHookEventArgs(dataObject, false, date.Ticks);
-            dataService.AddDataEntry(entry, new List<DataIdentifier>(), GetWindowsService().GetForegroundWindow(), false, false);
+            dataService.AddDataEntry(entry, new List<DataIdentifier>(), GetWindowsService().GetForegroundWindow(), false);
 
             dataObject = new DataObject();
             dataObject.SetText("Good Bye");
             entry = new ClipboardHookEventArgs(dataObject, false, date.Ticks);
-            dataService.AddDataEntry(entry, new List<DataIdentifier>(), GetWindowsService().GetForegroundWindow(), false, false);
+            dataService.AddDataEntry(entry, new List<DataIdentifier>(), GetWindowsService().GetForegroundWindow(), false);
 
             Assert.IsTrue(dataService.Cache.All(cacheDataEntry => cacheDataEntry.Status == DataEntryStatus.Added));
 
@@ -117,12 +117,12 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             var dataObject = new DataObject();
             dataObject.SetText("Hello");
             var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
-            dataService.AddDataEntry(entry, new List<DataIdentifier>(), GetWindowsService().GetForegroundWindow(), false, false);
+            dataService.AddDataEntry(entry, new List<DataIdentifier>(), GetWindowsService().GetForegroundWindow(), false);
 
             dataObject = new DataObject();
             dataObject.SetText("Good Bye");
             entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
-            dataService.AddDataEntry(entry, new List<DataIdentifier>(), GetWindowsService().GetForegroundWindow(), false, false);
+            dataService.AddDataEntry(entry, new List<DataIdentifier>(), GetWindowsService().GetForegroundWindow(), false);
 
             Assert.IsTrue(dataService.Cache.All(cacheDataEntry => cacheDataEntry.Status == DataEntryStatus.Added));
 
@@ -158,12 +158,12 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             var dataObject = new DataObject();
             dataObject.SetText("Hello");
             var entry = new ClipboardHookEventArgs(dataObject, false, date.Ticks);
-            dataService.AddDataEntry(entry, new List<DataIdentifier>(), GetWindowsService().GetForegroundWindow(), false, false);
+            dataService.AddDataEntry(entry, new List<DataIdentifier>(), GetWindowsService().GetForegroundWindow(), false);
 
             dataObject = new DataObject();
             dataObject.SetText("Good Bye");
             entry = new ClipboardHookEventArgs(dataObject, false, date.Ticks);
-            dataService.AddDataEntry(entry, new List<DataIdentifier>(), GetWindowsService().GetForegroundWindow(), false, false);
+            dataService.AddDataEntry(entry, new List<DataIdentifier>(), GetWindowsService().GetForegroundWindow(), false);
 
             Assert.IsTrue(dataService.Cache.All(cacheDataEntry => cacheDataEntry.Status == DataEntryStatus.Deleted));
 

@@ -69,6 +69,11 @@ namespace ClipboardZanager.ComponentModel.UI.Converters
 
                 case ThumbnailDataType.Color:
                     var colorString = DataHelper.FromBase64<string>(thumbnail.Value);
+                    if (!colorString.StartsWith("#"))
+                    {
+                        colorString = "#" + colorString;
+                    }
+
                     if (parameterStringLower == "solidcolorbrush")
                     {
                         return new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorString));

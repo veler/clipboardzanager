@@ -11,9 +11,9 @@ namespace ClipboardZanager.Core.Desktop.Tests.Mocks
     class ServiceSettingProviderMock : IServiceSettingProvider
     {
         internal bool KeepDataAfterReboot;
-        internal bool AvoidPasswords;
         internal bool AvoidCreditCard;
         internal bool DisablePasswordAndCreditCardSync;
+        internal bool DisplayUriTitle;
         internal int MaxDataToKeep;
         internal int DateExpireLimit;
         internal ArrayList KeepDataTypes;
@@ -38,10 +38,6 @@ namespace ClipboardZanager.Core.Desktop.Tests.Mocks
 
                 case "KeepDataAfterReboot":
                     value = KeepDataAfterReboot;
-                    break;
-
-                case "AvoidPasswords":
-                    value = AvoidPasswords;
                     break;
 
                 case "AvoidCreditCard":
@@ -83,6 +79,10 @@ namespace ClipboardZanager.Core.Desktop.Tests.Mocks
                     value = DisablePasswordAndCreditCardSync;
                     break;
 
+                case "DisplayUriTitle":
+                    value = DisplayUriTitle;
+                    break;
+
                 default:
                     Logger.Instance.Fatal(new KeyNotFoundException($"{settingName} not found."));
                     return default(T);
@@ -99,11 +99,12 @@ namespace ClipboardZanager.Core.Desktop.Tests.Mocks
         public void ResetSettings()
         {
             KeepDataAfterReboot = true;
-            AvoidPasswords = true;
             AvoidCreditCard = true;
             DisablePasswordAndCreditCardSync = true;
+            DisplayUriTitle = true;
             MaxDataToKeep = 25;
             DateExpireLimit = 30;
+            
             IgnoredApplications = new List<IgnoredApplication>();
 
             KeepDataTypes = new ArrayList

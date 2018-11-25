@@ -73,21 +73,6 @@ namespace ClipboardZanager.ViewModels.SettingsPanels
         }
 
         /// <summary>
-        /// Gets or sets whether the passwords must be captured when it is detected.
-        /// </summary>
-        public bool AvoidPasswords
-        {
-            get { return Settings.Default.AvoidPasswords; }
-            set
-            {
-                Logger.Instance.Information($"The setting '{nameof(AvoidPasswords)}' has been set to '{value}'.");
-                Settings.Default.AvoidPasswords = value;
-                RaisePropertyChanged();
-                _settingProvider.SaveAndApplySettings();
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the list of ignored applications
         /// </summary>
         public ObservableCollection<IgnoredApplication> IgnoredApplications

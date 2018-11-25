@@ -24,9 +24,6 @@
         <CheckBox Content="{Binding Language.SettingsSecurityUserControl.CreditCard}" AutomationProperties.HelpText="{Binding Language.SettingsSecurityUserControl.CreditCard_Description}" IsChecked="{Binding AvoidCreditCard, Mode=TwoWay}"/>
         <TextBlock Text="{Binding Language.SettingsSecurityUserControl.CreditCard_Description}" TextWrapping="Wrap" Margin="30,0,0,0"/>
 
-        <CheckBox Content="{Binding Language.SettingsSecurityUserControl.Passwords}" AutomationProperties.HelpText="{Binding Language.SettingsSecurityUserControl.Passwords_Description}" IsChecked="{Binding AvoidPasswords, Mode=TwoWay}" Margin="0,20,0,0"/>
-        <TextBlock Text="{Binding Language.SettingsSecurityUserControl.Passwords_Description}" TextWrapping="Wrap" Margin="30,0,0,0"/>
-
         <CheckBox Content="{Binding Language.SettingsSecurityUserControl.DisableSync}" AutomationProperties.HelpText="{Binding Language.SettingsSecurityUserControl.DisableSync_Description}" IsChecked="{Binding DisablePasswordAndCreditCardSync, Mode=TwoWay}" Margin="0,20,0,0"/>
         <TextBlock Text="{Binding Language.SettingsSecurityUserControl.DisableSync_Description}" TextWrapping="Wrap" Margin="30,0,0,0"/>
 

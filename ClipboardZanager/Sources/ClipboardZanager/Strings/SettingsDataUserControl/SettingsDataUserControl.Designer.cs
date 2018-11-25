@@ -79,6 +79,15 @@ namespace ClipboardZanager.Strings.SettingsDataUserControl {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When an internet address is copied, try to display the web page title.
+        /// </summary>
+        internal static string DisplayUriTitle {
+            get {
+                return ResourceManager.GetString("DisplayUriTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Microsoft Excel.
         /// </summary>
         internal static string Excel {

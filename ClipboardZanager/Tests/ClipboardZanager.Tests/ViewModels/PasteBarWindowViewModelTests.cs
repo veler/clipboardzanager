@@ -53,7 +53,7 @@ namespace ClipboardZanager.Tests.ViewModels
             dataObject.SetText("Lorem Ipsum");
             var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
 
-            dataService.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            dataService.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
 
             var viewmodel = new PasteBarWindowViewModel();
 

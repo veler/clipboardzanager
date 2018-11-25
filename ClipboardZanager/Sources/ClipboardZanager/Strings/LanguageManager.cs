@@ -665,6 +665,11 @@ namespace ClipboardZanager.Strings
         public string Days => SettingsDataUserControl.SettingsDataUserControl.Days;
 
         /// <summary>
+        /// Gets the resource DisplayUriTitle.
+        /// </summary>
+        public string DisplayUriTitle => SettingsDataUserControl.SettingsDataUserControl.DisplayUriTitle;
+
+        /// <summary>
         /// Gets the resource Excel.
         /// </summary>
         public string Excel => SettingsDataUserControl.SettingsDataUserControl.Excel;
@@ -894,16 +899,6 @@ namespace ClipboardZanager.Strings
         /// Gets the resource IgnoreFromApps_DeleteHelpText.
         /// </summary>
         public string IgnoreFromApps_DeleteHelpText => SettingsSecurityUserControl.SettingsSecurityUserControl.IgnoreFromApps_DeleteHelpText;
-
-        /// <summary>
-        /// Gets the resource Passwords.
-        /// </summary>
-        public string Passwords => SettingsSecurityUserControl.SettingsSecurityUserControl.Passwords;
-
-        /// <summary>
-        /// Gets the resource Passwords_Description.
-        /// </summary>
-        public string Passwords_Description => SettingsSecurityUserControl.SettingsSecurityUserControl.Passwords_Description;
 
         #endregion
     }
