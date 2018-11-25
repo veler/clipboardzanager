@@ -148,7 +148,7 @@ namespace ClipboardZanager.Tests.ComponentModel.UI.Converters
             dataObject.SetFileDropList(new StringCollection { "C:/file1.txt", "C:/folder/file2.txt", "C:/folder/file3.txt", "C:/folder/file4.txt" });
             var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
 
-            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
 
             var dataEntry = service.DataEntries.First();
 

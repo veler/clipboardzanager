@@ -1,4 +1,12 @@
-﻿using System;
+﻿using ClipboardZanager.Core.Desktop.ComponentModel;
+using ClipboardZanager.Core.Desktop.Enums;
+using ClipboardZanager.Core.Desktop.Events;
+using ClipboardZanager.Core.Desktop.Models;
+using ClipboardZanager.Core.Desktop.Services;
+using ClipboardZanager.Core.Desktop.Tests.Mocks;
+using ClipboardZanager.Shared.Services;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -7,14 +15,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using ClipboardZanager.Core.Desktop.ComponentModel;
-using ClipboardZanager.Core.Desktop.Enums;
-using ClipboardZanager.Core.Desktop.Events;
-using ClipboardZanager.Core.Desktop.Models;
-using ClipboardZanager.Core.Desktop.Services;
-using ClipboardZanager.Core.Desktop.Tests.Mocks;
-using ClipboardZanager.Shared.Services;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ClipboardZanager.Core.Desktop.Tests.Service
 {
@@ -50,11 +50,14 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             Assert.IsTrue(service.IsHexColor("#222fff"));
             Assert.IsTrue(service.IsHexColor("#F00"));
             Assert.IsTrue(service.IsHexColor("#bbffffff"));
-            Assert.IsFalse(service.IsHexColor("123456"));
+            Assert.IsTrue(service.IsHexColor("222fff"));
+            Assert.IsTrue(service.IsHexColor("F00"));
+            Assert.IsTrue(service.IsHexColor("bbffffff"));
+            Assert.IsTrue(service.IsHexColor("123456"));
+            Assert.IsTrue(service.IsHexColor("aFaE3f"));
+            Assert.IsTrue(service.IsHexColor("F00"));
             Assert.IsFalse(service.IsHexColor("#afafah"));
             Assert.IsFalse(service.IsHexColor("#123abce"));
-            Assert.IsFalse(service.IsHexColor("aFaE3f"));
-            Assert.IsFalse(service.IsHexColor("F00"));
             Assert.IsFalse(service.IsHexColor("#afaf"));
             Assert.IsFalse(service.IsHexColor("#F0h"));
         }
@@ -69,19 +72,6 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             Assert.IsTrue(service.IsCreditCard("hello  4974- 0411-   3456- 7895 world"));
             Assert.IsTrue(service.IsCreditCard("hello  4974- 0411- hey  3456- 7895 world"));
             Assert.IsFalse(service.IsCreditCard("hello  1234- 0411- hey  3456- 7895 world"));
-        }
-
-        [TestMethod]
-        public void DataService_IsPassword()
-        {
-            var service = GetDataService();
-
-            var window1 = new Models.Window(IntPtr.Zero, "Edge", new Process(), "Microsoft.MicrosoftEdge", null, true);
-            var window2 = new Models.Window(IntPtr.Zero, "Notepad", new Process(), "Notepad.exe", null, true);
-
-            Assert.IsFalse(service.IsPassword("Hello", window1));
-            Assert.IsTrue(service.IsPassword("M|cr0sof t", window1));
-            Assert.IsFalse(service.IsPassword("M|cr0sof t", window2));
         }
 
         [TestMethod]
@@ -103,27 +93,6 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             Assert.IsTrue(service.KeepOrIgnoreCreditCard("  4974- 0412-3456- 7895 "));
             Assert.IsTrue(service.KeepOrIgnoreCreditCard("  4974- 0411-3456- 7895 "));
             Assert.IsTrue(service.KeepOrIgnoreCreditCard("  4974- 0412-3456- 7895 "));
-        }
-
-        [TestMethod]
-        public void DataService_KeepOrIgnorePassword()
-        {
-            var service = GetDataService();
-
-            Assert.IsTrue(service.KeepOrIgnorePassword("M|cr0sof t"));
-            Assert.IsFalse(service.KeepOrIgnorePassword("M|cr0sof t"));
-
-            TestUtilities.GetSettingProvider().AvoidPasswords = false;
-
-            Assert.IsFalse(service.KeepOrIgnorePassword("M|cr0sof t"));
-            Assert.IsFalse(service.KeepOrIgnorePassword("M|cr0sof t"));
-            Assert.IsFalse(service.KeepOrIgnorePassword("M|cr0sof t"));
-
-            TestUtilities.GetSettingProvider().AvoidPasswords = true;
-
-            Assert.IsTrue(service.KeepOrIgnorePassword("M||cr0sof t"));
-            Assert.IsTrue(service.KeepOrIgnorePassword("M|||cr0sof t"));
-            Assert.IsTrue(service.KeepOrIgnorePassword("M||cr0sof t"));
         }
 
         [TestMethod]
@@ -153,7 +122,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
 
             try
             {
-                service.AddDataEntry(null, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+                service.AddDataEntry(null, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
                 Assert.Fail();
             }
             catch
@@ -163,14 +132,14 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             var dataObject = new DataObject();
             dataObject.SetText("Hello World");
             var entry1 = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
-            service.AddDataEntry(entry1, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            service.AddDataEntry(entry1, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
             var guid1 = service.DataEntries.Last().Identifier;
             var guid11 = service.Cache.Last().Identifier;
 
             dataObject = new DataObject();
             dataObject.SetText("Hello World 2");
             var entry2 = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
-            service.AddDataEntry(entry2, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            service.AddDataEntry(entry2, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
             var guid2 = service.DataEntries.First().Identifier;
             var guid22 = service.Cache.First().Identifier;
 
@@ -195,7 +164,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             dataObject.SetText("Hello World");
             var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
 
-            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
 
             var dataEntry = service.DataEntries.Last();
             var dataEntryCache = service.Cache.Last();
@@ -219,7 +188,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             dataObject.SetText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
             var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
 
-            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
 
             var dataEntry = service.DataEntries.First();
 
@@ -235,7 +204,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             dataObject.SetText("#Fff002");
             var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
 
-            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
 
             var dataEntry = service.DataEntries.First();
 
@@ -249,7 +218,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             var dataObject = new DataObject();
             dataObject.SetText("http://www.google.com");
             var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
-            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
             var dataEntry = service.DataEntries.First();
 
             Assert.AreEqual(dataEntry.Thumbnail.Type, ThumbnailDataType.Link);
@@ -259,7 +228,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             dataObject = new DataObject();
             dataObject.SetText("1");
             entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
-            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
             dataEntry = service.DataEntries.First();
 
             Assert.AreEqual(dataEntry.Thumbnail.Type, ThumbnailDataType.String);
@@ -267,7 +236,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             dataObject = new DataObject();
             dataObject.SetText("C:\\file.txt");
             entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
-            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
             dataEntry = service.DataEntries.First();
 
             Assert.AreEqual(dataEntry.Thumbnail.Type, ThumbnailDataType.String);
@@ -281,7 +250,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             dataObject.SetFileDropList(new StringCollection { "C:/file1.txt", "C:/folder/file2.txt", "C:/folder/file3.txt", "C:/folder/file4.txt" });
             var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
 
-            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
 
             var dataEntry = service.DataEntries.First();
 
@@ -297,7 +266,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             dataObject.SetData("DataFormat", new SerializableClass() { Data = "Hello World" });
             var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
 
-            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
 
             var dataEntry = service.DataEntries.FirstOrDefault();
 
@@ -317,7 +286,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
                 var dataObject = new DataObject();
                 dataObject.SetText((TestUtilities.GetSettingProvider().DateExpireLimit + 5 - i).ToString());
                 var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks - TimeSpan.FromDays(TestUtilities.GetSettingProvider().DateExpireLimit + 5 - i).Ticks);
-                service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+                service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
             }
 
             Assert.AreEqual(service.DataEntries.Count, TestUtilities.GetSettingProvider().DateExpireLimit - 1);
@@ -335,7 +304,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
                 var dataObject = new DataObject();
                 dataObject.SetText((TestUtilities.GetSettingProvider().MaxDataToKeep + 5 - i).ToString());
                 var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
-                service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+                service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
             }
 
             Assert.AreEqual(service.DataEntries.Count, TestUtilities.GetSettingProvider().MaxDataToKeep);
@@ -353,13 +322,13 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
                 var dataObject = new DataObject();
                 dataObject.SetText(i.ToString());
                 var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
-                service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+                service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
             }
 
             var dataObject2 = new DataObject();
             dataObject2.SetText("-1");
             var entry2 = new ClipboardHookEventArgs(dataObject2, false, DateTime.Now.Ticks);
-            service.AddDataEntry(entry2, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+            service.AddDataEntry(entry2, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
 
             Assert.AreEqual(service.DataEntries.Count, 11);
             Assert.AreEqual(DataHelper.FromBase64<string>(service.DataEntries.First().Thumbnail.Value), "-1");
@@ -383,7 +352,7 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
                 var dataObject = new DataObject();
                 dataObject.SetText(i.ToString());
                 var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
-                service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false, false);
+                service.AddDataEntry(entry, new List<DataIdentifier>(), ServiceLocator.GetService<WindowsService>().GetForegroundWindow(), false);
             }
 
             Assert.AreEqual(service.DataEntries.Count, 10);
@@ -408,38 +377,27 @@ namespace ClipboardZanager.Core.Desktop.Tests.Service
             var dataObject = new DataObject();
             var entry = new ClipboardHookEventArgs(dataObject, false, DateTime.Now.Ticks);
 
-            service.AddDataEntry(entry, new List<DataIdentifier>(), window, false, false);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), window, false);
 
             var dataEntry = service.DataEntries[0];
             Assert.IsTrue(dataEntry.CanSynchronize);
 
-            service.AddDataEntry(entry, new List<DataIdentifier>(), window, true, false);
-
-            dataEntry = service.DataEntries[0];
-            Assert.IsFalse(dataEntry.CanSynchronize);
-
-            service.AddDataEntry(entry, new List<DataIdentifier>(), window, false, true);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), window, true);
 
             dataEntry = service.DataEntries[0];
             Assert.IsFalse(dataEntry.CanSynchronize);
 
             TestUtilities.GetSettingProvider().DisablePasswordAndCreditCardSync = false;
 
-            service.AddDataEntry(entry, new List<DataIdentifier>(), window, false, false);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), window, false);
 
             dataEntry = service.DataEntries[0];
             Assert.IsTrue(dataEntry.CanSynchronize);
 
-            service.AddDataEntry(entry, new List<DataIdentifier>(), window, true, false);
+            service.AddDataEntry(entry, new List<DataIdentifier>(), window, true);
 
             dataEntry = service.DataEntries[0];
             Assert.IsTrue(dataEntry.CanSynchronize);
-
-            service.AddDataEntry(entry, new List<DataIdentifier>(), window, false, true);
-
-            dataEntry = service.DataEntries[0];
-            Assert.IsTrue(dataEntry.CanSynchronize);
-
         }
 
         private DataService GetDataService()

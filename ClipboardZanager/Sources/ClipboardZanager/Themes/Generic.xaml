@@ -35,6 +35,32 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid FlowDirection="{Binding RelativeSource={RelativeSource AncestorType=controls:BlurredWindow}, Path=FlowDirection}">
+                        <!-- Tiled noise texture -->
+                        <Rectangle x:Name="noiseLayer" Opacity="{Binding RelativeSource={RelativeSource AncestorType=controls:BlurredWindow}, Path=NoiseOpacity}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/ClipboardZanager;component/Assets/noise.png" TileMode="Tile" Stretch="None" ViewportUnits="Absolute" Viewport="0,0,128,128" RenderOptions.CachingHint="Cache" RenderOptions.BitmapScalingMode="LowQuality"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                        <Grid>
+                            <ContentPresenter x:Name="windowContent" Grid.Row="1" Content="{Binding}" Focusable="False" ClipToBounds="True" FlowDirection="{Binding RelativeSource={RelativeSource AncestorType=controls:BlurredWindow}, Path=FlowDirection}"/>
+                        </Grid>
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsActive, RelativeSource={RelativeSource AncestorType=controls:BlurredWindow}}" Value="False">
+                            <Setter TargetName="noiseLayer" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsBlurRendered, RelativeSource={RelativeSource AncestorType=controls:BlurredWindow}}" Value="False">
+                            <Setter TargetName="noiseLayer" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style TargetType="{x:Type controls:HamburgerMenuItem}">

@@ -1,5 +1,20 @@
 ﻿[
   {
+    "Icon": "\uE2B1",
+    "Title": "Improvment of the experience",
+    "Description": "Clicking on a link in the paste bar will no longer open the link. An option has been added to allow to detect the web page titles when a URL has been copied."
+  },
+  {
+    "Icon": "\uE2B1",
+    "Title": "Colors support",
+    "Description": "Improvment of the support of colors. The '#' is not required anymore to detect a color."
+  },
+  {
+    "Icon": "\uE1F5",
+    "Title": "Version 2017.12.16.10",
+    "Description": ""
+  },
+  {
     "Icon": "\uE2AC",
     "Title": "Stability improved",
     "Description": "Fixed seven issues. More information on GitHub."

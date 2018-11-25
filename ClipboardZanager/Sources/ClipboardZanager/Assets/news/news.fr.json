@@ -1,5 +1,20 @@
 ﻿[
   {
+    "Icon": "\uE2B1",
+    "Title": "Amélioration de l'expérience",
+    "Description": "Cliquer sur un lien dans la barre de collage n'ouvrira les liens. Une option a été ajoutée pour autoriser ou non la détection des titres des pages lorsqu'un lien est détecté."
+  },
+  {
+    "Icon": "\uE2B1",
+    "Title": "Support des couleurs",
+    "Description": "Amélioration du support des couleurs. Le diez n'est désormais plus nécessaire pour qu'une couleur soit détectée."
+  },
+  {
+    "Icon": "\uE1F5",
+    "Title": "Version 2017.12.16.10",
+    "Description": ""
+  },
+  {
     "Icon": "\uE2AC",
     "Title": "Stabilité améliorée",
     "Description": "Sept problèmes corrigés. Plus d'informations sur GitHub."

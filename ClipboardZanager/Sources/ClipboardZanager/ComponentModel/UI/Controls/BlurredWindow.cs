@@ -21,6 +21,8 @@ namespace ClipboardZanager.ComponentModel.UI.Controls
     {
         #region Fields
 
+        private const double DefaultNoiseOpacityWin10 = 0.02;
+
         private readonly RegistryKey _personalizeRegistryKey;
         private bool _customBackground;
 
@@ -70,6 +72,20 @@ namespace ClipboardZanager.ComponentModel.UI.Controls
         {
             get { return (AccentColorUse)GetValue(UseAccentColorProperty); }
             set { SetValue(UseAccentColorProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the opacity of noise layer of the acrylic effect.
+        /// </summary>
+        public static readonly DependencyProperty NoiseOpacityProperty = DependencyProperty.Register(nameof(NoiseOpacity), typeof(double), typeof(BlurredWindow), new FrameworkPropertyMetadata(DefaultNoiseOpacityWin10));
+
+        /// <summary>
+        /// Gets or sets the opacity of noise layer of the acrylic effect.
+        /// </summary>
+        public double NoiseOpacity
+        {
+            get { return (double)GetValue(NoiseOpacityProperty); }
+            set { SetValue(NoiseOpacityProperty, value); }
         }
 
         #endregion

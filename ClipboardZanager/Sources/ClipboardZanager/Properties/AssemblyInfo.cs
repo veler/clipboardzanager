@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Etienne BAUDOUX")]
 [assembly: AssemblyProduct("ClipboardZanager")]
-[assembly: AssemblyCopyright("© 2010 - 2017 Etienne BAUDOUX. All rights reserved.")]
+[assembly: AssemblyCopyright("© 2010 - 2018 Etienne BAUDOUX. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
@@ -55,8 +55,8 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2017.12.16.10")]
-[assembly: AssemblyFileVersion("2017.12.16.10")]
+[assembly: AssemblyVersion("2018.11.25.1")]
+[assembly: AssemblyFileVersion("2018.11.25.1")]
 
 [assembly: InternalsVisibleTo("ClipboardZanager.Tests")]
 

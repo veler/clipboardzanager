@@ -88,7 +88,7 @@ namespace ClipboardZanager.Strings.SettingsSecurityUserControl {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable by default passwords and credit cards cloud synchronization.
+        ///   Looks up a localized string similar to Disable by default credit cards cloud synchronization.
         /// </summary>
         internal static string DisableSync {
             get {
@@ -97,7 +97,7 @@ namespace ClipboardZanager.Strings.SettingsSecurityUserControl {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If the copied data is marked as a password or a credit card, the synchronization with the cloud will be disabled by default..
+        ///   Looks up a localized string similar to If the copied data is marked as a credit card, the synchronization with the cloud will be disabled by default..
         /// </summary>
         internal static string DisableSync_Description {
             get {
@@ -129,24 +129,6 @@ namespace ClipboardZanager.Strings.SettingsSecurityUserControl {
         internal static string IgnoreFromApps_DeleteHelpText {
             get {
                 return ResourceManager.GetString("IgnoreFromApps_DeleteHelpText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Do not keep passwords.
-        /// </summary>
-        internal static string Passwords {
-            get {
-                return ResourceManager.GetString("Passwords", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Try to detect a copied text that looks like a password from your web browser, and avoid to keep it in memory for safety. As it is hard to detect if what you copy is a password or not because it is not excplicit, we suggest to keep in mind that this software can be wrong. If you see a password in your data and want to be safe, just remove it..
-        /// </summary>
-        internal static string Passwords_Description {
-            get {
-                return ResourceManager.GetString("Passwords_Description", resourceCulture);
             }
         }
     }

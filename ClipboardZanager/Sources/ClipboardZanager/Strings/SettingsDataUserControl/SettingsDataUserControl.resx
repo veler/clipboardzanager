@@ -123,6 +123,9 @@
   <data name="Days" xml:space="preserve">
     <value>days</value>
   </data>
+  <data name="DisplayUriTitle" xml:space="preserve">
+    <value>When an internet address is copied, try to display the web page title</value>
+  </data>
   <data name="Excel" xml:space="preserve">
     <value>Microsoft Excel</value>
   </data>

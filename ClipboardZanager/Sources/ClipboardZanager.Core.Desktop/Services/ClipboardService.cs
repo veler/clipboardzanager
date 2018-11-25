@@ -64,7 +64,6 @@ namespace ClipboardZanager.Core.Desktop.Services
 
                     var dataIgnored = false;
                     var isCreditCard = false;
-                    var isPassword = false;
 
                     var dataService = ServiceLocator.GetService<DataService>();
                     var foregroundWindow = ServiceLocator.GetService<WindowsService>().GetForegroundWindow();
@@ -85,13 +84,6 @@ namespace ClipboardZanager.Core.Desktop.Services
                             {
                                 dataIgnored = true;
                                 Logger.Instance.Information($"The {nameof(ClipboardService)} ignored the data because it is a credit card number.");
-                            }
-
-                            isPassword = dataService.IsPassword(text, foregroundWindow);
-                            if (isPassword && dataService.KeepOrIgnorePassword(text))
-                            {
-                                dataIgnored = true;
-                                Logger.Instance.Information($"The {nameof(ClipboardService)} ignored the data because it is a password.");
                             }
                         }
                     }
@@ -130,7 +122,7 @@ namespace ClipboardZanager.Core.Desktop.Services
 
                             using (Logger.Instance.Stopwatch("Adding a new data entry to the data service."))
                             {
-                                dataService.AddDataEntry(e, identifiers, foregroundWindow, isCreditCard, isPassword);
+                                dataService.AddDataEntry(e, identifiers, foregroundWindow, isCreditCard);
                             }
 
                             Logger.Instance.Information($"The {nameof(ClipboardService)} successfully retrieved the data from the clipboard.");

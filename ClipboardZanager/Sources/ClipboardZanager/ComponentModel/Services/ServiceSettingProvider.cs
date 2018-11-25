@@ -32,10 +32,6 @@ namespace ClipboardZanager.ComponentModel.Services
                     value = Settings.Default.AvoidCreditCard;
                     break;
 
-                case "AvoidPasswords":
-                    value = Settings.Default.AvoidPasswords;
-                    break;
-
                 case "DropBoxAppKey":
                     value = Settings.Default.DropBoxAppKey;
                     break;
@@ -46,6 +42,10 @@ namespace ClipboardZanager.ComponentModel.Services
 
                 case "KeepDataAfterReboot":
                     value = Settings.Default.KeepDataAfterReboot;
+                    break;
+
+                case "DisplayUriTitle":
+                    value = Settings.Default.DisplayUriTitle;
                     break;
 
                 case "MaxDataToKeep":

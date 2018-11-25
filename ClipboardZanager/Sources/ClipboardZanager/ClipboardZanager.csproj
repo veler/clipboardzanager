@@ -515,6 +515,7 @@
     <Resource Include="Assets\paste-sync.ico" />
     <Resource Include="Assets\access_settings.jpg" />
     <Resource Include="Assets\NoIcon.png" />
+    <Resource Include="Assets\noise.png" />
     <Content Include="ComponentModel\Messages\MessageIdentifiers.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MessageIdentifiers.cs</LastGenOutput>

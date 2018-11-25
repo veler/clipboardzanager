@@ -50,6 +50,8 @@
             </StackPanel>
         </Grid>
 
+        <CheckBox Content="{Binding Language.SettingsDataUserControl.DisplayUriTitle}" IsChecked="{Binding DisplayUriTitle, Mode=TwoWay}" Margin="0,20,0,0"/>
+        
         <Border Margin="0,50,0,0"/>
     </StackPanel>
 </UserControl>

@@ -62,7 +62,6 @@ namespace ClipboardZanager.Tests.ViewModels.SettingsPanel
             Assert.AreEqual(viewmodelData.MaxDataToKeep, "25");
 
             Assert.IsTrue(viewmodelSecurity.AvoidCreditCard);
-            Assert.IsTrue(viewmodelSecurity.AvoidPasswords);
             Assert.AreEqual(viewmodelSecurity.IgnoredApplications.Count, 0);
 
             Assert.IsTrue(viewmodelNotifications.NotifyCreditCard);

@@ -248,16 +248,8 @@
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="1*"/>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0" Visibility="{Binding Text, ElementName=HyperLinkText, Converter={StaticResource NullToVisibilityConverter}}" Margin="10,5,10,5" TextAlignment="Left" FontSize="20" TextWrapping="Wrap">
-                                            <Hyperlink NavigateUri="{Binding Text, ElementName=HyperLinkText2}" Command="{Binding DataContext.ClickHyperlinkCommand, ElementName=blurredWindow}" CommandParameter="{Binding Text, ElementName=HyperLinkText2}" TextDecorations="{x:Null}" Focusable="False">
-                                                <TextBlock x:Name="HyperLinkText" Text="{Binding Thumbnail, ConverterParameter=LinkTitle, Converter={StaticResource ThumbnailToValueConverter}, Mode=OneTime}" Foreground="{StaticResource ForegroundBrush}" Margin="10,5,10,5" TextAlignment="Left" FontSize="20" TextWrapping="Wrap"/>
-                                            </Hyperlink>
-                                        </TextBlock>
-                                        <TextBlock Grid.Row="1">
-                                            <Hyperlink NavigateUri="{Binding Text, ElementName=HyperLinkText2}" Command="{Binding DataContext.ClickHyperlinkCommand, ElementName=blurredWindow}" CommandParameter="{Binding Text, ElementName=HyperLinkText2}" TextDecorations="{x:Null}" Focusable="False">
-                                                <TextBlock x:Name="HyperLinkText2" Text="{Binding Thumbnail, ConverterParameter=LinkUri, Converter={StaticResource ThumbnailToValueConverter}, Mode=OneTime}" Margin="10,5,10,5" TextAlignment="Left" FontSize="20" TextWrapping="Wrap"/>
-                                            </Hyperlink>
-                                        </TextBlock>
+                                        <TextBlock x:Name="HyperLinkText" Grid.Row="0" Visibility="{Binding Text, ElementName=HyperLinkText, Converter={StaticResource NullToVisibilityConverter}}" Margin="10,5,10,5" TextAlignment="Left" FontSize="20" TextWrapping="Wrap" Text="{Binding Thumbnail, ConverterParameter=LinkTitle, Converter={StaticResource ThumbnailToValueConverter}, Mode=OneTime}" Foreground="{StaticResource ForegroundBrush}"/>
+                                        <TextBlock x:Name="HyperLinkText2" Grid.Row="1" Text="{Binding Thumbnail, ConverterParameter=LinkUri, Converter={StaticResource ThumbnailToValueConverter}, Mode=OneTime}" Margin="10,5,10,5" TextAlignment="Left" FontSize="20" TextWrapping="Wrap"/>
                                         <Border Grid.Row="0" Grid.RowSpan="2" Height="40" VerticalAlignment="Bottom" Background="{StaticResource PasteBarItemLinearGradentBorderBackground}"/>
                                     </Grid>
                                     <Grid Visibility="{Binding Thumbnail.Type, ConverterParameter=Files, Converter={StaticResource EnumToVisibilityConverter}, Mode=OneTime}">
