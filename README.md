@@ -1,8 +1,13 @@
-# ClipboardZanager
+<p align="center">
+  <img alt="pazword logo" src="./ClipboardZanager/Windows%20Store/ClipboardZanagerApp/images/Square44x44Logo.scale-200.png" width="100px" />
+  <h1 align="center">ClipboardZanager</h1>
+</p>
 
 ClipboardZanager is a clipboard manager for ``Windows 10`` initiated by Etienne BAUDOUX in 2010. It is designed to keep a history of what the user copies in Windows and let him or her reuse it later. Since August 28th, 2017, ClipboardZanager is open source and is developed with the help of contributors.
 
-The main features of ClipboardZanager are :
+<a href='//www.microsoft.com/store/apps/9n1gt3np5cn2?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/en-us/store/badges/images/English_get-it-from-MS.png' alt='Get ClipboardZanager on the Microsoft Store' width="284px" height="104px"/></a>
+
+## Features
 * Clipboard conservation.
 * Synchronization with the personal user Cloud storage service account (supports ``OneDrive`` and ``DropBox``).
 * User's data is encrypted. The user can also decide to ignore all copied data from a specific application.
